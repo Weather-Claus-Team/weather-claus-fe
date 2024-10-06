@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
-import { useRecoilState } from "recoil";
-import { searchState } from "./atom";
-import logo2 from "./logo2.png";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { searchSelector, searchState, weatherState } from "./atom";
+// import logo2 from "./logo2.png";
+import { useEffect } from "react";
 
 const Container = styled.div`
   margin: 60px 150px;
@@ -83,12 +84,21 @@ const Weatherbox = styled.div`
   }
 `;
 
+const Smallbox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
 function App() {
-  const [inputValue, setInputValue] = useRecoilState(searchState);
+  const [searchValue, setSearchValue] = useRecoilState(searchState);
   const handleChange = (event) => {
-    console.log(event);
-    setInputValue(event.target.value);
+    setSearchValue(event.target.value);
   };
+  const searchResult = useRecoilValue(searchSelector);
+  // console.log(searchResult);
+
+  const handleSubmit = () => {};
 
   return (
     <Container>
@@ -104,21 +114,23 @@ function App() {
       </Nav>
       <Main>
         <Mainbox>
-          <Searchbox>
+          <Searchbox onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Search your location"
-              value={inputValue}
+              value={searchValue}
               onChange={handleChange}
             />
             <FontAwesomeIcon icon={faCloud} />
           </Searchbox>
           <Weatherbox>
-            <div>
+            <Smallbox>
               <span>오늘의 날씨</span>
-            </div>
+              {/* <h4>{weatherData.weather}</h4>
+              <h4>{weatherData.city}</h4> */}
+            </Smallbox>
             <div>
-              <span>오늘의 옷차림</span>
+              <span>추천 옷차림</span>
               <div>
                 <span>낮</span>
                 <span>밤</span>
@@ -133,3 +145,30 @@ function App() {
 }
 
 export default App;
+
+// const [weatherData, setWeatherData] = useRecoilState(weatherState);
+
+// useEffect(() => {
+//   const getLocation = () => {
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(geoSuccess, geoFail);
+//     }
+//   };
+//   getLocation();
+// }, []);
+
+// function geoSuccess(location) {
+//   const lat = location.coords.latitude;
+//   const lon = location.coords.longitude;
+//   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=86aec7c9d10bc13524e24895e4fdd4b8`;
+//   fetch(url)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const weather = data.weather[0].main;
+//       const city = data.name;
+//       setWeatherData({ weather, city });
+//     });
+// }
+// function geoFail(error) {
+//   console.error("Fail to get your location.", error);
+// }
