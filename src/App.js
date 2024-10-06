@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import logo from "./weather-claus-logo-removebg.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilState } from "recoil";
@@ -86,7 +85,6 @@ const Weatherbox = styled.div`
 
 function App() {
   const [inputValue, setInputValue] = useRecoilState(searchState);
-
   const handleChange = (event) => {
     console.log(event);
     setInputValue(event.target.value);
@@ -95,8 +93,8 @@ function App() {
   return (
     <Container>
       <Title>
-        <Logo src={logo2} />
-        {/* <h1>Weather Claus</h1> */}
+        {/* <Logo src={logo2} /> */}
+        <h1>Weather Claus</h1>
       </Title>
       <Nav>
         <ul>
@@ -109,7 +107,7 @@ function App() {
           <Searchbox>
             <input
               type="text"
-              placeholder="Find your Location"
+              placeholder="Search your location"
               value={inputValue}
               onChange={handleChange}
             />
