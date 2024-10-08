@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { searchSelector, searchState, weatherState } from "./atom";
-// import logo2 from "./logo2.png";
-import { useEffect } from "react";
+import logo2 from "./logo2.png";
+import { useEffect, useState } from "react";
+import weatherIcon from "./cloudy.png";
 
 const Container = styled.div`
-  margin: 60px 150px;
-  margin-bottom: 0;
+  margin: 40px 150px;
 `;
 
 const Title = styled.div`
@@ -38,8 +38,9 @@ const Main = styled.div``;
 const Mainbox = styled.div`
   width: 70vw;
   height: 50vh;
-  margin-top: 60px;
-  border: 6px solid rgba(187, 214, 228, 0.6);
+  margin-top: 50px;
+  border: 6px solid rgba(999, 999, 999, 0.7);
+  /* background-color: rgba(999, 999, 999, 0.4); */
   border-radius: 10px;
   padding: 60px;
 `;
@@ -48,7 +49,6 @@ const Searchbox = styled.form`
   display: flex;
   justify-content: center;
   input {
-    background-color: rgba(187, 214, 228, 0.6);
     padding: 20px;
     width: 600px;
     border: none;
@@ -56,22 +56,31 @@ const Searchbox = styled.form`
     margin-bottom: 40px;
     font-size: 18px;
     text-indent: 10px;
+    color: #9583aa;
   }
   input:focus {
     outline: none;
   }
   input::placeholder {
     text-indent: 10px;
+    color: #9583aa;
   }
   input:focus::placeholder {
     color: transparent;
   }
+  button {
+    all: unset;
+    cursor: pointer;
+  }
   svg {
-    color: gray;
+    color: #b6aac5;
     font-size: 25px;
     position: absolute;
     right: 420px;
-    top: 260px;
+    top: 288px;
+  }
+  svg:active {
+    color: #9583aa;
   }
 `;
 
@@ -84,58 +93,111 @@ const Weatherbox = styled.div`
   }
 `;
 
-const Smallbox = styled.div`
+const WeatherCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  text-align: center;
 `;
 
+const WeatherBox = styled.div`
+  background-color: rgba(999, 999, 999, 0.5);
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 5px;
+  img {
+    width: 80px;
+    margin-top: 20px;
+    margin-right: 30px;
+  }
+  div:first-child {
+    font-size: 20px;
+    span:first-child {
+      margin-right: 20px;
+    }
+  }
+  div:last-child {
+    margin-top: 20px;
+    /* display: flex; */
+    /* align-items: center; */
+    span {
+      font-size: 40px;
+    }
+  }
+`;
+
+const ClothesCard = styled.div``;
+
 function App() {
+  const [inputValue, setInputValue] = useState("");
   const [searchValue, setSearchValue] = useRecoilState(searchState);
   const handleChange = (event) => {
-    setSearchValue(event.target.value);
+    setInputValue(event.target.value);
   };
-  const searchResult = useRecoilValue(searchSelector);
-  // console.log(searchResult);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSearchValue(inputValue);
+    setInputValue("");
+  };
 
-  const handleSubmit = () => {};
+  const weatherData = useRecoilValueLoadable(searchSelector);
+  if (weatherData.state === "hasValue") {
+    // console.log(weatherData.contents);
+  }
+  if (weatherData.state === "hasError") {
+    console.log("error");
+  } else {
+    // console.log("loading..");
+  }
 
   return (
     <Container>
       <Title>
-        {/* <Logo src={logo2} /> */}
-        <h1>Weather Claus</h1>
+        <Logo src={logo2} />
+        {/* <h1>Weather Claus</h1> */}
       </Title>
-      <Nav>
+      {/* <Nav>
         <ul>
           <li>Home</li>
           <li>About us</li>
         </ul>
-      </Nav>
+      </Nav> */}
       <Main>
         <Mainbox>
           <Searchbox onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Search your location"
-              value={searchValue}
+              value={inputValue}
               onChange={handleChange}
             />
-            <FontAwesomeIcon icon={faCloud} />
+            <button type="submit">
+              <FontAwesomeIcon icon={faCloud} />
+            </button>
           </Searchbox>
           <Weatherbox>
-            <Smallbox>
+            <WeatherCard>
               <span>오늘의 날씨</span>
-              {/* <h4>{weatherData.weather}</h4>
-              <h4>{weatherData.city}</h4> */}
-            </Smallbox>
-            <div>
+              {weatherData.state === "hasValue" ? (
+                <WeatherBox>
+                  <div>
+                    <span>{weatherData.contents.date}</span>
+                    <span>{weatherData.contents.name}</span>
+                  </div>
+                  <div>
+                    <img src={weatherIcon} />
+                    {/* <span>{weatherData.contents.weather}</span> */}
+                    <span>{weatherData.contents.temp}°C</span>
+                  </div>
+                </WeatherBox>
+              ) : (
+                <span>"loading..."</span>
+              )}
+            </WeatherCard>
+            <ClothesCard>
               <span>추천 옷차림</span>
-              <div>
-                <span>낮</span>
-                <span>밤</span>
-              </div>
-            </div>
+            </ClothesCard>
           </Weatherbox>
         </Mainbox>
       </Main>
