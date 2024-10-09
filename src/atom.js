@@ -22,7 +22,7 @@ export const searchSelector = selector({
           json: async () => ({
             temp: 20,
             date: "10-08",
-            weather: "sunny",
+            weatherIcon: "02d",
             name: "서울",
           }),
         };
@@ -45,8 +45,10 @@ export const searchSelector = selector({
         const fakeData = {
           ok: true,
           json: async () => ({
-            temp: 22,
-            weather: "흐림",
+            temp: 15,
+            date: "10-09",
+            weatherIcon: "10n",
+            name: "전주",
           }),
         };
         const response = fakeData;

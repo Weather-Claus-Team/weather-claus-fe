@@ -1,11 +1,20 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { searchSelector, searchState, weatherState } from "./atom";
-import logo2 from "./logo2.png";
-import { useEffect, useState } from "react";
-import weatherIcon from "./cloudy.png";
+import logo2 from "./images/logo2.png";
+import { useState } from "react";
+import {
+  cardigan,
+  coat,
+  hoodie,
+  padding,
+  longSleeve,
+  shirt,
+  sleeveless,
+  sweater,
+} from "./image";
 
 const Container = styled.div`
   margin: 40px 150px;
@@ -69,15 +78,16 @@ const Searchbox = styled.form`
     color: transparent;
   }
   button {
+    position: relative;
     all: unset;
     cursor: pointer;
   }
   svg {
+    position: absolute;
     color: #b6aac5;
     font-size: 25px;
-    position: absolute;
     right: 420px;
-    top: 288px;
+    top: 293px;
   }
   svg:active {
     color: #9583aa;
@@ -101,15 +111,17 @@ const WeatherCard = styled.div`
 `;
 
 const WeatherBox = styled.div`
-  background-color: rgba(999, 999, 999, 0.5);
+  background-color: rgba(0, 0, 0, 0.07);
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
+  padding: 40px 30px;
+  padding-bottom: 0;
+  padding-left: 10px;
   img {
-    width: 80px;
-    margin-top: 20px;
-    margin-right: 30px;
+    width: 150px;
   }
   div:first-child {
     font-size: 20px;
@@ -118,20 +130,27 @@ const WeatherBox = styled.div`
     }
   }
   div:last-child {
-    margin-top: 20px;
-    /* display: flex; */
-    /* align-items: center; */
+    display: flex;
+    align-items: center;
     span {
       font-size: 40px;
     }
   }
 `;
 
-const ClothesCard = styled.div``;
+const ClothesCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 180px;
+    margin-top: 40px;
+  }
+`;
 
 function App() {
   const [inputValue, setInputValue] = useState("");
-  const [searchValue, setSearchValue] = useRecoilState(searchState);
+  const setSearchValue = useSetRecoilState(searchState);
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -143,18 +162,41 @@ function App() {
 
   const weatherData = useRecoilValueLoadable(searchSelector);
   if (weatherData.state === "hasValue") {
-    // console.log(weatherData.contents);
-  }
-  if (weatherData.state === "hasError") {
+    console.log(weatherData.contents);
+  } else if (weatherData.state === "hasError") {
     console.log("error");
   } else {
-    // console.log("loading..");
+    console.log("loading..");
+  }
+
+  // clothes card
+  let clothesOption;
+  const TEMPERATURE = weatherData.contents.temp;
+
+  if (TEMPERATURE >= 28) {
+    clothesOption = sleeveless;
+  } else if (TEMPERATURE >= 23) {
+    clothesOption = shirt;
+  } else if (TEMPERATURE >= 20) {
+    clothesOption = longSleeve;
+  } else if (TEMPERATURE >= 17) {
+    clothesOption = cardigan;
+  } else if (TEMPERATURE >= 12) {
+    clothesOption = sweater;
+  } else if (TEMPERATURE >= 9) {
+    clothesOption = coat;
+  } else if (TEMPERATURE >= 5) {
+    clothesOption = hoodie;
+  } else {
+    clothesOption = padding;
   }
 
   return (
     <Container>
       <Title>
-        <Logo src={logo2} />
+        <a href="/">
+          <Logo src={logo2} />
+        </a>
         {/* <h1>Weather Claus</h1> */}
       </Title>
       {/* <Nav>
@@ -186,8 +228,10 @@ function App() {
                     <span>{weatherData.contents.name}</span>
                   </div>
                   <div>
-                    <img src={weatherIcon} />
-                    {/* <span>{weatherData.contents.weather}</span> */}
+                    <img
+                      src={`https://openweathermap.org/img/wn/${weatherData.contents.weatherIcon}@2x.png`}
+                      alt="weatherImg"
+                    />
                     <span>{weatherData.contents.temp}°C</span>
                   </div>
                 </WeatherBox>
@@ -197,6 +241,11 @@ function App() {
             </WeatherCard>
             <ClothesCard>
               <span>추천 옷차림</span>
+              {weatherData.state === "hasValue" ? (
+                <img src={clothesOption} alt="clothesImg" />
+              ) : (
+                <span>"loading..."</span>
+              )}
             </ClothesCard>
           </Weatherbox>
         </Mainbox>
