@@ -24,3 +24,6 @@ yarn-error.log*
 
 # openweather api key 
 86aec7c9d10bc13524e24895e4fdd4b8
+
+# API Keys
+.env

@@ -2,16 +2,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { searchState } from "../atom";
 import { useWeather } from "../hooks/useWeather";
-// import {
-//   sleeveless,
-//   shirt,
-//   longSleeve,
-//   cardigan,
-//   sweater,
-//   coat,
-//   hoodie,
-//   padding,
-// } from "../image";
+import ClothesCP from "./ClothesCP";
 
 const Weatherbox = styled.div`
   display: flex;
@@ -57,41 +48,9 @@ const WeatherBox = styled.div`
   }
 `;
 
-// const ClothesCard = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   img {
-//     width: 180px;
-//     margin-top: 40px;
-//   }
-// `;
-
 function WeatherCP() {
   const searchValue = useRecoilValue(searchState);
   const { data, isLoading, isError, isFetching } = useWeather(searchValue);
-
-  // clothes card
-  // let clothesOption;
-  // const TEMPERATURE = data.contents.temp;
-
-  // if (TEMPERATURE >= 28) {
-  //   clothesOption = sleeveless;
-  // } else if (TEMPERATURE >= 23) {
-  //   clothesOption = shirt;
-  // } else if (TEMPERATURE >= 20) {
-  //   clothesOption = longSleeve;
-  // } else if (TEMPERATURE >= 17) {
-  //   clothesOption = cardigan;
-  // } else if (TEMPERATURE >= 12) {
-  //   clothesOption = sweater;
-  // } else if (TEMPERATURE >= 9) {
-  //   clothesOption = coat;
-  // } else if (TEMPERATURE >= 5) {
-  //   clothesOption = hoodie;
-  // } else {
-  //   clothesOption = padding;
-  // }
 
   if (isFetching || isLoading) {
     return <div>로딩 중</div>;
@@ -123,10 +82,7 @@ function WeatherCP() {
           </div>
         </WeatherBox>
       </WeatherCard>
-      {/* <ClothesCard>
-        <span>추천 옷차림</span>
-        <img src={clothesOption} alt="clothesImg" />
-      </ClothesCard> */}
+      <ClothesCP data={data.contents.temp} />
     </Weatherbox>
   );
 }
