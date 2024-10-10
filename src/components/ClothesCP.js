@@ -35,9 +35,8 @@ const getClothesImage = (temperature) => {
   return clothesOptions.find((option) => temperature >= option.minTemp).image;
 };
 
-function ClothesCP(data) {
-  const TEMPERATURE = data.contents.temp;
-  const clothesOption = getClothesImage(TEMPERATURE);
+function ClothesCP({ data }) {
+  const clothesOption = getClothesImage(data);
 
   return (
     <ClothesCard>

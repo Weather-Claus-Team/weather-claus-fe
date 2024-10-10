@@ -70,19 +70,19 @@ function WeatherCP() {
         <span>오늘의 날씨</span>
         <WeatherBox>
           <div>
-            <span>{data.contents.date}</span>
-            <span>{data.contents.name}</span>
+            <span>{data.data.list[0].dt_txt}</span>
+            <span>{data.data.city.name}</span>
           </div>
           <div>
             <img
-              src={`https://openweathermap.org/img/wn/${data.contents.weatherIcon}@2x.png`}
+              src={`https://openweathermap.org/img/wn/${data.data.list[0].weather[0].icon}@2x.png`}
               alt="weatherImg"
             />
-            <span>{data.contents.temp}°C</span>
+            <span>{data.data.list[0].main.temp}°C</span>
           </div>
         </WeatherBox>
       </WeatherCard>
-      <ClothesCP data={data.contents.temp} />
+      <ClothesCP data={data.data.list[0].main.temp} />
     </Weatherbox>
   );
 }
