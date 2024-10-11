@@ -5,7 +5,7 @@ const weatherApi = async (city) => {
     //로그인 구현 후 위,경도에 따른 api 추가 필요
     const url = city
       ? `${SERVER_GET_WEATHER_URL}/api/weather/forecast?city=${city}`
-      : `${SERVER_GET_WEATHER_URL}/api/weather`;
+      : `${SERVER_GET_WEATHER_URL}/api/weather/forecast`;
 
     const response = await fetch(url, {
       method: "GET",
