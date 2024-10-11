@@ -32,9 +32,16 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html {
+	height: 100%;
+}
 body {
 	line-height: 1;
-  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  	/* background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%); */
+	background-image: linear-gradient(60deg, #000000 0%, #485563 100%);
+	/* background-image: url();
+	background-size: cover; */
+	color: white;
 }
 ol, ul {
 	list-style: none;
@@ -50,6 +57,10 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+a {
+	color: inherit;
+	text-decoration: none;
 }
 `;
 

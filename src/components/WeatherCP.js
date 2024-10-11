@@ -21,7 +21,7 @@ const WeatherCard = styled.div`
 `;
 
 const WeatherBox = styled.div`
-  background-color: rgba(0, 0, 0, 0.07);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: center;
