@@ -38,8 +38,6 @@ html {
 body {
 	line-height: 1;
 	background-image: linear-gradient(60deg, #000000 0%, #485563 100%);
-	/* background-image: url();
-	background-size: cover; */
 	color: white;
 }
 ol, ul {
