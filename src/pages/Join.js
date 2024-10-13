@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Recaptcha from "../components/Join/Recaptcha";
+import Username from "../components/Join/Username";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -54,7 +55,7 @@ const SignupForm = styled.form`
   }
 `;
 
-const EmailBox = styled.div`
+const IdBox = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
@@ -65,6 +66,10 @@ const EmailBox = styled.div`
     width: 30%;
   }
 `;
+
+const EmailBox = styled(IdBox)``;
+
+const EmailCodeCheckBox = styled(IdBox)``;
 
 const SubmitBtn = styled.button`
   background-color: #39434f;
@@ -82,18 +87,10 @@ function Join() {
     register,
     handleSubmit,
     reset,
-    setError,
+    getValues,
     formState: { errors },
   } = useForm();
   const onValid = (data) => {
-    if (data.password !== data.password2) {
-      setError(
-        "password2",
-        { message: "비밀번호가 다릅니다" },
-        { shouldFocus: true }
-      );
-      return;
-    }
     console.log(data);
     reset();
   };
@@ -111,26 +108,16 @@ function Join() {
           <h5>Create an account for Login</h5>
         </div>
         <SignupForm onSubmit={handleSubmit(onValid)}>
-          <input
-            type="text"
-            placeholder="아이디"
-            {...register("username", {
-              required: "아이디를 작성해주세요",
-              minLength: {
-                value: 5,
-                message: "5글자 이상 작성하세요",
-              },
-            })}
-          />
+          <Username />
           <span>{errors?.username?.message}</span>
           <input
             type="password"
             placeholder="비밀번호"
             {...register("password", {
-              required: "비밀번호를 작성해주세요",
+              required: "비밀번호를 입력해주세요",
               minLength: {
                 value: 8,
-                message: "8글자 이상 작성하세요",
+                message: "8글자 이상 입력하세요",
               },
             })}
           />
@@ -138,7 +125,16 @@ function Join() {
           <input
             type="password"
             placeholder="비밀번호 재입력"
-            {...register("password2", { required: "비밀번호를 작성해주세요" })}
+            {...register("password2", {
+              required: "비밀번호 재입력을 입력해주세요",
+              validate: {
+                check: (value) => {
+                  if (getValues("password") !== value) {
+                    return "비밀번호가 일치하지 않습니다";
+                  }
+                },
+              },
+            })}
           />
           <span>{errors?.password2?.message}</span>
           <EmailBox>
@@ -146,14 +142,20 @@ function Join() {
               type="email"
               placeholder="이메일"
               {...register("email", {
-                required: "이메일을 작성해주세요",
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                required: "이메일을 입력해주세요",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "이메일을 올바르게 입력해주세요",
+                },
               })}
             />
             <button>인증번호 전송</button>
           </EmailBox>
           <span>{errors?.email?.message}</span>
-          <input type="number" placeholder="인증번호를 입력해주세요" />
+          <EmailCodeCheckBox>
+            <input type="number" placeholder="인증번호를 입력해주세요" />
+            <button>인증번호 확인</button>
+          </EmailCodeCheckBox>
           <Recaptcha />
           <SubmitBtn type="submit">Sign up</SubmitBtn>
         </SignupForm>
