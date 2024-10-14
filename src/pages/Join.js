@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
+import Password from "../components/Join/Password";
+import Email from "../components/Join/Email";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -55,22 +57,6 @@ const SignupForm = styled.form`
   }
 `;
 
-const IdBox = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 20px;
-  input {
-    width: 70%;
-  }
-  button {
-    width: 30%;
-  }
-`;
-
-const EmailBox = styled(IdBox)``;
-
-const EmailCodeCheckBox = styled(IdBox)``;
-
 const SubmitBtn = styled.button`
   background-color: #39434f;
   color: white;
@@ -83,13 +69,7 @@ const SubmitBtn = styled.button`
 `;
 
 function Join() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    getValues,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, reset } = useForm();
   const onValid = (data) => {
     console.log(data);
     reset();
@@ -109,53 +89,8 @@ function Join() {
         </div>
         <SignupForm onSubmit={handleSubmit(onValid)}>
           <Username />
-          <span>{errors?.username?.message}</span>
-          <input
-            type="password"
-            placeholder="비밀번호"
-            {...register("password", {
-              required: "비밀번호를 입력해주세요",
-              minLength: {
-                value: 8,
-                message: "8글자 이상 입력하세요",
-              },
-            })}
-          />
-          <span>{errors?.password?.message}</span>
-          <input
-            type="password"
-            placeholder="비밀번호 재입력"
-            {...register("password2", {
-              required: "비밀번호 재입력을 입력해주세요",
-              validate: {
-                check: (value) => {
-                  if (getValues("password") !== value) {
-                    return "비밀번호가 일치하지 않습니다";
-                  }
-                },
-              },
-            })}
-          />
-          <span>{errors?.password2?.message}</span>
-          <EmailBox>
-            <input
-              type="email"
-              placeholder="이메일"
-              {...register("email", {
-                required: "이메일을 입력해주세요",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "이메일을 올바르게 입력해주세요",
-                },
-              })}
-            />
-            <button>인증번호 전송</button>
-          </EmailBox>
-          <span>{errors?.email?.message}</span>
-          <EmailCodeCheckBox>
-            <input type="number" placeholder="인증번호를 입력해주세요" />
-            <button>인증번호 확인</button>
-          </EmailCodeCheckBox>
+          <Password />
+          <Email />
           <Recaptcha />
           <SubmitBtn type="submit">Sign up</SubmitBtn>
         </SignupForm>

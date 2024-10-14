@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { usernameDuplicateState, usernameState } from "../../atom";
 import { checkDuplicateUsername } from "../../api/signupApi";
 
-const IdBox = styled.form`
+const IdBox = styled.div`
   display: flex;
   width: 430px;
   gap: 20px;
@@ -17,7 +17,10 @@ const IdBox = styled.form`
 `;
 
 function Username() {
-  const { register } = useForm();
+  const {
+    register,
+    setError: { errors },
+  } = useForm();
 
   // id (username)
   const [username, setUsername] = useRecoilState(usernameState);
@@ -25,8 +28,13 @@ function Username() {
 
   // 중복검사 버튼 클릭
   const handleUsernameDuplicate = async () => {
+    setIsDuplicate(null);
     const result = await checkDuplicateUsername(username);
-    setIsDuplicate(result);
+    if (result.code !== 200) {
+      setIsDuplicate(true);
+    } else {
+      setIsDuplicate(false);
+    }
   };
 
   return (
@@ -57,6 +65,7 @@ function Username() {
           )}
         </div>
       )}
+      <span>{errors?.username?.message}</span>
     </div>
   );
 }
