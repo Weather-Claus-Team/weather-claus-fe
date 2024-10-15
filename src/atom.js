@@ -35,3 +35,9 @@ export const emailCodeCheckState = atom({
   key: "emailCodeCheckState",
   default: null, // true: 인증번호 일치, false: 인증번호 불일치
 });
+
+// 리캡챠 토큰
+export const recaptchaTokenState = atom({
+  key: "recaptchaTokenState",
+  default: "",
+});

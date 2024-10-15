@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { usernameDuplicateState, usernameState } from "../../atom";
 import { checkDuplicateUsername } from "../../api/signupApi";
@@ -20,7 +20,7 @@ function Username() {
   const {
     register,
     setError: { errors },
-  } = useForm();
+  } = useFormContext();
 
   // id (username)
   const [username, setUsername] = useRecoilState(usernameState);
@@ -29,7 +29,14 @@ function Username() {
   // 중복검사 버튼 클릭
   const handleUsernameDuplicate = async () => {
     setIsDuplicate(null);
+
     const result = await checkDuplicateUsername(username);
+
+    if (result === null) {
+      alert("중복 확인 중 문제가 발생했습니다. 다시 시도해주세요");
+      return;
+    }
+
     if (result.code !== 200) {
       setIsDuplicate(true);
     } else {
@@ -49,6 +56,10 @@ function Username() {
             minLength: {
               value: 5,
               message: "5글자 이상 작성하세요",
+            },
+            pattern: {
+              value: /^[a-z0-9]+$/,
+              message: "영문(소문자), 숫자만 입력해주세요",
             },
           })}
         />
