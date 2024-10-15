@@ -49,7 +49,7 @@ export const sendEmail = async (email) => {
 };
 
 // 이메일 인증번호 검사
-export const checkEmailCode = async (emailCode) => {
+export const checkEmailCode = async (email, emailCode) => {
   try {
     const url = `${SERVER_URL}/api/users/email-code`;
     const response = await fetch(url, {
@@ -57,7 +57,7 @@ export const checkEmailCode = async (emailCode) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ emailCode }),
+      body: JSON.stringify({ email, code: emailCode }),
     });
     if (!response.ok) {
       console.log("Error checking email code: ", response.statusText);

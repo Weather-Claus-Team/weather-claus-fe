@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
 
 const Container = styled.div`
   svg {
@@ -11,6 +12,9 @@ const Container = styled.div`
   }
   svg:hover {
     color: gray;
+  }
+  button {
+    all: unset;
   }
 `;
 
@@ -42,6 +46,22 @@ function Password() {
     setError: { errors },
   } = useFormContext();
 
+  // 비밀번호 보여주기
+  // const inputRef1 = useRef(null);
+  // const inputRef2 = useRef(null);
+
+  // const handlePasswordShow = (inputRef) => {
+  //   if (inputRef.current) {
+  //     inputRef.current.type =
+  //       inputRef.current.type === "password" ? "text" : "password";
+  //   }
+  // };
+
+  // const handleButtonClick = (inputRef) => {
+  //   handlePasswordShow(inputRef);
+  //   document.activeElement.blur();
+  // };
+
   return (
     <Container>
       <Password1>
@@ -56,7 +76,13 @@ function Password() {
             },
           })}
         />
+        {/* <button
+          ref={inputRef1}
+          type="button"
+          onClick={handleButtonClick(inputRef1)}
+        > */}
         <FontAwesomeIcon icon={faEye} />
+        {/* </button> */}
         <span>{errors?.password?.message}</span>
       </Password1>
       <Password2>
@@ -74,7 +100,13 @@ function Password() {
             },
           })}
         />
+        {/* <button
+          ref={inputRef2}
+          type="button"
+          onClick={handleButtonClick(inputRef2)}
+        > */}
         <FontAwesomeIcon icon={faEye} />
+        {/* </button> */}
         <span>{errors?.password2?.message}</span>
       </Password2>
     </Container>

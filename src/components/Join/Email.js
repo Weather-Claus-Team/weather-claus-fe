@@ -58,7 +58,7 @@ function Email() {
     useRecoilState(emailCodeCheckState);
 
   const handleCheckEmailCode = async () => {
-    const result = await checkEmailCode(emailCode);
+    const result = await checkEmailCode(email, emailCode);
     if (result === null) {
       alert("인증번호 인증에 문제가 발생했습니다. 다시 시도해주세요");
       return;
