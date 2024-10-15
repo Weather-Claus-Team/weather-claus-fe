@@ -1,12 +1,19 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
 import { useRecoilValue } from "recoil";
-import { recaptchaTokenState } from "../atom";
+import {
+  emailCodeCheckState,
+  emailCodeState,
+  emailState,
+  recaptchaTokenState,
+  usernameDuplicateState,
+  usernameState,
+} from "../atom";
 import { signupResult } from "../api/signupApi";
 
 const Container = styled.div`
@@ -75,6 +82,16 @@ function Join() {
   const methods = useForm();
   const { reset } = methods;
   const recaptchaToken = useRecoilValue(recaptchaTokenState);
+  const navigate = useNavigate();
+  // atom 디폴트값으로 reset
+  const resetAtoms = () => {
+    usernameState("");
+    usernameDuplicateState(null);
+    emailState("");
+    emailCodeState(0);
+    emailCodeCheckState(null);
+    recaptchaTokenState("");
+  };
 
   const onValid = async (data) => {
     if (!recaptchaToken) {
@@ -96,7 +113,10 @@ function Join() {
       }
 
       if (result.code === 200) {
+        // resetAtoms();
         alert("회원가입을 완료했습니다. 웨더클로스에 오신 것을 환영합니다 !");
+        console.log(result);
+        navigate("/"); // 회원가입 완료 후 메인페이지로 이동
       }
     } catch (error) {
       console.error("회원가입 오류 발생: ", error);
@@ -104,8 +124,6 @@ function Join() {
     }
     reset();
   };
-
-  // 회원가입 완료 이후 메인 페이지 이동 or 로그인 페이지로 이동
 
   return (
     <Container>

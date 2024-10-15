@@ -19,8 +19,15 @@ const IdBox = styled.div`
 function Username() {
   const {
     register,
-    setError: { errors },
-  } = useFormContext();
+    formState: { errors },
+    trigger,
+  } = useFormContext({
+    mode: "onBlur",
+  });
+
+  const handleBlur = async () => {
+    await trigger("username");
+  };
 
   // id (username)
   const [username, setUsername] = useRecoilState(usernameState);
@@ -52,16 +59,17 @@ function Username() {
           placeholder="아이디"
           {...register("username", {
             onChange: (event) => setUsername(event.target.value),
-            required: "아이디를 작성해주세요",
-            minLength: {
-              value: 5,
-              message: "5글자 이상 작성하세요",
-            },
+            required: "아이디를 입력해주세요",
             pattern: {
               value: /^[a-z0-9]+$/,
               message: "영문(소문자), 숫자만 입력해주세요",
             },
+            minLength: {
+              value: 5,
+              message: "5글자 이상 작성하세요",
+            },
           })}
+          onBlur={handleBlur}
         />
         <button type="button" onClick={handleUsernameDuplicate}>
           중복 확인
@@ -76,7 +84,7 @@ function Username() {
           )}
         </div>
       )}
-      <span>{errors?.username?.message}</span>
+      <span>{username && errors?.username?.message}</span>
     </div>
   );
 }

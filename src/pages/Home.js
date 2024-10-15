@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 
 const Container = styled.div`
   margin: 70px 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -19,7 +23,7 @@ const Title = styled.div`
 const Main = styled.main``;
 
 const Mainbox = styled.div`
-  width: 70vw;
+  width: 60vw;
   height: 50vh;
   margin-top: 60px;
   background-color: rgba(999, 999, 999, 0.4);
