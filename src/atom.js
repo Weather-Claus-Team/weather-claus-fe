@@ -6,6 +6,12 @@ export const searchState = atom({
   default: "",
 });
 
+//엑세스 토큰 저장
+export const accessTokenState = atom({
+  key: "accessTokenState",
+  default: "",
+});
+
 // 유저 아이디
 export const usernameState = atom({
   key: "usernameState",
