@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from "react";
+// import { useRef } from "react";
 
 const Container = styled.div`
   svg {
@@ -43,8 +43,17 @@ function Password() {
   const {
     register,
     getValues,
-    setError: { errors },
+    formState: { errors },
+    trigger,
+    watch,
   } = useFormContext();
+
+  const password = watch("password");
+  const password2 = watch("password2");
+
+  const handleBlur = async (value) => {
+    await trigger(value);
+  };
 
   // 비밀번호 보여주기
   // const inputRef1 = useRef(null);
@@ -75,6 +84,7 @@ function Password() {
               message: "8글자 이상 입력하세요",
             },
           })}
+          onBlur={() => handleBlur("password")}
         />
         {/* <button
           ref={inputRef1}
@@ -83,7 +93,7 @@ function Password() {
         > */}
         <FontAwesomeIcon icon={faEye} />
         {/* </button> */}
-        <span>{errors?.password?.message}</span>
+        <span>{password && errors?.password?.message}</span>
       </Password1>
       <Password2>
         <input
@@ -99,6 +109,7 @@ function Password() {
               },
             },
           })}
+          onBlur={() => handleBlur("password2")}
         />
         {/* <button
           ref={inputRef2}
@@ -107,7 +118,7 @@ function Password() {
         > */}
         <FontAwesomeIcon icon={faEye} />
         {/* </button> */}
-        <span>{errors?.password2?.message}</span>
+        <span>{password2 && errors?.password2?.message}</span>
       </Password2>
     </Container>
   );

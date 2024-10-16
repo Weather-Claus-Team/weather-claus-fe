@@ -39,7 +39,7 @@ const Searchbox = styled.form`
     color: #485563;
     font-size: 25px;
     top: 20px;
-    right: 200px;
+    right: 130px;
   }
   svg:active {
     color: #8898a8;

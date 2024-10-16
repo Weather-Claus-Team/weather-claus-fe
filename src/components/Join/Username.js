@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { usernameDuplicateState, usernameState } from "../../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  usernameCheckState,
+  usernameDuplicateState,
+  usernameState,
+} from "../../atom";
 import { checkDuplicateUsername } from "../../api/signupApi";
 
 const IdBox = styled.div`
@@ -19,12 +23,20 @@ const IdBox = styled.div`
 function Username() {
   const {
     register,
-    setError: { errors },
-  } = useFormContext();
+    formState: { errors },
+    trigger,
+  } = useFormContext({
+    mode: "onBlur",
+  });
+
+  const handleBlur = async () => {
+    await trigger("username");
+  };
 
   // id (username)
   const [username, setUsername] = useRecoilState(usernameState);
   const [isDuplicate, setIsDuplicate] = useRecoilState(usernameDuplicateState);
+  const setIsChecked = useSetRecoilState(usernameCheckState);
 
   // 중복검사 버튼 클릭
   const handleUsernameDuplicate = async () => {
@@ -38,9 +50,10 @@ function Username() {
     }
 
     if (result.code !== 200) {
-      setIsDuplicate(true);
+      setIsDuplicate(true); // 아이디 중복
     } else {
-      setIsDuplicate(false);
+      setIsDuplicate(false); // 사용 가능 아이디
+      setIsChecked(true); // 중복검사 확인 완료
     }
   };
 
@@ -52,16 +65,17 @@ function Username() {
           placeholder="아이디"
           {...register("username", {
             onChange: (event) => setUsername(event.target.value),
-            required: "아이디를 작성해주세요",
-            minLength: {
-              value: 5,
-              message: "5글자 이상 작성하세요",
-            },
+            required: "아이디를 입력해주세요",
             pattern: {
               value: /^[a-z0-9]+$/,
               message: "영문(소문자), 숫자만 입력해주세요",
             },
+            minLength: {
+              value: 5,
+              message: "5글자 이상 작성하세요",
+            },
           })}
+          onBlur={handleBlur}
         />
         <button type="button" onClick={handleUsernameDuplicate}>
           중복 확인
@@ -76,7 +90,7 @@ function Username() {
           )}
         </div>
       )}
-      <span>{errors?.username?.message}</span>
+      <span>{username && errors?.username?.message}</span>
     </div>
   );
 }
