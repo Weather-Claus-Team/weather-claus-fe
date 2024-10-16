@@ -5,14 +5,11 @@ import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  emailCodeCheckState,
-  emailCodeState,
-  emailState,
+  emailCheckState,
   recaptchaTokenState,
-  usernameDuplicateState,
-  usernameState,
+  usernameCheckState,
 } from "../atom";
 import { signupResult } from "../api/signupApi";
 
@@ -81,29 +78,34 @@ const SubmitBtn = styled.button`
 function Join() {
   const methods = useForm();
   const { reset } = methods;
-  const recaptchaToken = useRecoilValue(recaptchaTokenState);
   const navigate = useNavigate();
-  // atom 디폴트값으로 reset
-  const resetAtoms = () => {
-    usernameState("");
-    usernameDuplicateState(null);
-    emailState("");
-    emailCodeState(0);
-    emailCodeCheckState(null);
-    recaptchaTokenState("");
-  };
+  const recaptchaToken = useRecoilValue(recaptchaTokenState);
+  const [usernameChecked, setUsernameChecked] =
+    useRecoilState(usernameCheckState);
+  const [emailChecked, setEmailChecked] = useRecoilState(emailCheckState);
 
   const onValid = async (data) => {
     if (!recaptchaToken) {
       alert("리캡챠가 완료되지 않았습니다");
       return;
     }
-    // data에 리캡챠 토큰 추가해서 보내기
+    if (!usernameChecked) {
+      alert("아이디 중복 확인이 완료되지 않았습니다");
+      return;
+    }
+    if (!emailChecked) {
+      alert("이메일 인증번호 확인이 완료되지 않았습니다");
+      return;
+    }
+    // 데이터에서 비밀번호 재확인, 이메일 인증번호 제외
+    const { password2, emailCode, ...restData } = data;
+    // 리캡챠 토큰 추가
     const addTokenData = {
-      ...data,
+      ...restData,
       token: recaptchaToken,
     };
     console.log(addTokenData);
+
     try {
       const result = await signupResult(addTokenData);
 
@@ -113,9 +115,7 @@ function Join() {
       }
 
       if (result.code === 200) {
-        // resetAtoms();
         alert("회원가입을 완료했습니다. 웨더클로스에 오신 것을 환영합니다 !");
-        console.log(result);
         navigate("/"); // 회원가입 완료 후 메인페이지로 이동
       }
     } catch (error) {

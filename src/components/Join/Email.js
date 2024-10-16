@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { emailCodeCheckState, emailCodeState, emailState } from "../../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  emailCheckState,
+  emailCodeCheckState,
+  emailCodeState,
+  emailState,
+} from "../../atom";
 import { checkEmailCode, sendEmail } from "../../api/signupApi";
 
 const Container = styled.div`
@@ -61,18 +66,21 @@ function Email() {
   const [emailCode, setEmailCode] = useRecoilState(emailCodeState);
   const [isEmailCodeSame, setIsEmailCodeSame] =
     useRecoilState(emailCodeCheckState);
+  const setIsChecked = useSetRecoilState(emailCheckState);
 
   const handleCheckEmailCode = async () => {
     const result = await checkEmailCode(email, emailCode);
+
     if (result === null) {
       alert("인증번호 인증에 문제가 발생했습니다. 다시 시도해주세요");
       return;
     }
 
     if (result.code === 200) {
-      setIsEmailCodeSame(true);
+      setIsEmailCodeSame(true); // 인증번호 일치
+      setIsChecked(true); // 인증번호 확인 완료
     } else {
-      setIsEmailCodeSame(false);
+      setIsEmailCodeSame(false); // 인증번호 불일치
     }
   };
 

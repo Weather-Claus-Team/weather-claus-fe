@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { usernameDuplicateState, usernameState } from "../../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  usernameCheckState,
+  usernameDuplicateState,
+  usernameState,
+} from "../../atom";
 import { checkDuplicateUsername } from "../../api/signupApi";
 
 const IdBox = styled.div`
@@ -32,6 +36,7 @@ function Username() {
   // id (username)
   const [username, setUsername] = useRecoilState(usernameState);
   const [isDuplicate, setIsDuplicate] = useRecoilState(usernameDuplicateState);
+  const setIsChecked = useSetRecoilState(usernameCheckState);
 
   // 중복검사 버튼 클릭
   const handleUsernameDuplicate = async () => {
@@ -45,9 +50,10 @@ function Username() {
     }
 
     if (result.code !== 200) {
-      setIsDuplicate(true);
+      setIsDuplicate(true); // 아이디 중복
     } else {
-      setIsDuplicate(false);
+      setIsDuplicate(false); // 사용 가능 아이디
+      setIsChecked(true); // 중복검사 확인 완료
     }
   };
 
