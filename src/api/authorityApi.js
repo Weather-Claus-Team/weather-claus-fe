@@ -35,7 +35,9 @@ const authorityApi = async () => {
       if (refreshResponse.status === 200) {
         const newAccessToken = refreshResponse.headers.get("Authorization");
         window.localStorage.setItem("ACT", newAccessToken);
+        console.log("토큰 재발급 성공");
         //원래 작업 실행
+        // baseOption.headers.Authorization = `${newAccessToken}`;
         return authorityApi();
       } else {
         //엑세스 토큰 재발급 실패
@@ -47,7 +49,9 @@ const authorityApi = async () => {
     } else if (response.status === 200) {
       //기존 엑세스 토큰이 유효할 때
       console.log("토큰 유효함. 권한 확인 완료");
-      return response;
+      const data = await response.text();
+      console.log(data);
+      return data;
     } else {
       //엑세스 토큰 검증 오류
       window.alert("토큰 확인 불가");

@@ -24,7 +24,6 @@ const loginApi = async ({ username, password }) => {
     const accessToken = response.headers.get("Authorization");
     console.log(accessToken);
     window.localStorage.setItem("ACT", accessToken);
-    window.location.replace("/");
   } catch (error) {
     console.error("Failed to Login:", error);
     throw error;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import loginApi from "../api/loginApi";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ const SubmitBtn = styled.button`
 `;
 
 function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +67,7 @@ function Login() {
     setIsLoading(true);
     try {
       await loginApi({ username, password });
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("Login error:", error);
       alert("아이디나 비밀번호를 확인해주세요!");
