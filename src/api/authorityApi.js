@@ -1,5 +1,3 @@
-// import { useRecoilValue, useSetRecoilState } from "recoil";
-// import { accessTokenState } from "../atom";
 import logoutApi from "./logoutApi";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
