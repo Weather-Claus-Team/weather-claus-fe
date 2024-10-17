@@ -5,13 +5,14 @@ import {
   emailCheckState,
   emailCodeCheckState,
   emailCodeState,
+  emailDuplicateState,
   emailState,
 } from "../../atom";
 import { checkEmailCode, sendEmail } from "../../api/signupApi";
 
 const Container = styled.div`
   input:first-child {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 `;
 
@@ -48,8 +49,12 @@ function Email() {
 
   // 이메일 인증번호 보내기
   const [email, setEmail] = useRecoilState(emailState);
+  const [isEmailDuplicate, setIsEmailDuplicate] =
+    useRecoilState(emailDuplicateState);
+
   const handleSendEmail = async () => {
     const result = await sendEmail(email);
+
     if (result === null) {
       alert("인증번호 전송에 문제가 발생했습니다. 다시 시도해주세요");
       return;
@@ -57,6 +62,11 @@ function Email() {
 
     if (result.code === 200) {
       alert("인증번호를 전송했습니다");
+    } else if (
+      (result.code === 400) &
+      (result.errorDetails.details === "email already exists")
+    ) {
+      setIsEmailDuplicate(true); // 이미 있는 이메일
     } else {
       alert("인증번호 전송에 실패했습니다");
     }
@@ -79,8 +89,13 @@ function Email() {
     if (result.code === 200) {
       setIsEmailCodeSame(true); // 인증번호 일치
       setIsChecked(true); // 인증번호 확인 완료
-    } else {
+    } else if (
+      result.code === 400 &&
+      result.errorDetails.details === "code mismatch"
+    ) {
       setIsEmailCodeSame(false); // 인증번호 불일치
+    } else {
+      alert("인증번호 인증에 문제가 발생했습니다. 다시 시도해주세요");
     }
   };
 
@@ -104,6 +119,7 @@ function Email() {
           인증번호 전송
         </button>
       </EmailBox>
+      {isEmailDuplicate === true && <span>이미 사용 중인 이메일입니다</span>}
       <span>{email && errors?.email?.message}</span>
       <EmailCodeCheckBox>
         <input

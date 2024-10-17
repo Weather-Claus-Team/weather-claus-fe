@@ -78,7 +78,7 @@ function WeatherCP() {
               src={`https://openweathermap.org/img/wn/${data.data.list[0].weather[0].icon}@2x.png`}
               alt="weatherImg"
             />
-            <span>{data.data.list[0].main.temp}°C</span>
+            <span>{Math.floor(data.data.list[0].main.temp)}°C</span>
           </div>
         </WeatherBox>
       </WeatherCard>

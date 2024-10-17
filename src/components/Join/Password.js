@@ -5,6 +5,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import { useRef } from "react";
 
 const Container = styled.div`
+  width: 430px;
   svg {
     color: #c0c0c0;
     cursor: pointer;
@@ -21,7 +22,7 @@ const Container = styled.div`
 const Password1 = styled.div`
   position: relative;
   input {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   svg {
     position: absolute;

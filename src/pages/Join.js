@@ -5,13 +5,17 @@ import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   emailCheckState,
+  emailCodeCheckState,
+  emailDuplicateState,
   recaptchaTokenState,
   usernameCheckState,
+  usernameDuplicateState,
 } from "../atom";
 import { signupResult } from "../api/signupApi";
+import { useEffect } from "react";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -51,7 +55,7 @@ const SignupForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   margin-top: 20px;
   input {
     padding: 13px 15px;
@@ -61,6 +65,9 @@ const SignupForm = styled.form`
   }
   input:focus {
     outline-color: #7e8c9e;
+  }
+  input:focus::placeholder {
+    color: transparent;
   }
 `;
 
@@ -75,20 +82,37 @@ const SubmitBtn = styled.button`
   cursor: pointer;
 `;
 
+const LoginText = styled.span`
+  a {
+    margin-left: 4px;
+    text-decoration: underline;
+    color: #45505e;
+    cursor: pointer;
+  }
+`;
+
 function Join() {
   const methods = useForm();
   const { reset } = methods;
   const navigate = useNavigate();
-  const recaptchaToken = useRecoilValue(recaptchaTokenState);
-  const [usernameChecked, setUsernameChecked] =
-    useRecoilState(usernameCheckState);
-  const [emailChecked, setEmailChecked] = useRecoilState(emailCheckState);
+  // const recaptchaToken = useRecoilValue(recaptchaTokenState);
+  const usernameChecked = useRecoilValue(usernameCheckState);
+  const emailChecked = useRecoilValue(emailCheckState);
+  const setUsernameDuplicate = useSetRecoilState(usernameDuplicateState);
+  const setEmailCodeCheck = useSetRecoilState(emailCodeCheckState);
+  const setEmailDuplicate = useSetRecoilState(emailDuplicateState);
+
+  useEffect(() => {
+    setUsernameDuplicate(null);
+    setEmailCodeCheck(null);
+    setEmailDuplicate(null);
+  }, []);
 
   const onValid = async (data) => {
-    if (!recaptchaToken) {
-      alert("리캡챠가 완료되지 않았습니다");
-      return;
-    }
+    // if (!recaptchaToken) {
+    //   alert("리캡챠가 완료되지 않았습니다");
+    //   return;
+    // }
     if (!usernameChecked) {
       alert("아이디 중복 확인이 완료되지 않았습니다");
       return;
@@ -98,16 +122,17 @@ function Join() {
       return;
     }
     // 데이터에서 비밀번호 재확인, 이메일 인증번호 제외
-    const { password2, emailCode, ...restData } = data;
+    const { emailCode, ...restData } = data;
     // 리캡챠 토큰 추가
-    const addTokenData = {
-      ...restData,
-      token: recaptchaToken,
-    };
-    console.log(addTokenData);
+    // const addTokenData = {
+    //   ...restData,
+    //   token: recaptchaToken,
+    // };
+    // console.log(addTokenData);
+    console.log(restData);
 
     try {
-      const result = await signupResult(addTokenData);
+      const result = await signupResult(restData);
 
       if (result === null) {
         alert("서버와의 통신 중 문제가 발생했습니다. 다시 시도해주세요");
@@ -135,7 +160,12 @@ function Join() {
       <SignupBox>
         <div>
           <h2>Sign up</h2>
-          <h5>Create an account for Login</h5>
+          <h5>
+            Create an account for
+            <LoginText>
+              <Link to="/login">Login</Link>
+            </LoginText>
+          </h5>
         </div>
         <FormProvider {...methods}>
           <SignupForm onSubmit={methods.handleSubmit(onValid)}>

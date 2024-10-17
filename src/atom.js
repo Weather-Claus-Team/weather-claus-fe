@@ -21,7 +21,7 @@ export const usernameState = atom({
 // 아이디 중복 여부
 export const usernameDuplicateState = atom({
   key: "usernameDuplicateState",
-  default: null, // true: 중복, false: 중복 아님
+  default: null, // true: 중복, false: 사용 가능
 });
 
 // 아이디 중복 검사를 했는지 안 했는지
@@ -36,10 +36,16 @@ export const emailState = atom({
   default: "",
 });
 
+// 이메일 중복 여부
+export const emailDuplicateState = atom({
+  key: "emailDuplicateState",
+  default: null, // true: 중복, false: 사용 가능
+});
+
 // 이메일 인증번호
 export const emailCodeState = atom({
   key: "emailCodeState",
-  default: 0, // 인증번호는 숫자
+  default: 0, // 인증번호는 숫자 6자리
 });
 
 // 이메일 인증번호 확인

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { DefaultValue, useRecoilState, useSetRecoilState } from "recoil";
 import {
   usernameCheckState,
   usernameDuplicateState,
@@ -48,12 +48,17 @@ function Username() {
       alert("중복 확인 중 문제가 발생했습니다. 다시 시도해주세요");
       return;
     }
-
-    if (result.code !== 200) {
+    console.log(result);
+    if (
+      result.code === 400 &&
+      result.errorDetails.details === "Username is already in use."
+    ) {
       setIsDuplicate(true); // 아이디 중복
-    } else {
+    } else if (result.code === 200) {
       setIsDuplicate(false); // 사용 가능 아이디
       setIsChecked(true); // 중복검사 확인 완료
+    } else {
+      alert("중복 확인 중 문제가 발생했습니다. 다시 시도해주세요");
     }
   };
 
@@ -72,7 +77,7 @@ function Username() {
             },
             minLength: {
               value: 5,
-              message: "5글자 이상 작성하세요",
+              message: "5글자 이상 입력하세요",
             },
           })}
           onBlur={handleBlur}
@@ -84,7 +89,7 @@ function Username() {
       {isDuplicate !== null && (
         <div>
           {isDuplicate ? (
-            <p style={{ color: "red" }}>사용할 수 없는 아이디입니다</p>
+            <p style={{ color: "red" }}>이미 사용 중인 아이디입니다</p>
           ) : (
             <p style={{ color: "blue" }}>사용 가능한 아이디입니다</p>
           )}
