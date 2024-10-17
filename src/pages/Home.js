@@ -2,6 +2,8 @@ import styled from "styled-components";
 import SearchCP from "../components/SearchCP";
 import WeatherCP from "../components/WeatherCP";
 import { Link } from "react-router-dom";
+import logoutApi from "../api/logoutApi";
+import authorityApi from "../api/authorityApi";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -66,6 +68,9 @@ function Home() {
         <button>
           <Link to="/join">Join</Link>
         </button>
+        {/* 로그아웃,권한확인 테스트 */}
+        {/* <button onClick={logoutApi}>로그아웃</button>
+        <button onClick={authorityApi}>권한 확인</button> */}
       </Btns>
       <Main>
         <Mainbox>

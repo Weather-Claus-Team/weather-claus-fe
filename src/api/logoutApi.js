@@ -1,34 +1,27 @@
-import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useResetRecoilState } from "recoil";
-import { accessTokenState } from "../atom";
-
 const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
 
-async function LogoutApi() {
-  const navigate = useNavigate();
-  const accessToken = useRecoilValue(accessTokenState);
-  const resetAccessToken = useResetRecoilState(accessTokenState);
+const logoutApi = async () => {
   try {
     const url = `${SERVER_URL}/api/logout`;
+    const accessToken = window.localStorage.getItem("ACT");
 
     await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${accessToken}`,
       },
-      body: JSON.stringify({
-        accessToken: accessToken,
-      }),
       credentials: "include",
     });
 
-    resetAccessToken();
-    navigate("/");
+    window.localStorage.removeItem("ACT");
+    window.location.replace("/");
   } catch (error) {
-    console.error("Failed to Login:", error);
-    navigate("/");
+    console.error("Failed to Logout:", error);
+    window.localStorage.removeItem("ACT");
+    window.location.replace("/");
     throw error;
   }
-}
+};
 
-export default LogoutApi;
+export default logoutApi;

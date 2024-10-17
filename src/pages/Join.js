@@ -79,16 +79,16 @@ function Join() {
   const methods = useForm();
   const { reset } = methods;
   const navigate = useNavigate();
-  const recaptchaToken = useRecoilValue(recaptchaTokenState);
+  // const recaptchaToken = useRecoilValue(recaptchaTokenState);
   const [usernameChecked, setUsernameChecked] =
     useRecoilState(usernameCheckState);
   const [emailChecked, setEmailChecked] = useRecoilState(emailCheckState);
 
   const onValid = async (data) => {
-    if (!recaptchaToken) {
-      alert("리캡챠가 완료되지 않았습니다");
-      return;
-    }
+    // if (!recaptchaToken) {
+    //   alert("리캡챠가 완료되지 않았습니다");
+    //   return;
+    // }
     if (!usernameChecked) {
       alert("아이디 중복 확인이 완료되지 않았습니다");
       return;
@@ -98,16 +98,16 @@ function Join() {
       return;
     }
     // 데이터에서 비밀번호 재확인, 이메일 인증번호 제외
-    const { password2, emailCode, ...restData } = data;
+    const { emailCode, ...restData } = data;
     // 리캡챠 토큰 추가
-    const addTokenData = {
-      ...restData,
-      token: recaptchaToken,
-    };
-    console.log(addTokenData);
+    // const addTokenData = {
+    //   ...restData,
+    //   token: recaptchaToken,
+    // };
+    // console.log(addTokenData);
 
     try {
-      const result = await signupResult(addTokenData);
+      const result = await signupResult(restData);
 
       if (result === null) {
         alert("서버와의 통신 중 문제가 발생했습니다. 다시 시도해주세요");
