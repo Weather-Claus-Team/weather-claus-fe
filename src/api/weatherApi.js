@@ -1,11 +1,9 @@
-const SERVER_GET_WEATHER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
-
 const weatherApi = async (city) => {
   try {
     //로그인 구현 후 위,경도에 따른 api 추가 필요
     const url = city
-      ? `${SERVER_GET_WEATHER_URL}/api/weather/forecast?city=${city}`
-      : `${SERVER_GET_WEATHER_URL}/api/weather/forecast`;
+      ? `/api/weather/forecast?city=${city}`
+      : "/api/weather/forecast";
 
     const response = await fetch(url, {
       method: "GET",

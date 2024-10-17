@@ -1,8 +1,6 @@
-const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
-
 const logoutApi = async () => {
   try {
-    const url = `${SERVER_URL}/logout`;
+    const url = "/logout";
     const accessToken = window.localStorage.getItem("ACT");
 
     await fetch(url, {

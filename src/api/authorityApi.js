@@ -1,7 +1,5 @@
 import logoutApi from "./logoutApi";
 
-const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
-
 const authorityApi = async () => {
   const accessToken = window.localStorage.getItem("ACT");
 
@@ -15,7 +13,7 @@ const authorityApi = async () => {
   };
 
   try {
-    const url = `${SERVER_URL}/myPage`;
+    const url = "/myPage";
 
     const response = await fetch(url, {
       ...baseOption,
@@ -23,7 +21,8 @@ const authorityApi = async () => {
 
     //엑세스 토큰 만료 시 재발급
     if (response.status === 401) {
-      const refreshUrl = `${SERVER_URL}/reissue`;
+      const refreshUrl = "/reissue";
+      console.log("토큰 만료!");
       const refreshResponse = await fetch(refreshUrl, {
         method: "POST",
         headers: {
@@ -37,7 +36,6 @@ const authorityApi = async () => {
         window.localStorage.setItem("ACT", newAccessToken);
         console.log("토큰 재발급 성공");
         //원래 작업 실행
-        // baseOption.headers.Authorization = `${newAccessToken}`;
         return authorityApi();
       } else {
         //엑세스 토큰 재발급 실패
