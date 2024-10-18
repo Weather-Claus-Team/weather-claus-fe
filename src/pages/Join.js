@@ -121,27 +121,27 @@ function Join() {
       alert("이메일 인증번호 확인이 완료되지 않았습니다");
       return;
     }
-    // 데이터에서 비밀번호 재확인, 이메일 인증번호 제외
+    // 데이터에서 이메일 인증번호 제외
     const { emailCode, ...restData } = data;
     // 리캡챠 토큰 추가
     // const addTokenData = {
     //   ...restData,
     //   token: recaptchaToken,
     // };
-    // console.log(addTokenData);
-    console.log(restData);
 
     try {
       const result = await signupResult(restData);
 
-      if (result === null) {
-        alert("서버와의 통신 중 문제가 발생했습니다. 다시 시도해주세요");
+      if (!result) {
+        alert("서버 응답이 없습니다. 다시 시도해주세요");
         return;
       }
 
       if (result.code === 200) {
         alert("회원가입을 완료했습니다. 웨더클로스에 오신 것을 환영합니다 !");
-        navigate("/"); // 회원가입 완료 후 메인페이지로 이동
+        navigate("/");
+      } else {
+        alert("알 수 없는 에러가 발생했습니다. 다시 시도해주세요");
       }
     } catch (error) {
       console.error("회원가입 오류 발생: ", error);

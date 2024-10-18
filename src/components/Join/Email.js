@@ -9,6 +9,7 @@ import {
   emailState,
 } from "../../atom";
 import { checkEmailCode, sendEmail } from "../../api/signupApi";
+import { useEffect } from "react";
 
 const Container = styled.div`
   input:first-child {
@@ -53,24 +54,33 @@ function Email() {
     useRecoilState(emailDuplicateState);
 
   const handleSendEmail = async () => {
-    const result = await sendEmail(email);
+    try {
+      const result = await sendEmail(email);
 
-    if (result === null) {
-      alert("인증번호 전송에 문제가 발생했습니다. 다시 시도해주세요");
-      return;
-    }
+      if (!result) {
+        alert("서버 응답이 없습니다. 다시 시도해주세요");
+        return;
+      }
 
-    if (result.code === 200) {
-      alert("인증번호를 전송했습니다");
-    } else if (
-      (result.code === 400) &
-      (result.errorDetails.details === "email already exists")
-    ) {
-      setIsEmailDuplicate(true); // 이미 있는 이메일
-    } else {
-      alert("인증번호 전송에 실패했습니다");
+      if (
+        result.code === 400 &&
+        result.errorDetails?.details === "email already exists"
+      ) {
+        setIsEmailDuplicate(true); // 사용 중인 이메일(사용 불가)
+      } else if (result.code === 200) {
+        alert("인증번호를 전송했습니다");
+      } else {
+        alert("알 수 없는 에러가 발생했습니다. 다시 시도해주세요");
+      }
+    } catch (error) {
+      console.error("이메일 전송 에러: ", error);
+      alert("이메일 전송 요청에 실패했습니다. 다시 시도해주세요");
     }
   };
+
+  useEffect(() => {
+    setIsEmailDuplicate(null);
+  }, [email]);
 
   // 인증번호 확인
   const [emailCode, setEmailCode] = useRecoilState(emailCodeState);
@@ -79,25 +89,34 @@ function Email() {
   const setIsChecked = useSetRecoilState(emailCheckState);
 
   const handleCheckEmailCode = async () => {
-    const result = await checkEmailCode(email, emailCode);
+    try {
+      const result = await checkEmailCode(email, emailCode);
 
-    if (result === null) {
-      alert("인증번호 인증에 문제가 발생했습니다. 다시 시도해주세요");
-      return;
-    }
+      if (!result) {
+        alert("서버 응답이 없습니다. 다시 시도해주세요");
+        return;
+      }
 
-    if (result.code === 200) {
-      setIsEmailCodeSame(true); // 인증번호 일치
-      setIsChecked(true); // 인증번호 확인 완료
-    } else if (
-      result.code === 400 &&
-      result.errorDetails.details === "code mismatch"
-    ) {
-      setIsEmailCodeSame(false); // 인증번호 불일치
-    } else {
-      alert("인증번호 인증에 문제가 발생했습니다. 다시 시도해주세요");
+      if (
+        result.code === 400 &&
+        result.errorDetails.details === "code mismatch"
+      ) {
+        setIsEmailCodeSame(false); // 인증번호 불일치
+      } else if (result.code === 200) {
+        setIsEmailCodeSame(true); // 인증번호 일치
+        setIsChecked(true); // 인증번호 확인 완료
+      } else {
+        alert("알 수 없는 에러가 발생했습니다. 다시 시도해주세요");
+      }
+    } catch (error) {
+      console.error("이메일 인증번호 오류: ", error);
+      alert("인증번호 확인 요청에 실패했습니다. 다시 시도해주세요");
     }
   };
+
+  useEffect(() => {
+    setIsEmailCodeSame(null);
+  }, [emailCode]);
 
   return (
     <Container>
@@ -119,7 +138,9 @@ function Email() {
           인증번호 전송
         </button>
       </EmailBox>
-      {isEmailDuplicate === true && <span>이미 사용 중인 이메일입니다</span>}
+      {email && isEmailDuplicate === true && (
+        <span>이미 사용 중인 이메일입니다</span>
+      )}
       <span>{email && errors?.email?.message}</span>
       <EmailCodeCheckBox>
         <input
@@ -144,7 +165,7 @@ function Email() {
         </button>
       </EmailCodeCheckBox>
       <span>{emailCode !== 0 && errors?.emailCode?.message}</span>
-      {isEmailCodeSame !== null && (
+      {emailCode !== 0 && isEmailCodeSame !== null && (
         <div>
           {isEmailCodeSame ? (
             <span>인증되었습니다</span>

@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { DefaultValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   usernameCheckState,
   usernameDuplicateState,
   usernameState,
 } from "../../atom";
 import { checkDuplicateUsername } from "../../api/signupApi";
+import { useEffect } from "react";
 
-const IdBox = styled.div`
+const UsernameBox = styled.div`
   display: flex;
   width: 430px;
   gap: 20px;
@@ -40,31 +41,37 @@ function Username() {
 
   // 중복검사 버튼 클릭
   const handleUsernameDuplicate = async () => {
-    setIsDuplicate(null);
+    try {
+      const result = await checkDuplicateUsername(username);
 
-    const result = await checkDuplicateUsername(username);
-
-    if (result === null) {
-      alert("중복 확인 중 문제가 발생했습니다. 다시 시도해주세요");
-      return;
-    }
-    console.log(result);
-    if (
-      result.code === 400 &&
-      result.errorDetails.details === "Username is already in use."
-    ) {
-      setIsDuplicate(true); // 아이디 중복
-    } else if (result.code === 200) {
-      setIsDuplicate(false); // 사용 가능 아이디
-      setIsChecked(true); // 중복검사 확인 완료
-    } else {
-      alert("중복 확인 중 문제가 발생했습니다. 다시 시도해주세요");
+      if (!result) {
+        alert("서버 응답이 없습니다. 다시 시도해주세요");
+        return;
+      }
+      if (
+        result.code === 400 &&
+        result.errorDetails?.details === "Username is already in use."
+      ) {
+        setIsDuplicate(true); // 아이디 중복
+      } else if (result.code === 200) {
+        setIsDuplicate(false); // 사용 가능 아이디
+        setIsChecked(true); // 중복검사 확인 완료
+      } else {
+        alert("알 수 없는 에러가 발생했습니다. 다시 시도해주세요");
+      }
+    } catch (error) {
+      console.error("아이디 중복 확인 오류: ", error);
+      alert("중복 확인에 실패했습니다. 다시 시도해주세요");
     }
   };
 
+  useEffect(() => {
+    setIsDuplicate(null);
+  }, [username]);
+
   return (
     <div>
-      <IdBox>
+      <UsernameBox>
         <input
           type="text"
           placeholder="아이디"
@@ -85,13 +92,13 @@ function Username() {
         <button type="button" onClick={handleUsernameDuplicate}>
           중복 확인
         </button>
-      </IdBox>
-      {isDuplicate !== null && (
+      </UsernameBox>
+      {username && isDuplicate !== null && (
         <div>
           {isDuplicate ? (
-            <p style={{ color: "red" }}>이미 사용 중인 아이디입니다</p>
+            <span style={{ color: "red" }}>이미 사용 중인 아이디입니다</span>
           ) : (
-            <p style={{ color: "blue" }}>사용 가능한 아이디입니다</p>
+            <span style={{ color: "blue" }}>사용 가능한 아이디입니다</span>
           )}
         </div>
       )}
