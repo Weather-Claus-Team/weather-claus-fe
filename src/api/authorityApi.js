@@ -13,7 +13,7 @@ const authorityApi = async () => {
   };
 
   try {
-    const url = "/myPage";
+    const url = "/api/users";
 
     const response = await fetch(url, {
       ...baseOption,
