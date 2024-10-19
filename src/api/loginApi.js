@@ -1,8 +1,6 @@
-const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
-
 const loginApi = async ({ username, password }) => {
   try {
-    const url = `${SERVER_URL}/api/login`;
+    const url = "/login";
 
     const response = await fetch(url, {
       method: "POST",
@@ -21,9 +19,9 @@ const loginApi = async ({ username, password }) => {
         `Failed to Login: ${response.status} ${response.statusText}`
       );
     }
-
-    const data = await response.json();
-    return data;
+    const accessToken = response.headers.get("Authorization");
+    window.localStorage.setItem("ACT", accessToken);
+    // window.location.replace("/");
   } catch (error) {
     console.error("Failed to Login:", error);
     throw error;

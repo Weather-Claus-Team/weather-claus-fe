@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import loginApi from "../api/loginApi";
-import { useSetRecoilState } from "recoil";
-import { accessTokenState } from "../atom";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -63,22 +61,16 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const setTokenValue = useSetRecoilState(accessTokenState);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const accessToken = await loginApi({ username, password });
-      if (accessToken) {
-        setTokenValue(accessToken);
-        navigate("/", { replace: true });
-      } else {
-        alert("로그인 실패! 사용자 이름이나 비밀번호를 확인하세요.");
-      }
+      await loginApi({ username, password });
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("Login error:", error);
-      alert("로그인 중 오류가 발생했습니다.");
+      alert("아이디나 비밀번호를 확인해주세요!");
     } finally {
       setIsLoading(false);
     }
