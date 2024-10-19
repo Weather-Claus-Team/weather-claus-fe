@@ -11,12 +11,10 @@ import {
 } from "../image";
 
 const ClothesCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-left: 20px;
+  padding-bottom: 30px;
   img {
-    width: 180px;
-    margin-top: 40px;
+    width: 80px;
   }
 `;
 
@@ -40,7 +38,6 @@ function ClothesCP({ data }) {
 
   return (
     <ClothesCard>
-      <span>추천 옷차림</span>
       <img src={clothesOption} alt="clothesImg" />
     </ClothesCard>
   );

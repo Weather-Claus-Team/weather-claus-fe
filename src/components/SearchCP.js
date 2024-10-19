@@ -6,6 +6,7 @@ import { useState } from "react";
 import { searchState } from "../atom";
 
 const Searchbox = styled.form`
+  position: relative;
   display: flex;
   justify-content: center;
   input {
@@ -16,14 +17,14 @@ const Searchbox = styled.form`
     margin-bottom: 40px;
     font-size: 18px;
     text-indent: 10px;
-    color: #9583aa;
+    color: #485563;
   }
   input:focus {
     outline: none;
   }
   input::placeholder {
     text-indent: 10px;
-    color: #9583aa;
+    color: #485563;
   }
   input:focus::placeholder {
     color: transparent;
@@ -35,13 +36,13 @@ const Searchbox = styled.form`
   }
   svg {
     position: absolute;
-    color: #b6aac5;
+    color: #485563;
     font-size: 25px;
-    right: 420px;
-    top: 293px;
+    top: 20px;
+    right: 130px;
   }
   svg:active {
-    color: #9583aa;
+    color: #8898a8;
   }
 `;
 

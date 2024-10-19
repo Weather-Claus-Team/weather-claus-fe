@@ -4,35 +4,29 @@ import { searchState } from "../atom";
 import { useWeather } from "../hooks/useWeather";
 import ClothesCP from "./ClothesCP";
 
-const Weatherbox = styled.div`
+const Container = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
-  span {
-    font-size: 20px;
-  }
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 30px 0;
+  padding-right: 20px;
+  padding-bottom: 0;
 `;
 
 const WeatherCard = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
   text-align: center;
 `;
 
 const WeatherBox = styled.div`
-  background-color: rgba(0, 0, 0, 0.07);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  padding: 40px 30px;
-  padding-bottom: 0;
-  padding-left: 10px;
-  img {
-    width: 150px;
-  }
   div:first-child {
     font-size: 20px;
     span:first-child {
@@ -40,17 +34,32 @@ const WeatherBox = styled.div`
     }
   }
   div:last-child {
+    position: relative;
     display: flex;
     align-items: center;
     span {
-      font-size: 40px;
+      font-size: 30px;
     }
   }
+`;
+
+const DateText = styled.span`
+  margin-left: 30px;
+  font-size: 20px;
+`;
+
+const TempText = styled.span`
+  position: absolute;
+  right: -11.5px;
+  bottom: 25px;
+  color: black;
+  font-weight: 900;
 `;
 
 function WeatherCP() {
   const searchValue = useRecoilValue(searchState);
   const { data, isLoading, isError, isFetching } = useWeather(searchValue);
+  console.log(data);
 
   if (isFetching || isLoading) {
     return <div>로딩 중</div>;
@@ -64,26 +73,31 @@ function WeatherCP() {
     );
   }
 
+  // 날짜 모양
+  const fullDate = new Date(data.data.list[0].dt_txt); // 2024-10-18 06:00:00
+  const month = fullDate.getMonth() + 1;
+  const date = fullDate.getDate();
+
   return (
-    <Weatherbox>
+    <Container>
       <WeatherCard>
-        <span>오늘의 날씨</span>
         <WeatherBox>
           <div>
-            <span>{data.data.list[0].dt_txt}</span>
-            <span>{data.data.city.name}</span>
+            <DateText>{`${month}/${date}`}</DateText>
+            {/* <span>{data.data.city.name}</span> */}
+            <span>{Math.floor(data.data.list[0].main.temp)}°C</span>
           </div>
           <div>
             <img
               src={`https://openweathermap.org/img/wn/${data.data.list[0].weather[0].icon}@2x.png`}
               alt="weatherImg"
             />
-            <span>{data.data.list[0].main.temp}°C</span>
+            {/* <TempText>{Math.floor(data.data.list[0].main.temp)}°C</TempText> */}
           </div>
         </WeatherBox>
       </WeatherCard>
       <ClothesCP data={data.data.list[0].main.temp} />
-    </Weatherbox>
+    </Container>
   );
 }
 
