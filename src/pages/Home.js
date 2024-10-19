@@ -53,6 +53,14 @@ const Btns = styled.div`
   }
 `;
 
+const WeatherBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
 function Home() {
   return (
     <Container>
@@ -75,7 +83,11 @@ function Home() {
       <Main>
         <Mainbox>
           <SearchCP />
-          <WeatherCP />
+          <WeatherBox>
+            <WeatherCP />
+            <WeatherCP />
+            <WeatherCP />
+          </WeatherBox>
         </Mainbox>
       </Main>
       {/* <footer>© 2024 Weather Claus</footer> */}

@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-// import { useRef } from "react";
 
 const Container = styled.div`
+  width: 430px;
   svg {
     color: #c0c0c0;
     cursor: pointer;
@@ -21,7 +21,7 @@ const Container = styled.div`
 const Password1 = styled.div`
   position: relative;
   input {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   svg {
     position: absolute;
@@ -55,22 +55,6 @@ function Password() {
     await trigger(value);
   };
 
-  // 비밀번호 보여주기
-  // const inputRef1 = useRef(null);
-  // const inputRef2 = useRef(null);
-
-  // const handlePasswordShow = (inputRef) => {
-  //   if (inputRef.current) {
-  //     inputRef.current.type =
-  //       inputRef.current.type === "password" ? "text" : "password";
-  //   }
-  // };
-
-  // const handleButtonClick = (inputRef) => {
-  //   handlePasswordShow(inputRef);
-  //   document.activeElement.blur();
-  // };
-
   return (
     <Container>
       <Password1>
@@ -86,13 +70,7 @@ function Password() {
           })}
           onBlur={() => handleBlur("password")}
         />
-        {/* <button
-          ref={inputRef1}
-          type="button"
-          onClick={handleButtonClick(inputRef1)}
-        > */}
         <FontAwesomeIcon icon={faEye} />
-        {/* </button> */}
         <span>{password && errors?.password?.message}</span>
       </Password1>
       <Password2>
@@ -111,13 +89,7 @@ function Password() {
           })}
           onBlur={() => handleBlur("password2")}
         />
-        {/* <button
-          ref={inputRef2}
-          type="button"
-          onClick={handleButtonClick(inputRef2)}
-        > */}
         <FontAwesomeIcon icon={faEye} />
-        {/* </button> */}
         <span>{password2 && errors?.password2?.message}</span>
       </Password2>
     </Container>
