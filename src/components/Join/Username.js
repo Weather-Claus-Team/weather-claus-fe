@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { DefaultValue, useRecoilState, useSetRecoilState } from "recoil";
 import {
   usernameCheckState,
   usernameDuplicateState,
@@ -41,6 +41,14 @@ function Username() {
 
   // 중복검사 버튼 클릭
   const handleUsernameDuplicate = async () => {
+    // 유효성 검사 통과 후 중복 확인 가능
+    const isValid = await trigger("username");
+    console.log(isValid);
+
+    if (!isValid) {
+      return;
+    }
+
     try {
       const result = await checkDuplicateUsername(username);
 
