@@ -59,3 +59,18 @@ export const recaptchaTokenState = atom({
   key: "recaptchaTokenState",
   default: "",
 });
+
+// 로그인 성공
+export const loginSuccessState = atom({
+  key: "loginSuccessState",
+  default: false, // true : 로그인 성공
+});
+
+// 위치 동의 시 위도 경도
+export const locationState = atom({
+  key: "locationState",
+  default: {
+    lat: 0,
+    lon: 0,
+  },
+});

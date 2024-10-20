@@ -4,6 +4,9 @@ import WeatherCP from "../components/WeatherCP";
 import { Link } from "react-router-dom";
 import logoutApi from "../api/logoutApi";
 import authorityApi from "../api/authorityApi";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { locationState, loginSuccessState } from "../atom";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -39,7 +42,8 @@ const Btns = styled.div`
   width: 200px;
   gap: 20px;
   top: 30px;
-  right: -20px;
+  /* right: -20px; */
+  right: 50px;
   button {
     all: unset;
     font-size: 20px;
@@ -62,6 +66,24 @@ const WeatherBox = styled.div`
 `;
 
 function Home() {
+  const loginSuccess = useRecoilValue(loginSuccessState);
+  const [locationValue, setLocationValue] = useRecoilState(locationState);
+
+  useEffect(() => {
+    if (loginSuccess) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        const lat = location.coords.latitude;
+        const lon = location.coords.longitude;
+        setLocationValue({ lat, lon });
+        // localStorage.setItem(
+        //   "geoLocation",
+        //   JSON.stringify({ lat: lat, lon: lon })
+        // );
+      });
+    }
+  }, [loginSuccess]);
+  console.log(locationValue);
+
   return (
     <Container>
       <Title>
@@ -77,8 +99,8 @@ function Home() {
           <Link to="/join">Join</Link>
         </button>
         {/* 로그아웃,권한확인 테스트 */}
-        {/* <button onClick={logoutApi}>로그아웃</button>
-        <button onClick={authorityApi}>권한 확인</button> */}
+        <button onClick={logoutApi}>로그아웃</button>
+        {/* <button onClick={authorityApi}>권한 확인</button> */}
       </Btns>
       <Main>
         <Mainbox>

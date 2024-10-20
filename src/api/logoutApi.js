@@ -1,7 +1,7 @@
 const logoutApi = async () => {
   try {
     const url = "/logout";
-    const accessToken = window.localStorage.getItem("ACT");
+    const accessToken = localStorage.getItem("ACT");
 
     await fetch(url, {
       method: "POST",
@@ -12,11 +12,12 @@ const logoutApi = async () => {
       credentials: "include",
     });
 
-    window.localStorage.removeItem("ACT");
+    localStorage.removeItem("ACT");
     window.location.replace("/");
+    alert("로그아웃되었습니다");
   } catch (error) {
     console.error("Failed to Logout:", error);
-    window.localStorage.removeItem("ACT");
+    localStorage.removeItem("ACT");
     window.location.replace("/");
     throw error;
   }

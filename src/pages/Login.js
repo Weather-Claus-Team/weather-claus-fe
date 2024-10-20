@@ -4,6 +4,8 @@ import loginApi from "../api/loginApi";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { useSetRecoilState } from "recoil";
+import { loginSuccessState } from "../atom";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -108,12 +110,14 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const setIsLoginSuccess = useSetRecoilState(loginSuccessState);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
       await loginApi({ username, password });
+      setIsLoginSuccess(true); // 로그인 성공
       navigate("/", { replace: true });
     } catch (error) {
       console.error("Login error:", error);
