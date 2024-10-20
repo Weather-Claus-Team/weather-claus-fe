@@ -79,6 +79,7 @@ function Home() {
         {/* 로그아웃,권한확인 테스트 */}
         {/* <button onClick={logoutApi}>로그아웃</button>
         <button onClick={authorityApi}>권한 확인</button> */}
+        {/* <Link to="/myPage">마이페이지</Link> */}
       </Btns>
       <Main>
         <Mainbox>

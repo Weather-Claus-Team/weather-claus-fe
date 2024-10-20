@@ -2,6 +2,7 @@ import Join from "./pages/Join";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/join" element={<Join />} />
+      <Route path="/myPage" element={<MyPage />} />
     </Routes>
   );
 }

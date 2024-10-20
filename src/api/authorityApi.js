@@ -1,10 +1,10 @@
 import logoutApi from "./logoutApi";
 
-const authorityApi = async () => {
+const authorityApi = async (method, endpoint) => {
   const accessToken = window.localStorage.getItem("ACT");
 
   const baseOption = {
-    method: "GET",
+    method: method,
     headers: {
       "Content-Type": "application/json",
       Authorization: `${accessToken}`,
@@ -13,7 +13,7 @@ const authorityApi = async () => {
   };
 
   try {
-    const url = "/api/users";
+    const url = `/api/users/${endpoint}`;
 
     const response = await fetch(url, {
       ...baseOption,
@@ -36,7 +36,7 @@ const authorityApi = async () => {
         window.localStorage.setItem("ACT", newAccessToken);
         console.log("토큰 재발급 성공");
         //원래 작업 실행
-        return authorityApi();
+        return authorityApi(method, endpoint);
       } else {
         //엑세스 토큰 재발급 실패
         const refreshErrData = refreshResponse;
