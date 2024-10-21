@@ -47,7 +47,7 @@ const authorityApi = async (method, endpoint) => {
     } else if (response.status === 200) {
       //기존 엑세스 토큰이 유효할 때
       console.log("토큰 유효함. 권한 확인 완료");
-      const data = await response.text();
+      const data = await response.json();
       console.log(data);
       return data;
     } else {

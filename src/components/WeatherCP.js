@@ -59,7 +59,6 @@ const TempText = styled.span`
 function WeatherCP() {
   const searchValue = useRecoilValue(searchState);
   const { data, isLoading, isError, isFetching } = useWeather(searchValue);
-  console.log(data);
 
   if (isFetching || isLoading) {
     return <div>로딩 중</div>;
