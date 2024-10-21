@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import Profile from "../components/Profile";
 import { useMyPage } from "../hooks/useMypage";
 
 function MyPage() {
@@ -18,8 +20,18 @@ function MyPage() {
 
   return (
     <>
-      <div>데이터</div>
-      <div>{data}</div>
+      <div>이름</div>
+      <div>{data.username}</div>
+      <br />
+      <div>이메일</div>
+      <div>{data.email}</div>
+      <br />
+      <div>사진</div>
+      <Profile />
+      <br />
+      <Link to="/setPw">비밀번호 변경</Link>
+      <br />
+      <Link to="/remove">계정 탈퇴</Link>
     </>
   );
 }

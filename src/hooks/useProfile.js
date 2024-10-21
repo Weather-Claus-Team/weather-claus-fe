@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import authorityApi from "./../api/authorityApi";
 
 const fetchProfile = async () => {
-  const response = await authorityApi("GET", "profile");
+  const response = await authorityApi("GET", "profile", {});
   return response.data;
 };
 

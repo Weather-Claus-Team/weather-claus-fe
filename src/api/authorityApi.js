@@ -1,6 +1,6 @@
 import logoutApi from "./logoutApi";
 
-const authorityApi = async (method, endpoint) => {
+const authorityApi = async (method, endpoint, { body }) => {
   const accessToken = window.localStorage.getItem("ACT");
 
   const baseOption = {
@@ -11,6 +11,10 @@ const authorityApi = async (method, endpoint) => {
     },
     credentials: "include",
   };
+
+  if (body) {
+    baseOption.body = JSON.stringify(body);
+  }
 
   try {
     const url = `/api/users/${endpoint}`;
