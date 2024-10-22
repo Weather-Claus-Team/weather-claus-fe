@@ -3,14 +3,14 @@ import { useProfile } from "../hooks/useProfile";
 import defaultProfile from "../images/user.png";
 
 const ProfileImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: ${(props) => props.sizes};
+  height: ${(props) => props.sizes};
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
 `;
 
-function Profile({ onClick }) {
+function Profile({ onClick, sizes }) {
   const { data, isLoading, isError, isFetching } = useProfile();
 
   if (isFetching || isLoading) {
@@ -28,9 +28,19 @@ function Profile({ onClick }) {
   return (
     <>
       {data === null ? (
-        <ProfileImage src={defaultProfile} alt="Profile" onClick={onClick} />
+        <ProfileImage
+          src={defaultProfile}
+          alt="Profile"
+          onClick={onClick}
+          sizes={sizes}
+        />
       ) : (
-        <ProfileImage src={data} alt="Profile" onClick={onClick} />
+        <ProfileImage
+          src={data}
+          alt="Profile"
+          onClick={onClick}
+          sizes={sizes}
+        />
       )}
     </>
   );

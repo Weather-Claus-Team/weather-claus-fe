@@ -39,7 +39,7 @@ function Nav() {
     <>
       {hasAct ? (
         <>
-          <Profile onClick={toggleMenu} />
+          <Profile onClick={toggleMenu} sizes={"50px"} />
           {isMenuVisible && (
             <MenuContainer>
               <MenuButton onClick={logoutApi}>로그아웃</MenuButton>

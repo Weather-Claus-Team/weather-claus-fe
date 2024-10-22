@@ -2,8 +2,6 @@ import styled from "styled-components";
 import SearchCP from "../components/SearchCP";
 import WeatherCP from "../components/WeatherCP";
 import { Link } from "react-router-dom";
-import logoutApi from "../api/logoutApi";
-import authorityApi from "../api/authorityApi";
 import Nav from "../components/Nav";
 
 const Container = styled.div`
