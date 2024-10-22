@@ -42,7 +42,6 @@ const Btns = styled.div`
   top: 30px;
   right: -20px;
   button {
-    all: unset;
     font-size: 20px;
     padding: 8px 10px;
     border: 1px solid white;

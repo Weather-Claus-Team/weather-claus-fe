@@ -42,7 +42,7 @@ function NewPw() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await authorityApi("POST", "newpassword", {
+      await authorityApi("PUT", "password", {
         body: { password, password2 },
       });
       navigate("/myPage", { replace: true });

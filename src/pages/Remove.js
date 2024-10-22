@@ -41,7 +41,7 @@ function Remove() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await authorityApi("POST", "remove", { body: { password } });
+      await authorityApi("DELETE", "", { body: { password } });
       navigate("/", { replace: true });
     } catch (error) {
       console.error("error:", error);
