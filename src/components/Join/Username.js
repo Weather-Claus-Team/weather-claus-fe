@@ -43,7 +43,6 @@ function Username() {
   const handleUsernameDuplicate = async () => {
     // 유효성 검사 통과 후 중복 확인 가능
     const isValid = await trigger("username");
-    console.log(isValid);
 
     if (!isValid) {
       return;

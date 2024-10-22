@@ -76,9 +76,9 @@ function Password() {
       <Password2>
         <input
           type="password"
-          placeholder="비밀번호 재입력"
+          placeholder="비밀번호 확인"
           {...register("password2", {
-            required: "비밀번호 재입력을 입력해주세요",
+            required: "비밀번호 확인을 입력해주세요",
             validate: {
               check: (value) => {
                 if (getValues("password") !== value) {

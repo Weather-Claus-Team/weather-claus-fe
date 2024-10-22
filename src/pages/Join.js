@@ -15,7 +15,7 @@ import {
   usernameDuplicateState,
 } from "../atom";
 import { signupResult } from "../api/signupApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -91,6 +91,11 @@ const LoginText = styled.span`
   }
 `;
 
+const SignupErrorText = styled.span`
+  margin-top: 10px;
+  font-weight: 500;
+`;
+
 function Join() {
   const methods = useForm();
   const { reset } = methods;
@@ -101,6 +106,7 @@ function Join() {
   const setUsernameDuplicate = useSetRecoilState(usernameDuplicateState);
   const setEmailCodeCheck = useSetRecoilState(emailCodeCheckState);
   const setEmailDuplicate = useSetRecoilState(emailDuplicateState);
+  const [signupError, setSignupError] = useState("");
 
   useEffect(() => {
     setUsernameDuplicate(null);
@@ -130,10 +136,23 @@ function Join() {
     // };
 
     try {
-      const result = await signupResult(restData);
+      const [result, errorMessage] = await signupResult(restData);
 
       if (!result) {
-        alert("서버 응답이 없습니다. 다시 시도해주세요");
+        if (errorMessage === "비밀번호 유효성 검사 오류") {
+          setSignupError("비밀번호를 다시 확인해주세요");
+          return;
+        }
+        if (errorMessage === "아이디 유효성 검사 오류") {
+          setSignupError("아이디를 다시 확인해주세요");
+          return;
+        }
+        if (errorMessage === "이메일 유효성 검사 오류") {
+          setSignupError("이메일을 다시 확인해주세요");
+          return;
+        }
+        // result = null && errorMessage가 없는 경우
+        alert("예기치 않은 오류가 발생했습니다. 다시 시도해주세요");
         return;
       }
 
@@ -174,6 +193,7 @@ function Join() {
             <Email />
             <Recaptcha />
             <SubmitBtn type="submit">Sign up</SubmitBtn>
+            {signupError && <SignupErrorText>{signupError}</SignupErrorText>}
           </SignupForm>
         </FormProvider>
       </SignupBox>
