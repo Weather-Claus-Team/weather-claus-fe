@@ -57,10 +57,14 @@ const TempText = styled.span`
 `;
 
 function WeatherCP() {
+  const loginSuccess = localStorage.getItem("loginSuccess") === "true";
   const cityValue = useRecoilValue(cityState);
+  const searchedCity = localStorage.getItem("searchedCity");
   const locationValue = JSON.parse(localStorage.getItem("geoLocation"));
+  const selectedCity = loginSuccess && searchedCity ? searchedCity : cityValue;
+
   const { data, isLoading, isError, isFetching } = useWeather(
-    cityValue,
+    selectedCity,
     locationValue
   );
   // 날씨 데이터

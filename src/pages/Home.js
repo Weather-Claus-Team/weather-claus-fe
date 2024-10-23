@@ -61,7 +61,6 @@ const Btns = styled.div`
 const WeatherBox = styled.div`
   display: flex;
   flex-direction: row;
-
   gap: 20px;
 `;
 

@@ -118,6 +118,7 @@ function Login() {
     try {
       await loginApi({ username, password });
       setIsLoginSuccess(true); // 로그인 성공
+      localStorage.setItem("loginSuccess", true);
       navigate("/", { replace: true });
     } catch (error) {
       console.error("Login error:", error);
@@ -166,8 +167,6 @@ function Login() {
         <LoginNav>
           <ul>
             <li>아이디 찾기</li>
-            <span>|</span>
-            <li>비밀번호 재설정</li>
             <span>|</span>
             <li>
               <Link to="/join">회원가입</Link>

@@ -49,6 +49,7 @@ const Searchbox = styled.form`
 function SearchCP() {
   const [inputValue, setInputValue] = useState("");
   const setCityValue = useSetRecoilState(cityState);
+  const loginSuccess = localStorage.getItem("loginSuccess") === "true";
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -56,6 +57,9 @@ function SearchCP() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (loginSuccess) {
+      localStorage.setItem("searchedCity", inputValue);
+    }
     setCityValue(inputValue);
     setInputValue("");
   };
@@ -64,7 +68,7 @@ function SearchCP() {
     <Searchbox onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Search your location"
+        placeholder="지역을 검색하세요"
         value={inputValue}
         onChange={handleChange}
       />

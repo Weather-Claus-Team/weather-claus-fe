@@ -192,7 +192,7 @@ function Join() {
             <Password />
             <Email />
             <Recaptcha />
-            <SubmitBtn type="submit">Sign up</SubmitBtn>
+            <SubmitBtn type="submit">회원가입하기</SubmitBtn>
             {signupError && <SignupErrorText>{signupError}</SignupErrorText>}
           </SignupForm>
         </FormProvider>
