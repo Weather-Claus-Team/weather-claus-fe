@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import authorityApi from "../api/authorityApi";
+import logoutApi from "../api/logoutApi";
 
 const Form = styled.form`
   display: flex;
@@ -33,16 +33,21 @@ const SubmitBtn = styled.button`
 `;
 
 function Remove() {
-  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const isConfirmed = window.confirm("정말로 계정을 삭제하시겠습니까?");
+
+    if (!isConfirmed) {
+      return;
+    }
     setIsLoading(true);
     try {
       await authorityApi("DELETE", "", { body: { password } });
-      navigate("/", { replace: true });
+      logoutApi();
+      window.alert("계정이 삭제되었습니다.");
     } catch (error) {
       console.error("error:", error);
       alert("비밀번호를 확인해주세요!");

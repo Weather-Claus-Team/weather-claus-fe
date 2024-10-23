@@ -54,15 +54,17 @@ const authorityApi = async (method, endpoint, { body }) => {
       const data = await response.json();
       console.log(data);
       return data;
+    } else if (response.status === 400) {
+      //양식 오류
+      throw new Error(response.message);
     } else {
       //엑세스 토큰 검증 오류
-      window.alert("토큰 확인 불가");
+      window.alert("토큰 검증 실패");
       logoutApi();
     }
   } catch (error) {
     //서버 통신 오류
     console.error("Fetch error:", error);
-    window.alert("재시도 해주세요!");
     throw error;
   }
 };

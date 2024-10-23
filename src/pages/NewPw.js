@@ -37,15 +37,31 @@ function NewPw() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
+
+    if (password.length < 8) {
+      setError("비밀번호는 8자 이상이어야 합니다.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== password2) {
+      setError("비밀번호가 일치하지 않습니다.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       await authorityApi("PUT", "password", {
         body: { password, password2 },
       });
       navigate("/myPage", { replace: true });
+      window.alert("비밀번호가 변경되었습니다!");
     } catch (error) {
       console.error("error:", error);
       alert("비밀번호를 확인해주세요!");
@@ -73,6 +89,7 @@ function NewPw() {
           onChange={(e) => setPassword2(e.target.value)}
           required
         />
+        {error && <div style={{ color: "red" }}>{error}</div>}
         {isLoading ? (
           <div>확인중...</div>
         ) : (
