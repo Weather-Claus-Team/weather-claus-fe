@@ -13,8 +13,9 @@ const logoutApi = async () => {
     });
 
     localStorage.removeItem("ACT");
+    localStorage.removeItem("geoLocation");
     window.location.replace("/");
-    alert("로그아웃되었습니다");
+    alert("로그아웃 되었습니다");
   } catch (error) {
     console.error("Failed to Logout:", error);
     localStorage.removeItem("ACT");

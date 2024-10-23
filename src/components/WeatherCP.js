@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { locationState, searchState } from "../atom";
+import { cityState } from "../atom";
 import { useWeather } from "../hooks/useWeather";
 import ClothesCP from "./ClothesCP";
 
@@ -57,16 +57,14 @@ const TempText = styled.span`
 `;
 
 function WeatherCP() {
-  const searchValue = useRecoilValue(searchState);
-  const locationValue = useRecoilValue(locationState);
-  // const locationValue = JSON.parse(localStorage.getItem("geoLocation"));
+  const cityValue = useRecoilValue(cityState);
+  const locationValue = JSON.parse(localStorage.getItem("geoLocation"));
   const { data, isLoading, isError, isFetching } = useWeather(
-    searchValue,
+    cityValue,
     locationValue
   );
   // 날씨 데이터
-  // console.log(data);
-  console.log(locationValue);
+  console.log(data);
 
   if (isFetching || isLoading) {
     return <div>로딩 중</div>;
