@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
 import { useSetRecoilState } from "recoil";
 import { useState } from "react";
-import { searchState } from "../atom";
+import { cityState } from "../atom";
 
 const Searchbox = styled.form`
   position: relative;
@@ -48,14 +48,15 @@ const Searchbox = styled.form`
 
 function SearchCP() {
   const [inputValue, setInputValue] = useState("");
-  const setSearchValue = useSetRecoilState(searchState);
+  const setCityValue = useSetRecoilState(cityState);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSearchValue(inputValue);
+    setCityValue(inputValue);
     setInputValue("");
   };
 
