@@ -4,6 +4,10 @@ import WeatherCP from "../components/WeatherCP";
 import { Link } from "react-router-dom";
 import logoutApi from "../api/logoutApi";
 import authorityApi from "../api/authorityApi";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { cityState, locationState, loginSuccessState } from "../atom";
+import weatherApi from "../api/weatherApi";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -39,7 +43,8 @@ const Btns = styled.div`
   width: 200px;
   gap: 20px;
   top: 30px;
-  right: -20px;
+  /* right: -20px; */
+  right: 50px;
   button {
     all: unset;
     font-size: 20px;
@@ -56,12 +61,32 @@ const Btns = styled.div`
 const WeatherBox = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
 `;
 
 function Home() {
+  const loginSuccess = useRecoilValue(loginSuccessState);
+  const [locationValue, setLocationValue] = useRecoilState(locationState);
+  const cityValue = useRecoilValue(cityState);
+
+  useEffect(() => {
+    if (loginSuccess) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        const lat = location.coords.latitude;
+        const lon = location.coords.longitude;
+        setLocationValue({ lat, lon });
+        localStorage.setItem("geoLocation", JSON.stringify({ lat, lon }));
+      });
+    }
+  }, [loginSuccess]);
+
+  // 위치 정보 동의 시) 값 자동으로 반영
+  useEffect(() => {
+    if (locationValue) {
+      weatherApi(cityValue, locationValue.lat, locationValue.lon);
+    }
+  }, [locationValue, cityValue]);
+
   return (
     <Container>
       <Title>
@@ -77,14 +102,13 @@ function Home() {
           <Link to="/join">Join</Link>
         </button>
         {/* 로그아웃,권한확인 테스트 */}
-        {/* <button onClick={logoutApi}>로그아웃</button>
-        <button onClick={authorityApi}>권한 확인</button> */}
+        <button onClick={logoutApi}>Logout</button>
+        {/* <button onClick={authorityApi}>권한 확인</button> */}
       </Btns>
       <Main>
         <Mainbox>
           <SearchCP />
           <WeatherBox>
-            <WeatherCP />
             <WeatherCP />
             <WeatherCP />
           </WeatherBox>

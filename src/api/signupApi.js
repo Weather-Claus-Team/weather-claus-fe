@@ -11,8 +11,10 @@ export const checkDuplicateUsername = async (username) => {
       },
       body: JSON.stringify({ username }),
     });
+    console.log(response);
 
     const result = await response.json();
+    console.log(result);
 
     // 중복된 아이디일 때
     if (!response.ok) {
@@ -87,11 +89,31 @@ export const signupResult = async (data) => {
     });
     const result = await response.json();
 
+    // 백엔드 유효성검사 오류 발생 시
     if (!response.ok) {
-      console.log("Signup error: ", result?.errorDetails?.details);
-      return null;
+      if (result?.errorDetails?.details.includes("Passwords do not match")) {
+        console.log("회원가입 오류(비밀번호): ", result?.errorDetails?.details);
+        return [null, "비밀번호 유효성 검사 오류"];
+      } else if (
+        result?.errorDetails?.details.includes("username") &&
+        (result?.errorDetails?.details.includes("공백일 수 없습니다") ||
+          result?.errorDetails?.details.includes(
+            "크기가 4에서 20 사이여야 합니다"
+          ))
+      ) {
+        console.log("회원가입 오류(아이디): ", result?.errorDetails?.details);
+        return [null, "아이디 유효성 검사 오류"];
+      } else if (
+        result?.errorDetails?.details.includes("email") &&
+        result?.errorDetails?.details.includes("공백일 수 없습니다")
+      ) {
+        console.log("회원가입 오류(이메일): ", result?.errorDetails?.details);
+        return [null, "이메일 유효성 검사 오류"];
+      } else {
+        console.log("Signup error: ", result?.errorDetails?.details);
+        return null;
+      }
     }
-
     return result;
   } catch (error) {
     console.error("Signup error: ", error);

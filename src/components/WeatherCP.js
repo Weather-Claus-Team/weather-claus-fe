@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { searchState } from "../atom";
+import { cityState } from "../atom";
 import { useWeather } from "../hooks/useWeather";
 import ClothesCP from "./ClothesCP";
 
@@ -57,8 +57,17 @@ const TempText = styled.span`
 `;
 
 function WeatherCP() {
-  const searchValue = useRecoilValue(searchState);
-  const { data, isLoading, isError, isFetching } = useWeather(searchValue);
+  const loginSuccess = localStorage.getItem("loginSuccess") === "true";
+  const cityValue = useRecoilValue(cityState);
+  const searchedCity = localStorage.getItem("searchedCity");
+  const locationValue = JSON.parse(localStorage.getItem("geoLocation"));
+  const selectedCity = loginSuccess && searchedCity ? searchedCity : cityValue;
+
+  const { data, isLoading, isError, isFetching } = useWeather(
+    selectedCity,
+    locationValue
+  );
+  // 날씨 데이터
   console.log(data);
 
   if (isFetching || isLoading) {
@@ -84,15 +93,15 @@ function WeatherCP() {
         <WeatherBox>
           <div>
             <DateText>{`${month}/${date}`}</DateText>
-            {/* <span>{data.data.city.name}</span> */}
-            <span>{Math.floor(data.data.list[0].main.temp)}°C</span>
+            <span>{data.data.city.name}</span>
+            {/* <span>{Math.floor(data.data.list[0].main.temp)}°C</span> */}
           </div>
           <div>
             <img
               src={`https://openweathermap.org/img/wn/${data.data.list[0].weather[0].icon}@2x.png`}
               alt="weatherImg"
             />
-            {/* <TempText>{Math.floor(data.data.list[0].main.temp)}°C</TempText> */}
+            <TempText>{Math.floor(data.data.list[0].main.temp)}°C</TempText>
           </div>
         </WeatherBox>
       </WeatherCard>

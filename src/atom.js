@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 
-// 날씨 검색
-export const searchState = atom({
-  key: "searchState",
+// 검색 지역
+export const cityState = atom({
+  key: "cityState",
   default: "",
 });
 
@@ -58,4 +58,19 @@ export const emailCheckState = atom({
 export const recaptchaTokenState = atom({
   key: "recaptchaTokenState",
   default: "",
+});
+
+// 로그인 성공
+export const loginSuccessState = atom({
+  key: "loginSuccessState",
+  default: false, // true : 로그인 성공
+});
+
+// 위치 동의 시 - 사용자의 위치와 경도
+export const locationState = atom({
+  key: "locationState",
+  default: {
+    lat: null,
+    lon: null,
+  },
 });
