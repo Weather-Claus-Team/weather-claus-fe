@@ -3,7 +3,7 @@ import styled from "styled-components";
 import loginApi from "../api/loginApi";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useSetRecoilState } from "recoil";
 import { loginSuccessState } from "../atom";
 
@@ -91,6 +91,7 @@ const LoginNav = styled.nav`
 `;
 
 const PasswordBox = styled.div`
+  display: flex;
   position: relative;
   svg {
     position: absolute;
@@ -98,10 +99,13 @@ const PasswordBox = styled.div`
     right: 13px;
     color: #c0c0c0;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.4s;
   }
   svg:hover {
     color: gray;
+  }
+  button {
+    all: unset;
   }
 `;
 
@@ -128,6 +132,11 @@ function Login() {
     }
   };
 
+  const [isVisible, setIsVisible] = useState(false);
+  const handleShowPW = () => {
+    setIsVisible((prev) => !prev);
+  };
+
   return (
     <Container>
       <Title>
@@ -150,13 +159,15 @@ function Login() {
             <Input
               placeholder="비밀번호"
               id="password"
-              type="password"
+              type={isVisible ? "text" : "password"}
               value={password}
               autoComplete="off"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <FontAwesomeIcon icon={faEye} />
+            <button type="button" onClick={handleShowPW}>
+              <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
+            </button>
           </PasswordBox>
           {isLoading ? (
             <div>로그인 중...</div>
