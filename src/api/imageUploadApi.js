@@ -1,23 +1,22 @@
 import logoutApi from "./logoutApi";
 
-const authorityApi = async (method, endpoint, { body }) => {
+const imageUploadApi = async ({ body }) => {
   const accessToken = window.localStorage.getItem("ACT");
 
   const baseOption = {
-    method: method,
+    method: "PATCH",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `${accessToken}`,
     },
     credentials: "include",
   };
 
   if (body) {
-    baseOption.body = JSON.stringify(body);
+    baseOption.body = body;
   }
 
   try {
-    const url = `/api/profile/${endpoint}`;
+    const url = `/api/profile`;
 
     const response = await fetch(url, {
       ...baseOption,
@@ -40,7 +39,7 @@ const authorityApi = async (method, endpoint, { body }) => {
         window.localStorage.setItem("ACT", newAccessToken);
         console.log("토큰 재발급 성공");
         //원래 작업 실행
-        return authorityApi(method, endpoint);
+        return imageUploadApi({ body });
       } else {
         //엑세스 토큰 재발급 실패
         const refreshErrData = refreshResponse;
@@ -52,6 +51,7 @@ const authorityApi = async (method, endpoint, { body }) => {
       //기존 엑세스 토큰이 유효할 때
       console.log("토큰 유효함. 권한 확인 완료");
       const data = await response.json();
+      console.log(data);
       return data;
     } else if (response.status === 400) {
       //양식 오류
@@ -64,8 +64,9 @@ const authorityApi = async (method, endpoint, { body }) => {
   } catch (error) {
     //서버 통신 오류
     console.error("Fetch error:", error);
+    window.alert("재시도 해주세요!");
     throw error;
   }
 };
 
-export default authorityApi;
+export default imageUploadApi;
