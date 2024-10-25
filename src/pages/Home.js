@@ -78,7 +78,7 @@ function Home() {
         localStorage.setItem("geoLocation", JSON.stringify({ lat, lon }));
       });
     }
-  }, [loginSuccess]);
+  }, [loginSuccess, setLocationValue]);
 
   // 위치 정보 동의 시) 값 자동으로 반영
   useEffect(() => {
