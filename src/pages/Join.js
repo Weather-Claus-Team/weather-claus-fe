@@ -112,7 +112,7 @@ function Join() {
     setUsernameDuplicate(null);
     setEmailCodeCheck(null);
     setEmailDuplicate(null);
-  }, []);
+  }, [setUsernameDuplicate, setEmailCodeCheck, setEmailDuplicate]);
 
   const onValid = async (data) => {
     // if (!recaptchaToken) {
