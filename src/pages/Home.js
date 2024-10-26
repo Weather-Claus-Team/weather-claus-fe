@@ -3,6 +3,10 @@ import SearchCP from "../components/SearchCP";
 import WeatherCP from "../components/WeatherCP";
 import { Link } from "react-router-dom";
 import Nav from "../components/Nav";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { cityState, locationState, loginSuccessState } from "../atom";
+import weatherApi from "../api/weatherApi";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -38,7 +42,8 @@ const Btns = styled.div`
   width: 200px;
   gap: 20px;
   top: 30px;
-  right: -20px;
+  /* right: -20px; */
+  right: 50px;
   button {
     font-size: 20px;
     padding: 8px 10px;
@@ -54,12 +59,32 @@ const Btns = styled.div`
 const WeatherBox = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
 `;
 
 function Home() {
+  const loginSuccess = useRecoilValue(loginSuccessState);
+  const [locationValue, setLocationValue] = useRecoilState(locationState);
+  const cityValue = useRecoilValue(cityState);
+
+  useEffect(() => {
+    if (loginSuccess) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        const lat = location.coords.latitude;
+        const lon = location.coords.longitude;
+        setLocationValue({ lat, lon });
+        localStorage.setItem("geoLocation", JSON.stringify({ lat, lon }));
+      });
+    }
+  }, [loginSuccess, setLocationValue]);
+
+  // 위치 정보 동의 시) 값 자동으로 반영
+  useEffect(() => {
+    if (locationValue) {
+      weatherApi(cityValue, locationValue.lat, locationValue.lon);
+    }
+  }, [locationValue, cityValue]);
+
   return (
     <Container>
       <Title>
@@ -74,7 +99,6 @@ function Home() {
         <Mainbox>
           <SearchCP />
           <WeatherBox>
-            <WeatherCP />
             <WeatherCP />
             <WeatherCP />
           </WeatherBox>

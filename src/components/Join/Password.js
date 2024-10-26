@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 430px;
   svg {
     color: #c0c0c0;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.4s;
   }
   svg:hover {
     color: gray;
@@ -39,6 +40,10 @@ const Password2 = styled.div`
   }
 `;
 
+const PWBox = styled.div`
+  display: flex;
+`;
+
 function Password() {
   const {
     register,
@@ -55,41 +60,60 @@ function Password() {
     await trigger(value);
   };
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+
+  const handleShowPW = () => {
+    setIsVisible((prev) => !prev);
+  };
+
+  const handleShowPW2 = () => {
+    setIsVisible2((prev) => !prev);
+  };
+
   return (
     <Container>
       <Password1>
-        <input
-          type="password"
-          placeholder="비밀번호"
-          {...register("password", {
-            required: "비밀번호를 입력해주세요",
-            minLength: {
-              value: 8,
-              message: "8글자 이상 입력하세요",
-            },
-          })}
-          onBlur={() => handleBlur("password")}
-        />
-        <FontAwesomeIcon icon={faEye} />
+        <PWBox>
+          <input
+            type={isVisible ? "text" : "password"}
+            placeholder="비밀번호"
+            {...register("password", {
+              required: "비밀번호를 입력해주세요",
+              minLength: {
+                value: 8,
+                message: "8글자 이상 입력하세요",
+              },
+            })}
+            onBlur={() => handleBlur("password")}
+          />
+          <button type="button" onClick={handleShowPW}>
+            <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
+          </button>
+        </PWBox>
         <span>{password && errors?.password?.message}</span>
       </Password1>
       <Password2>
-        <input
-          type="password"
-          placeholder="비밀번호 재입력"
-          {...register("password2", {
-            required: "비밀번호 재입력을 입력해주세요",
-            validate: {
-              check: (value) => {
-                if (getValues("password") !== value) {
-                  return "비밀번호가 일치하지 않습니다";
-                }
+        <PWBox>
+          <input
+            type={isVisible2 ? "text" : "password"}
+            placeholder="비밀번호 확인"
+            {...register("password2", {
+              required: "비밀번호 확인을 입력해주세요",
+              validate: {
+                check: (value) => {
+                  if (getValues("password") !== value) {
+                    return "비밀번호가 일치하지 않습니다";
+                  }
+                },
               },
-            },
-          })}
-          onBlur={() => handleBlur("password2")}
-        />
-        <FontAwesomeIcon icon={faEye} />
+            })}
+            onBlur={() => handleBlur("password2")}
+          />
+          <button type="button" onClick={handleShowPW2}>
+            <FontAwesomeIcon icon={isVisible2 ? faEyeSlash : faEye} />
+          </button>
+        </PWBox>
         <span>{password2 && errors?.password2?.message}</span>
       </Password2>
     </Container>
