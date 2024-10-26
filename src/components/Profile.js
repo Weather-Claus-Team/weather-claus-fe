@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useProfile } from "../hooks/useProfile";
 import defaultProfile from "../images/user.png";
+import { useMyPage } from "../hooks/useMypage";
 
 const ProfileImage = styled.img`
   width: ${(props) => props.sizes};
@@ -11,7 +11,7 @@ const ProfileImage = styled.img`
 `;
 
 function Profile({ onClick, sizes }) {
-  const { data, isLoading, isError, isFetching } = useProfile();
+  const { data, isLoading, isError, isFetching } = useMyPage();
 
   if (isFetching || isLoading) {
     return <div>로딩 중...</div>;
@@ -36,7 +36,7 @@ function Profile({ onClick, sizes }) {
         />
       ) : (
         <ProfileImage
-          src={data}
+          src={data.imageUrl}
           alt="Profile"
           onClick={onClick}
           sizes={sizes}

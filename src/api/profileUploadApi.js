@@ -1,6 +1,6 @@
 import logoutApi from "./logoutApi";
 
-const imageUploadApi = async ({ body }) => {
+const profileUploadApi = async ({ body }) => {
   const accessToken = window.localStorage.getItem("ACT");
 
   const baseOption = {
@@ -22,6 +22,8 @@ const imageUploadApi = async ({ body }) => {
       ...baseOption,
     });
 
+    console.log(baseOption.body);
+
     //엑세스 토큰 만료 시 재발급
     if (response.status === 401) {
       const refreshUrl = "/reissue";
@@ -39,7 +41,7 @@ const imageUploadApi = async ({ body }) => {
         window.localStorage.setItem("ACT", newAccessToken);
         console.log("토큰 재발급 성공");
         //원래 작업 실행
-        return imageUploadApi({ body });
+        return profileUploadApi({ body });
       } else {
         //엑세스 토큰 재발급 실패
         const refreshErrData = refreshResponse;
@@ -69,4 +71,4 @@ const imageUploadApi = async ({ body }) => {
   }
 };
 
-export default imageUploadApi;
+export default profileUploadApi;
