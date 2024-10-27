@@ -11,9 +11,9 @@ const Container = styled.div`
   margin-top: 20px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  padding: 30px 0;
-  padding-right: 20px;
-  padding-bottom: 0;
+  padding: 35px 25px;
+  padding-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 const WeatherCard = styled.div`
@@ -27,33 +27,35 @@ const WeatherBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  div:first-child {
-    font-size: 20px;
-    span:first-child {
-      margin-right: 20px;
-    }
-  }
-  div:last-child {
-    position: relative;
-    display: flex;
-    align-items: center;
-    span {
-      font-size: 30px;
-    }
-  }
+`;
+
+const WBox1 = styled.div`
+  display: flex;
+`;
+
+const WMiniBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
 `;
 
 const DateText = styled.span`
-  margin-left: 30px;
-  font-size: 20px;
+  margin-right: 10px;
 `;
 
 const TempText = styled.span`
-  position: absolute;
-  right: -11.5px;
-  bottom: 25px;
-  color: black;
-  font-weight: 900;
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #fec002;
+  span {
+    font-weight: 400;
+  }
+`;
+
+const RecText = styled.span`
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
 function WeatherCP() {
@@ -91,21 +93,26 @@ function WeatherCP() {
     <Container>
       <WeatherCard>
         <WeatherBox>
-          <div>
-            <DateText>{`${month}/${date}`}</DateText>
-            <span>{data.data.city.name}</span>
-            {/* <span>{Math.floor(data.data.list[0].main.temp)}°C</span> */}
-          </div>
-          <div>
+          <WBox1>
             <img
               src={`https://openweathermap.org/img/wn/${data.data.list[0].weather[0].icon}@2x.png`}
               alt="weatherImg"
             />
-            <TempText>{Math.floor(data.data.list[0].main.temp)}°C</TempText>
-          </div>
+            <WMiniBox>
+              <div>
+                <DateText>{`${month}/${date}`}</DateText>
+                <span>{data.data.city.name}</span>
+              </div>
+              <TempText>
+                {Math.floor(data.data.list[0].main.temp)}
+                <span>°C</span>
+              </TempText>
+            </WMiniBox>
+          </WBox1>
+          <RecText>다음과 같은 옷을 추천해요</RecText>
+          <ClothesCP data={data.data.list[0].main.temp} />
         </WeatherBox>
       </WeatherCard>
-      <ClothesCP data={data.data.list[0].main.temp} />
     </Container>
   );
 }

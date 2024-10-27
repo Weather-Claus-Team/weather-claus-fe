@@ -37,6 +37,20 @@ const EmailCodeCheckBox = styled(EmailBox)`
   }
 `;
 
+const Btn = styled.button`
+  height: 43px;
+  background-color: #b7b7b7;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.3s;
+  &:active {
+    background-color: gray;
+  }
+`;
+
 function Email() {
   const {
     register,
@@ -134,9 +148,9 @@ function Email() {
           })}
           onBlur={() => handleBlur("email")}
         />
-        <button type="button" onClick={handleSendEmail}>
+        <Btn type="button" onClick={handleSendEmail}>
           인증번호 전송
-        </button>
+        </Btn>
       </EmailBox>
       {email && isEmailDuplicate === true && (
         <span>이미 사용 중인 이메일입니다</span>
@@ -160,9 +174,9 @@ function Email() {
           })}
           onBlur={() => handleBlur("emailCode")}
         />
-        <button type="button" onClick={handleCheckEmailCode}>
+        <Btn type="button" onClick={handleCheckEmailCode}>
           인증번호 확인
-        </button>
+        </Btn>
       </EmailCodeCheckBox>
       <span>{emailCode !== 0 && errors?.emailCode?.message}</span>
       {emailCode !== 0 && isEmailCodeSame !== null && (

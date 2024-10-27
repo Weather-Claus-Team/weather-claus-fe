@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
 import weatherApi from "../api/weatherApi";
+import Footer from "../components/Footer";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -39,27 +40,16 @@ const Mainbox = styled.div`
 const Btns = styled.div`
   position: absolute;
   display: flex;
-  width: 200px;
   gap: 20px;
   top: 30px;
-  /* right: -20px; */
-  right: 50px;
-  button {
-    font-size: 20px;
-    padding: 8px 10px;
-    border: 1px solid white;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  button:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
+  right: 30px;
 `;
 
 const WeatherBox = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  justify-content: center;
+  gap: 25px;
 `;
 
 function Home() {
@@ -101,10 +91,11 @@ function Home() {
           <WeatherBox>
             <WeatherCP />
             <WeatherCP />
+            <WeatherCP />
           </WeatherBox>
         </Mainbox>
       </Main>
-      {/* <footer>© 2024 Weather Claus</footer> */}
+      <Footer />
     </Container>
   );
 }

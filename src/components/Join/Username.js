@@ -21,6 +21,19 @@ const UsernameBox = styled.div`
   }
 `;
 
+const Btn = styled.button`
+  height: 43px;
+  background-color: #b7b7b7;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:active {
+    background-color: gray;
+  }
+`;
+
 function Username() {
   const {
     register,
@@ -97,9 +110,9 @@ function Username() {
           })}
           onBlur={handleBlur}
         />
-        <button type="button" onClick={handleUsernameDuplicate}>
+        <Btn type="button" onClick={handleUsernameDuplicate}>
           중복 확인
-        </button>
+        </Btn>
       </UsernameBox>
       {username && isDuplicate !== null && (
         <div>

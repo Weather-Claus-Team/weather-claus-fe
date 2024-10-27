@@ -15,7 +15,7 @@ const ProfileSection = styled.div`
   width: 100%;
   max-width: 760px;
   margin: auto;
-  height: 90%;
+  height: 70%;
   align-items: center;
   padding: 1rem 3rem;
   border-radius: 20px;

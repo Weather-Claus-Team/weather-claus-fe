@@ -11,8 +11,6 @@ import {
 } from "../image";
 
 const ClothesCard = styled.div`
-  margin-left: 20px;
-  padding-bottom: 30px;
   img {
     width: 80px;
   }

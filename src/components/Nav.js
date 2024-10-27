@@ -3,23 +3,50 @@ import { Link } from "react-router-dom";
 import logoutApi from "../api/logoutApi";
 import { useLayoutEffect, useState } from "react";
 import Profile from "./Profile";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRightFromBracket,
+  faCircleUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 const MenuContainer = styled.div`
+  width: 140px;
   position: absolute;
   top: 60px;
-  right: 30px;
-  background-color: gray;
+  right: 20px;
+  background-color: #161b1f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 10px;
+  padding: 35px 40px;
   z-index: 10;
-  width: 150px;
 `;
 
 const MenuButton = styled.button`
-  display: block;
-  width: 100%;
-  background: none;
+  all: unset;
+  display: flex;
+  color: rgba(999, 999, 999, 0.7);
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  svg {
+    margin-right: 10px;
+  }
+  &:hover {
+    color: #fec002;
+  }
+`;
+
+const Btn = styled.button`
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  padding: 8px 10px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 `;
 
 function Nav() {
@@ -42,21 +69,29 @@ function Nav() {
           <Profile onClick={toggleMenu} sizes={"50px"} />
           {isMenuVisible && (
             <MenuContainer>
-              <MenuButton onClick={logoutApi}>로그아웃</MenuButton>
+              <span>-- 님</span>
+              <hr />
               <MenuButton>
-                <Link to="/myPage">마이페이지</Link>
+                <Link to="/myPage">
+                  <FontAwesomeIcon icon={faCircleUser} />
+                  마이페이지
+                </Link>
+              </MenuButton>
+              <MenuButton onClick={logoutApi}>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+                로그아웃
               </MenuButton>
             </MenuContainer>
           )}
         </>
       ) : (
         <>
-          <button>
+          <Btn>
             <Link to="/login">Login</Link>
-          </button>
-          <button>
+          </Btn>
+          <Btn>
             <Link to="/join">Join</Link>
-          </button>
+          </Btn>
         </>
       )}
     </>
