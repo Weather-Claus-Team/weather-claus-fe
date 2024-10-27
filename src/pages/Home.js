@@ -2,8 +2,7 @@ import styled from "styled-components";
 import SearchCP from "../components/SearchCP";
 import WeatherCP from "../components/WeatherCP";
 import { Link } from "react-router-dom";
-import logoutApi from "../api/logoutApi";
-import authorityApi from "../api/authorityApi";
+import Nav from "../components/Nav";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
@@ -46,7 +45,6 @@ const Btns = styled.div`
   /* right: -20px; */
   right: 50px;
   button {
-    all: unset;
     font-size: 20px;
     padding: 8px 10px;
     border: 1px solid white;
@@ -95,15 +93,7 @@ function Home() {
         </Link>
       </Title>
       <Btns>
-        <button>
-          <Link to="/login">Login</Link>
-        </button>
-        <button>
-          <Link to="/join">Join</Link>
-        </button>
-        {/* 로그아웃,권한확인 테스트 */}
-        <button onClick={logoutApi}>Logout</button>
-        {/* <button onClick={authorityApi}>권한 확인</button> */}
+        <Nav />
       </Btns>
       <Main>
         <Mainbox>
