@@ -98,6 +98,9 @@ const SubmitBtn = styled.button`
   padding: 15px 20px;
   font-size: 18px;
   cursor: pointer;
+  @media (max-width: 481px) {
+    border-radius: 0;
+  }
 `;
 
 const LoginText = styled.span`
