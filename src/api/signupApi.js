@@ -29,7 +29,7 @@ export const checkDuplicateUsername = async (username) => {
   }
 };
 
-// // 이메일 인증번호 전송
+// 이메일 인증번호 전송
 export const sendEmail = async (email) => {
   try {
     const url = `${SERVER_URL}/api/users/email`;
