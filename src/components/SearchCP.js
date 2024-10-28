@@ -6,12 +6,17 @@ import { useState } from "react";
 import { cityState } from "../atom";
 
 const Searchbox = styled.form`
+  position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+
   input {
-    position: relative;
     padding: 20px;
-    width: 600px;
+    width: 100%;
     border: none;
     border-radius: 20px;
     margin-bottom: 40px;
@@ -21,28 +26,33 @@ const Searchbox = styled.form`
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
+
   input:focus {
     outline: none;
   }
+
   input::placeholder {
     text-indent: 10px;
     color: #485563;
   }
+
   input:focus::placeholder {
     color: transparent;
   }
+
   button {
-    position: relative;
     all: unset;
     cursor: pointer;
-  }
-  svg {
     position: absolute;
+    right: 20px;
+    top: 18px;
+  }
+
+  svg {
     color: #485563;
     font-size: 25px;
-    top: 247px;
-    right: 420px;
   }
+
   svg:active {
     color: #8898a8;
   }

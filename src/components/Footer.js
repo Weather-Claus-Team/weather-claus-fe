@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 100%;
-  height: 100px;
-  margin-top: 130px;
+  min-height: 100px;
+  margin: 130px 10px 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 60px;
   border: 1px solid rgba(999, 999, 999, 0.5);
   padding: 50px;
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 `;
 
 const Logo = styled.div`

@@ -10,7 +10,8 @@ import weatherApi from "../api/weatherApi";
 import Footer from "../components/Footer";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  width: 100%;
+  margin: 70px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,17 +21,21 @@ const Container = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
   h1 {
     font-family: "Cinzel Decorative", serif;
     font-size: 40px;
   }
 `;
 
-const Main = styled.main``;
+const Main = styled.main`
+  width: 100%;
+`;
 
 const Mainbox = styled.div`
+  width: 100%;
   margin-top: 60px;
-  padding: 60px;
+  padding: 60px 0;
 `;
 
 const Btns = styled.div`
@@ -44,6 +49,7 @@ const Btns = styled.div`
 const WeatherBox = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 25px;
 `;
