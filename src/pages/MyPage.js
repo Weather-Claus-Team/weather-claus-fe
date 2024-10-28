@@ -4,14 +4,14 @@ import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
 
 const Container = styled.div`
-  /* display: flex;
-  width: 100vw;
-  height: 100vh; */
-  margin: 70px 150px;
+  margin: 70px 130px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 769px) {
+    margin: 70px 0;
+  }
 `;
 
 const Title = styled.div`
@@ -30,30 +30,43 @@ const ProfileSection = styled.div`
   align-items: center;
   width: 100%;
   max-width: 760px;
-  height: 70%;
+  height: 100%;
   border-radius: 20px;
-  margin: auto;
-  padding: 60px;
+  padding: 60px 40px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
   margin-top: 60px;
+  @media (max-width: 769px) {
+    padding: 5rem 0;
+    flex-direction: column;
+  }
 `;
 
 const ProfileSet = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 45%;
+  width: 50%;
+  height: 20rem;
   align-items: center;
-  margin-right: 70px;
-  @media (max-width: 576px) {
+  margin: 0 1rem;
+  @media (max-width: 769px) {
+    width: 90%;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
   }
 `;
 
-const InfoBox = styled.div``;
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 20rem;
+  width: 50%;
+  margin: 0 1rem;
+  @media (max-width: 769px) {
+    width: 90%;
+  }
+`;
 
 const ProfileImage = styled.div`
   display: flex;
@@ -63,13 +76,29 @@ const ProfileImage = styled.div`
 
 const Value = styled.div``;
 
+const ProfileInfo = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 40%;
+  border-top: 1px solid #787878;
+  margin-top: 1rem;
+  @media (max-width: 481px) {
+    padding: 1rem 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+`;
+
 const Info = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  height: ${(props) => (props.height ? props.height : "15%")};
+  height: 25%;
   border-top: 1px solid #787878;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
+    padding: 1rem 0;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -78,9 +107,9 @@ const Info = styled.div`
 
 const Label = styled.div`
   font-weight: bold;
-  width: 9.5rem;
+  width: 7rem;
   flex-shrink: 0;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     width: auto;
     margin-bottom: 10px;
   }
@@ -133,10 +162,10 @@ function MyPage() {
             <StyledLink to="/setProfile" color="#12b886">
               수정
             </StyledLink>
-            <Info height={"50%"}>
+            <ProfileInfo>
               <Label>닉네임</Label>
               <Value>{data.nickname}</Value>
-            </Info>
+            </ProfileInfo>
           </ProfileSet>
           <InfoBox>
             <Info>
