@@ -9,7 +9,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(999, 999, 999, 0.2);
   border-radius: 5px;
   padding: 35px 25px;
   padding-bottom: 10px;

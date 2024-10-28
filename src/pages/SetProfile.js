@@ -15,9 +15,9 @@ const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 760px;
+  max-width: 700px;
   margin: auto;
-  height: 90%;
+  height: 70%;
   align-items: center;
   padding: 1rem 3rem;
   border-radius: 20px;
@@ -64,6 +64,9 @@ const Value = styled.input`
     outline: none;
     border-bottom: 1px solid #787878;
   }
+  &:focus::placeholder {
+    color: transparent;
+  }
 `;
 
 const Info = styled.div`
@@ -84,6 +87,7 @@ const Label = styled.div`
   font-weight: bold;
   width: 9.5rem;
   flex-shrink: 0;
+  text-indent: 20px;
   @media (max-width: 576px) {
     width: auto;
     margin-bottom: 10px;
@@ -236,7 +240,7 @@ function SetProfile() {
               <Label>닉네임</Label>
               <Value
                 value={nickname}
-                placeholder="닉네임 작성하기"
+                placeholder="닉네임을 입력하세요"
                 onChange={handleNicknameChange}
               />
             </Info>

@@ -2,37 +2,85 @@ import { useState } from "react";
 import styled from "styled-components";
 import authorityApi from "../api/authorityApi";
 import logoutApi from "../api/logoutApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+
+const Container = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const PWBox = styled.div`
+  position: relative;
+  width: 29vw;
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  padding: 40px;
+`;
+
+const Title = styled.h1`
+  font-size: 25px;
+  font-weight: 600;
+  margin: 10px;
+`;
+
+const XBtn = styled.button`
+  all: unset;
+  svg {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+  }
+`;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
 `;
 
 const Input = styled.input`
-  padding: 15px 20px;
-  border: none;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-`;
-
-const SubmitBtn = styled.button`
-  width: 100%;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 25px;
-  background: #1161ee;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+  padding: 15px 15px;
+  width: 85%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  &:focus {
+    outline-color: #7e8c9e;
+  }
+  &:focus::placeholder {
+    color: transparent;
   }
 `;
 
+const SubmitBtn = styled.button`
+  background-color: #39434f;
+  color: white;
+  width: 75%;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  cursor: pointer;
+`;
+
 function Remove() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,24 +104,35 @@ function Remove() {
     }
   };
 
+  const handleClick = () => {
+    navigate(-1);
+  };
+
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Input
-          id="password"
-          type="password"
-          value={password}
-          autoComplete="off"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {isLoading ? (
-          <div>확인중...</div>
-        ) : (
-          <SubmitBtn type="submit">탈퇴하기</SubmitBtn>
-        )}
-      </Form>
-    </>
+    <Container>
+      <PWBox>
+        <Title>회원 탈퇴</Title>
+        <XBtn type="button" onClick={handleClick}>
+          <FontAwesomeIcon icon={faXmark} />
+        </XBtn>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            placeholder="비밀번호를 입력해주세요"
+            id="password"
+            type="password"
+            value={password}
+            autoComplete="off"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {isLoading ? (
+            <div>확인중...</div>
+          ) : (
+            <SubmitBtn type="submit">탈퇴하기</SubmitBtn>
+          )}
+        </Form>
+      </PWBox>
+    </Container>
   );
 }
 

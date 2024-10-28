@@ -4,23 +4,39 @@ import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 100vh; */
+  margin: 70px 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  h1 {
+    font-family: "Cinzel Decorative", serif;
+    font-size: 40px;
+  }
 `;
 
 const ProfileSection = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 760px;
-  margin: auto;
   height: 70%;
-  align-items: center;
-  padding: 1rem 3rem;
   border-radius: 20px;
+  margin: auto;
+  padding: 60px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
+  margin-top: 60px;
 `;
 
 const ProfileSet = styled.div`
@@ -29,12 +45,15 @@ const ProfileSet = styled.div`
   width: 100%;
   height: 45%;
   align-items: center;
+  margin-right: 70px;
   @media (max-width: 576px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
   }
 `;
+
+const InfoBox = styled.div``;
 
 const ProfileImage = styled.div`
   display: flex;
@@ -100,7 +119,13 @@ function MyPage() {
   return (
     <>
       <Container>
+        <Title>
+          <Link to="/">
+            <h1>Weather Claus</h1>
+          </Link>
+        </Title>
         <ProfileSection>
+          {/* <h1>My Page</h1> */}
           <ProfileSet>
             <ProfileImage>
               <Profile sizes={"120px"} />
@@ -113,26 +138,28 @@ function MyPage() {
               <Value>{data.nickname}</Value>
             </Info>
           </ProfileSet>
-          <Info>
-            <Label>아이디</Label>
-            <Value>{data.username}</Value>
-          </Info>
-          <Info>
-            <Label>이메일</Label>
-            <Value>{data.email}</Value>
-          </Info>
-          <Info>
-            <Label>비밀번호</Label>
-            <StyledLink to="/setPw" color="#12b886">
-              비밀번호 변경
-            </StyledLink>
-          </Info>
-          <Info>
-            <Label>계정 탈퇴</Label>
-            <StyledLink to="/remove" color="#ff6b6b">
-              계정 탈퇴
-            </StyledLink>
-          </Info>
+          <InfoBox>
+            <Info>
+              <Label>아이디</Label>
+              <Value>{data.username}</Value>
+            </Info>
+            <Info>
+              <Label>이메일</Label>
+              <Value>{data.email}</Value>
+            </Info>
+            <Info>
+              <Label>비밀번호</Label>
+              <StyledLink to="/setPw" color="#12b886">
+                비밀번호 변경
+              </StyledLink>
+            </Info>
+            <Info>
+              <Label>계정 탈퇴</Label>
+              <StyledLink to="/remove" color="#ff6b6b">
+                계정 탈퇴
+              </StyledLink>
+            </Info>
+          </InfoBox>
         </ProfileSection>
       </Container>
     </>

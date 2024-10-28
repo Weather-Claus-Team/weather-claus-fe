@@ -29,11 +29,7 @@ const Title = styled.div`
 const Main = styled.main``;
 
 const Mainbox = styled.div`
-  width: 60vw;
-  height: 50vh;
   margin-top: 60px;
-  background-color: rgba(999, 999, 999, 0.4);
-  border-radius: 10px;
   padding: 60px;
 `;
 
