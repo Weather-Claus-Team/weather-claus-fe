@@ -23,6 +23,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 481px) {
+    margin: 70px 0;
+  }
 `;
 
 const Title = styled.div`
@@ -34,8 +37,16 @@ const Title = styled.div`
   }
 `;
 
+const SignupTitle = styled.div`
+  @media (max-width: 481px) {
+    margin: 0 1rem 1rem;
+  }
+`;
+
 const SignupBox = styled.div`
-  width: 30vw;
+  min-width: 20rem;
+  max-width: 481px;
+  width: 100%;
   background-color: white;
   border-radius: 10px;
   color: black;
@@ -48,6 +59,10 @@ const SignupBox = styled.div`
   span {
     color: red;
   }
+  @media (max-width: 481px) {
+    min-width: 0px;
+    padding: 5rem 0;
+  }
 `;
 
 const SignupForm = styled.form`
@@ -59,7 +74,7 @@ const SignupForm = styled.form`
   margin-top: 20px;
   input {
     padding: 13px 15px;
-    width: 400px;
+    width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 3px;
   }
@@ -69,12 +84,15 @@ const SignupForm = styled.form`
   input:focus::placeholder {
     color: transparent;
   }
+  @media (max-width: 481px) {
+    margin: 0 1rem;
+  }
 `;
 
 const SubmitBtn = styled.button`
   background-color: #39434f;
   color: white;
-  width: 90%;
+  width: 100%;
   border: none;
   border-radius: 25px;
   padding: 15px 20px;
@@ -177,7 +195,7 @@ function Join() {
         </Link>
       </Title>
       <SignupBox>
-        <div>
+        <SignupTitle>
           <h2>Sign up</h2>
           <h5>
             Create an account for
@@ -185,7 +203,7 @@ function Join() {
               <Link to="/login">Login</Link>
             </LoginText>
           </h5>
-        </div>
+        </SignupTitle>
         <FormProvider {...methods}>
           <SignupForm onSubmit={methods.handleSubmit(onValid)}>
             <Username />
