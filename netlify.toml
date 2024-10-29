@@ -1,14 +1,4 @@
 [build]
   command = "npm run build"
-  publish = "public"
+  publish = "build"
 
-[[redirects]]
-  from = "/api/*"
-  to = "https://weather-claus.netlify.app/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
