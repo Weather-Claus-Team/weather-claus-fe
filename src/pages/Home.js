@@ -7,9 +7,11 @@ import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
 import weatherApi from "../api/weatherApi";
+import Footer from "../components/Footer";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  width: 100%;
+  margin: 70px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,47 +21,37 @@ const Container = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
   h1 {
     font-family: "Cinzel Decorative", serif;
     font-size: 40px;
   }
 `;
 
-const Main = styled.main``;
+const Main = styled.main`
+  width: 100%;
+`;
 
 const Mainbox = styled.div`
-  width: 60vw;
-  height: 50vh;
+  width: 100%;
   margin-top: 60px;
-  background-color: rgba(999, 999, 999, 0.4);
-  border-radius: 10px;
-  padding: 60px;
+  padding: 60px 0;
 `;
 
 const Btns = styled.div`
   position: absolute;
   display: flex;
-  width: 200px;
   gap: 20px;
   top: 30px;
-  /* right: -20px; */
-  right: 50px;
-  button {
-    font-size: 20px;
-    padding: 8px 10px;
-    border: 1px solid white;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  button:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
+  right: 30px;
 `;
 
 const WeatherBox = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
 `;
 
 function Home() {
@@ -101,10 +93,11 @@ function Home() {
           <WeatherBox>
             <WeatherCP />
             <WeatherCP />
+            <WeatherCP />
           </WeatherBox>
         </Mainbox>
       </Main>
-      {/* <footer>© 2024 Weather Claus</footer> */}
+      <Footer />
     </Container>
   );
 }

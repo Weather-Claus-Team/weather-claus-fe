@@ -11,13 +11,29 @@ import { useEffect } from "react";
 
 const UsernameBox = styled.div`
   display: flex;
-  width: 430px;
-  gap: 20px;
+  max-width: 430px;
+  width: 100%;
+  gap: 3%;
   input {
     width: 70%;
   }
   button {
-    width: 30%;
+    width: 27%;
+  }
+`;
+
+const Btn = styled.button`
+  height: 43px;
+  background-color: #b7b7b7;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  overflow: wrap;
+  word-break: keep-all;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:active {
+    background-color: gray;
   }
 `;
 
@@ -78,7 +94,7 @@ function Username() {
   }, [username, setIsDuplicate]);
 
   return (
-    <div>
+    <>
       <UsernameBox>
         <input
           type="text"
@@ -97,9 +113,9 @@ function Username() {
           })}
           onBlur={handleBlur}
         />
-        <button type="button" onClick={handleUsernameDuplicate}>
+        <Btn type="button" onClick={handleUsernameDuplicate}>
           중복 확인
-        </button>
+        </Btn>
       </UsernameBox>
       {username && isDuplicate !== null && (
         <div>
@@ -111,7 +127,7 @@ function Username() {
         </div>
       )}
       <span>{username && errors?.username?.message}</span>
-    </div>
+    </>
   );
 }
 

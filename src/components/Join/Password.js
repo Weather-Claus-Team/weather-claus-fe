@@ -5,7 +5,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Container = styled.div`
-  width: 430px;
+  max-width: 430px;
+  width: 100%;
   svg {
     color: #c0c0c0;
     cursor: pointer;

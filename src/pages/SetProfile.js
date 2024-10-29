@@ -7,22 +7,27 @@ import { useSetProfile } from "../hooks/useSetProfile";
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  margin: 70px 150px;
+  @media (max-width: 769px) {
+    margin: 70px 0;
+  }
 `;
 
 const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 760px;
+  max-width: 600px;
   margin: auto;
-  height: 90%;
+  height: auto;
   align-items: center;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   border-radius: 20px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
+  @media (max-width: 481px) {
+    padding: 1rem;
+  }
 `;
 
 const ProfileSet = styled.div`
@@ -32,9 +37,8 @@ const ProfileSet = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
   }
 `;
@@ -52,6 +56,7 @@ const ProfileImage = styled.div`
   flex-direction: column;
   align-items: center;
   height: 40%;
+  width: 100%;
 `;
 
 const Value = styled.input`
@@ -64,16 +69,20 @@ const Value = styled.input`
     outline: none;
     border-bottom: 1px solid #787878;
   }
+  &:focus::placeholder {
+    color: transparent;
+  }
 `;
 
 const Info = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  height: 15%;
+  height: 18%;
   border-top: 1px solid #787878;
   border-bottom: 1px solid #787878;
-  @media (max-width: 576px) {
+  padding: 1rem 0;
+  @media (max-width: 481px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -84,7 +93,8 @@ const Label = styled.div`
   font-weight: bold;
   width: 9.5rem;
   flex-shrink: 0;
-  @media (max-width: 576px) {
+  text-indent: 20px;
+  @media (max-width: 481px) {
     width: auto;
     margin-bottom: 10px;
   }
@@ -93,17 +103,18 @@ const Label = styled.div`
 const Button = styled.button`
   background-color: transparent;
   display: inline-block;
-  color: #0095f6;
+  color: white;
   font-size: 16px;
   font-weight: 500;
   padding: 10px 15px;
-  border: 1px solid #0095f6;
+  border: 1px solid white;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.4s;
   &:hover {
-    background-color: #0095f6;
-    color: white;
+    background-color: white;
+    color: #121518;
   }
 `;
 
@@ -116,28 +127,38 @@ const UploadBtn = styled.div`
   button {
     all: unset;
     display: inline-block;
-    color: #0095f6;
+    color: white;
     font-size: 16px;
     font-weight: 500;
     padding: 10px 15px;
-    border: 1px solid #0095f6;
+    border: 1px solid white;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
+    transition: all 0.4s;
     &:hover {
-      background-color: #0095f6;
-      color: white;
+      background-color: white;
+      color: #121518;
     }
   }
   input {
     display: none;
+  }
+  @media (max-width: 481px) {
+    flex-direction: column;
+    width: 100%;
+    label,
+    button {
+      width: 90%;
+      text-align: center;
+    }
   }
 `;
 
 const Submit = styled.div`
   gap: 10px;
   width: 100%;
-  padding-top: 10rem;
+  padding-top: 9.5rem;
   display: flex;
   justify-content: flex-end;
 `;
@@ -236,7 +257,7 @@ function SetProfile() {
               <Label>닉네임</Label>
               <Value
                 value={nickname}
-                placeholder="닉네임 작성하기"
+                placeholder="닉네임을 입력하세요"
                 onChange={handleNicknameChange}
               />
             </Info>

@@ -12,6 +12,8 @@ import { checkEmailCode, sendEmail } from "../../api/signupApi";
 import { useEffect } from "react";
 
 const Container = styled.div`
+  max-width: 430px;
+  width: 100%;
   input:first-child {
     margin-bottom: 8px;
   }
@@ -19,13 +21,12 @@ const Container = styled.div`
 
 const EmailBox = styled.div`
   display: flex;
-  width: 430px;
-  gap: 20px;
+  gap: 3%;
   input {
     width: 70%;
   }
   button {
-    width: 30%;
+    width: 27%;
   }
 `;
 
@@ -34,6 +35,22 @@ const EmailCodeCheckBox = styled(EmailBox)`
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+`;
+
+const Btn = styled.button`
+  height: 43px;
+  background-color: #b7b7b7;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  overflow: wrap;
+  word-break: keep-all;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.3s;
+  &:active {
+    background-color: gray;
   }
 `;
 
@@ -134,9 +151,9 @@ function Email() {
           })}
           onBlur={() => handleBlur("email")}
         />
-        <button type="button" onClick={handleSendEmail}>
+        <Btn type="button" onClick={handleSendEmail}>
           인증번호 전송
-        </button>
+        </Btn>
       </EmailBox>
       {email && isEmailDuplicate === true && (
         <span>이미 사용 중인 이메일입니다</span>
@@ -160,9 +177,9 @@ function Email() {
           })}
           onBlur={() => handleBlur("emailCode")}
         />
-        <button type="button" onClick={handleCheckEmailCode}>
+        <Btn type="button" onClick={handleCheckEmailCode}>
           인증번호 확인
-        </button>
+        </Btn>
       </EmailCodeCheckBox>
       <span>{emailCode !== 0 && errors?.emailCode?.message}</span>
       {emailCode !== 0 && isEmailCodeSame !== null && (
