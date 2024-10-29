@@ -17,11 +17,11 @@ const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 700px;
+  max-width: 600px;
   margin: auto;
   height: auto;
   align-items: center;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   border-radius: 20px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
@@ -78,7 +78,7 @@ const Info = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  height: 20%;
+  height: 18%;
   border-top: 1px solid #787878;
   border-bottom: 1px solid #787878;
   padding: 1rem 0;
@@ -103,17 +103,18 @@ const Label = styled.div`
 const Button = styled.button`
   background-color: transparent;
   display: inline-block;
-  color: #0095f6;
+  color: white;
   font-size: 16px;
   font-weight: 500;
   padding: 10px 15px;
-  border: 1px solid #0095f6;
+  border: 1px solid white;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.4s;
   &:hover {
-    background-color: #0095f6;
-    color: white;
+    background-color: white;
+    color: #121518;
   }
 `;
 
@@ -126,17 +127,18 @@ const UploadBtn = styled.div`
   button {
     all: unset;
     display: inline-block;
-    color: #0095f6;
+    color: white;
     font-size: 16px;
     font-weight: 500;
     padding: 10px 15px;
-    border: 1px solid #0095f6;
+    border: 1px solid white;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
+    transition: all 0.4s;
     &:hover {
-      background-color: #0095f6;
-      color: white;
+      background-color: white;
+      color: #121518;
     }
   }
   input {
@@ -156,7 +158,7 @@ const UploadBtn = styled.div`
 const Submit = styled.div`
   gap: 10px;
   width: 100%;
-  padding-top: 10rem;
+  padding-top: 9.5rem;
   display: flex;
   justify-content: flex-end;
 `;

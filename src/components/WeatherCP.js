@@ -47,7 +47,7 @@ const TempText = styled.span`
   font-size: 40px;
   font-weight: 600;
   margin-top: 20px;
-  color: #fec002;
+  color: #b9e5e8;
   span {
     font-weight: 400;
   }
@@ -56,6 +56,10 @@ const TempText = styled.span`
 const RecText = styled.span`
   margin-top: 10px;
   margin-bottom: 20px;
+  background-color: #dff2eb;
+  color: #1a1f24;
+  padding: 9px 17px;
+  border-radius: 20px;
 `;
 
 function WeatherCP() {
