@@ -2,35 +2,39 @@ import { Link } from "react-router-dom";
 import Profile from "../components/Profile";
 import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  /* display: flex;
-  width: 100vw;
-  height: 100vh; */
   margin: 70px 150px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Title = styled.div`
   display: flex;
-  justify-content: center;
-  h1 {
-    font-family: "Cinzel Decorative", serif;
-    font-size: 40px;
-  }
+  flex-direction: row;
+  align-items: center;
+  font-size: 40px;
+  font-family: "Cinzel Decorative", serif;
+  margin-left: 160px;
+`;
+
+const Line = styled.div`
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, #ffffff, #2f3842);
+  border: none;
+  margin: 0 20px;
 `;
 
 const ProfileSection = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   max-width: 760px;
-  height: 70%;
   border-radius: 20px;
   margin: auto;
   padding: 60px;
@@ -40,12 +44,26 @@ const ProfileSection = styled.div`
 `;
 
 const ProfileSet = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 45%;
   align-items: center;
-  margin-right: 70px;
+  height: 45%;
+  button {
+    all: unset;
+    position: absolute;
+    top: 115px;
+    right: 5px;
+    color: #2f3842;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+
   @media (max-width: 576px) {
     flex-direction: column;
     align-items: flex-start;
@@ -59,16 +77,21 @@ const ProfileImage = styled.div`
   display: flex;
   height: 100%;
   align-items: center;
+  margin-bottom: 70px;
 `;
 
-const Value = styled.div``;
+const Value = styled.div`
+  color: rgba(999, 999, 999, 0.5);
+`;
 
 const Info = styled.div`
-  width: 100%;
+  padding: 30px 0;
   display: flex;
   align-items: center;
-  height: ${(props) => (props.height ? props.height : "15%")};
-  border-top: 1px solid #787878;
+  .first-link:hover {
+    color: #171b1f;
+  }
+
   @media (max-width: 576px) {
     flex-direction: column;
     align-items: flex-start;
@@ -77,8 +100,8 @@ const Info = styled.div`
 `;
 
 const Label = styled.div`
-  font-weight: bold;
   width: 9.5rem;
+  font-weight: 500;
   flex-shrink: 0;
   @media (max-width: 576px) {
     width: auto;
@@ -87,6 +110,8 @@ const Label = styled.div`
 `;
 
 const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
   display: inline-block;
   color: ${(props) => props.color};
   font-size: 16px;
@@ -95,6 +120,7 @@ const StyledLink = styled(Link)`
   border: 1px solid ${(props) => props.color};
   border-radius: 5px;
   text-decoration: none;
+  transition: all 0.4s;
   &:hover {
     background-color: ${(props) => props.color};
     color: white;
@@ -120,23 +146,24 @@ function MyPage() {
     <>
       <Container>
         <Title>
-          <Link to="/">
-            <h1>Weather Claus</h1>
-          </Link>
+          <span>
+            <Link to="/">My Page</Link>
+          </span>
         </Title>
         <ProfileSection>
-          {/* <h1>My Page</h1> */}
           <ProfileSet>
             <ProfileImage>
-              <Profile sizes={"120px"} />
+              <Profile sizes={"150px"} />
             </ProfileImage>
-            <StyledLink to="/setProfile" color="#12b886">
-              수정
-            </StyledLink>
-            <Info height={"50%"}>
+            <div>
               <Label>닉네임</Label>
               <Value>{data.nickname}</Value>
-            </Info>
+            </div>
+            <button>
+              <Link to="/setProfile" color="#12b886">
+                <FontAwesomeIcon icon={faPencil} />
+              </Link>
+            </button>
           </ProfileSet>
           <InfoBox>
             <Info>
@@ -149,7 +176,7 @@ function MyPage() {
             </Info>
             <Info>
               <Label>비밀번호</Label>
-              <StyledLink to="/setPw" color="#12b886">
+              <StyledLink to="/setPw" color="white" className="first-link">
                 비밀번호 변경
               </StyledLink>
             </Info>
