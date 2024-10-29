@@ -9,7 +9,7 @@ const Container = styled.div`
   gap: 60px;
   border: 1px solid rgba(999, 999, 999, 0.5);
   padding: 50px;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     flex-direction: column;
   }
 `;

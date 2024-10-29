@@ -13,6 +13,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 481px) {
+    margin: 70px 0;
+  }
 `;
 
 const Title = styled.div`
@@ -25,12 +28,18 @@ const Title = styled.div`
 `;
 
 const LoginBox = styled.section`
-  width: 29vw;
+  min-width: 20rem;
+  max-width: 481px;
+  width: 100%;
   background-color: white;
   border-radius: 10px;
   color: black;
   margin-top: 100px;
   padding: 40px 50px;
+  @media (max-width: 481px) {
+    min-width: 0px;
+    padding: 5rem 0;
+  }
 `;
 
 const LoginTitle = styled.h1`
@@ -41,6 +50,7 @@ const LoginTitle = styled.h1`
 
 const LoginForm = styled.form`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -59,6 +69,9 @@ const Input = styled.input`
   &:focus::placeholder {
     color: transparent;
   }
+  @media (max-width: 481px) {
+    width: 80%;
+  }
 `;
 const SubmitBtn = styled.button`
   background-color: #39434f;
@@ -71,6 +84,10 @@ const SubmitBtn = styled.button`
   margin-bottom: 20px;
   font-size: 18px;
   cursor: pointer;
+  @media (max-width: 481px) {
+    width: 95%;
+    border-radius: 0;
+  }
 `;
 
 const LoginNav = styled.nav`
@@ -93,6 +110,7 @@ const LoginNav = styled.nav`
 const PasswordBox = styled.div`
   display: flex;
   position: relative;
+  justify-content: center;
   svg {
     position: absolute;
     top: 15.5px;
@@ -106,6 +124,10 @@ const PasswordBox = styled.div`
   }
   button {
     all: unset;
+    position: relative;
+  }
+  @media (max-width: 481px) {
+    width: 100%;
   }
 `;
 

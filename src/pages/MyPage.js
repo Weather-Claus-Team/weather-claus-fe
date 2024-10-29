@@ -9,6 +9,10 @@ const Container = styled.div`
   margin: 70px 150px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  @media (max-width: 769px) {
+    margin: 70px 0.5rem;
+  }
 `;
 
 const Title = styled.div`
@@ -17,7 +21,6 @@ const Title = styled.div`
   align-items: center;
   font-size: 40px;
   font-family: "Cinzel Decorative", serif;
-  margin-left: 160px;
 `;
 
 const Line = styled.div`
@@ -36,11 +39,14 @@ const ProfileSection = styled.div`
   width: 100%;
   max-width: 760px;
   border-radius: 20px;
-  margin: auto;
-  padding: 60px;
+  padding: 60px 40px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
   margin-top: 60px;
+  @media (max-width: 769px) {
+    padding: 5rem 0;
+    flex-direction: column;
+  }
 `;
 
 const ProfileSet = styled.div`
@@ -48,7 +54,7 @@ const ProfileSet = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 45%;
+  height: 50%;
   button {
     all: unset;
     position: absolute;
@@ -64,16 +70,28 @@ const ProfileSet = styled.div`
       rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: 769px) {
+    width: 90%;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
   }
 `;
 
-const InfoBox = styled.div``;
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 20rem;
+  width: 50%;
+  margin: 0 1rem;
+  @media (max-width: 769px) {
+    width: 90%;
+    height: 50%;
+  }
+`;
 
 const ProfileImage = styled.div`
+  position: relative;
   display: flex;
   height: 100%;
   align-items: center;
@@ -85,6 +103,8 @@ const Value = styled.div`
 `;
 
 const Info = styled.div`
+  width: 100%;
+  height: 40px;
   padding: 30px 0;
   display: flex;
   align-items: center;
@@ -92,7 +112,7 @@ const Info = styled.div`
     color: #171b1f;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -100,10 +120,10 @@ const Info = styled.div`
 `;
 
 const Label = styled.div`
-  width: 9.5rem;
+  width: 7rem;
   font-weight: 500;
   flex-shrink: 0;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     width: auto;
     margin-bottom: 10px;
   }
@@ -154,16 +174,16 @@ function MyPage() {
           <ProfileSet>
             <ProfileImage>
               <Profile sizes={"150px"} />
+              <button>
+                <Link to="/setProfile" color="#12b886">
+                  <FontAwesomeIcon icon={faPencil} />
+                </Link>
+              </button>
             </ProfileImage>
-            <div>
+            <Info>
               <Label>닉네임</Label>
               <Value>{data.nickname}</Value>
-            </div>
-            <button>
-              <Link to="/setProfile" color="#12b886">
-                <FontAwesomeIcon icon={faPencil} />
-              </Link>
-            </button>
+            </Info>
           </ProfileSet>
           <InfoBox>
             <Info>

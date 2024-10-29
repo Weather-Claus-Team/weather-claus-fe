@@ -7,8 +7,10 @@ import { useSetProfile } from "../hooks/useSetProfile";
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  margin: 70px 150px;
+  @media (max-width: 769px) {
+    margin: 70px 0;
+  }
 `;
 
 const ProfileSection = styled.div`
@@ -17,12 +19,15 @@ const ProfileSection = styled.div`
   width: 100%;
   max-width: 600px;
   margin: auto;
-  height: 70%;
+  height: auto;
   align-items: center;
   padding: 2rem 3rem;
   border-radius: 20px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
+  @media (max-width: 481px) {
+    padding: 1rem;
+  }
 `;
 
 const ProfileSet = styled.div`
@@ -32,9 +37,8 @@ const ProfileSet = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
   }
 `;
@@ -52,6 +56,7 @@ const ProfileImage = styled.div`
   flex-direction: column;
   align-items: center;
   height: 40%;
+  width: 100%;
 `;
 
 const Value = styled.input`
@@ -76,7 +81,8 @@ const Info = styled.div`
   height: 18%;
   border-top: 1px solid #787878;
   border-bottom: 1px solid #787878;
-  @media (max-width: 576px) {
+  padding: 1rem 0;
+  @media (max-width: 481px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
@@ -88,7 +94,7 @@ const Label = styled.div`
   width: 9.5rem;
   flex-shrink: 0;
   text-indent: 20px;
-  @media (max-width: 576px) {
+  @media (max-width: 481px) {
     width: auto;
     margin-bottom: 10px;
   }
@@ -137,6 +143,15 @@ const UploadBtn = styled.div`
   }
   input {
     display: none;
+  }
+  @media (max-width: 481px) {
+    flex-direction: column;
+    width: 100%;
+    label,
+    button {
+      width: 90%;
+      text-align: center;
+    }
   }
 `;
 

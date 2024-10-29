@@ -11,13 +11,14 @@ import { useEffect } from "react";
 
 const UsernameBox = styled.div`
   display: flex;
-  width: 430px;
-  gap: 20px;
+  max-width: 430px;
+  width: 100%;
+  gap: 3%;
   input {
     width: 70%;
   }
   button {
-    width: 30%;
+    width: 27%;
   }
 `;
 
@@ -91,7 +92,7 @@ function Username() {
   }, [username, setIsDuplicate]);
 
   return (
-    <div>
+    <>
       <UsernameBox>
         <input
           type="text"
@@ -124,7 +125,7 @@ function Username() {
         </div>
       )}
       <span>{username && errors?.username?.message}</span>
-    </div>
+    </>
   );
 }
 
