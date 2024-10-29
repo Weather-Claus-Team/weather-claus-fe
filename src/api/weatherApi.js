@@ -3,10 +3,10 @@ const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
 const weatherApi = async (city, lat, lon) => {
   try {
     const url = city
-      ? `${SERVER_URL}/api/weather/forecast?city=${city}`
+      ? `/api/weather/forecast?city=${city}`
       : lat && lon
-      ? `${SERVER_URL}/api/weather/forecast?lat=${lat}&lon=${lon}`
-      : `${SERVER_URL}/api/weather/forecast`;
+      ? `/api/weather/forecast?lat=${lat}&lon=${lon}`
+      : "/api/weather/forecast";
 
     const response = await fetch(url, {
       method: "GET",
