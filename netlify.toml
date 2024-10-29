@@ -3,7 +3,7 @@
   publish = "build"
 
 [[redirects]]
-  from = "/api/"
+  from = "/api/*"
   to = "https://weather-claus.netlify.app/:splat"
   status = 200
   force = true
