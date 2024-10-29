@@ -28,6 +28,8 @@ const Btn = styled.button`
   color: white;
   border: none;
   border-radius: 3px;
+  overflow: wrap;
+  word-break: keep-all;
   cursor: pointer;
   transition: all 0.3s;
   &:active {

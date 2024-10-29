@@ -44,6 +44,8 @@ const Btn = styled.button`
   color: white;
   border: none;
   border-radius: 3px;
+  overflow: wrap;
+  word-break: keep-all;
   cursor: pointer;
   padding: 5px 10px;
   transition: all 0.3s;
