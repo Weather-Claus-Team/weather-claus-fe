@@ -4,7 +4,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://weather-claus.netlify.app/:splat"
+  to = "http://http://43.200.138.242/:splat"
   status = 200
   force = true
 
