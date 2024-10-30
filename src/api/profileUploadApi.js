@@ -16,7 +16,7 @@ const profileUploadApi = async ({ body }) => {
   }
 
   try {
-    const url = `/api/profile`;
+    const url = `/api/profile/myPage`;
 
     const response = await fetch(url, {
       ...baseOption,

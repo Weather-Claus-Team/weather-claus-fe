@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  margin: 70px 150px;
   width: 100%;
   position: absolute;
   display: flex;
@@ -95,7 +94,7 @@ function SetPw() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await authorityApi("POST", "password", { body: { password } });
+      await authorityApi("POST", "/password", { body: { password } });
       navigate("/NewPw", { replace: true });
     } catch (error) {
       console.error("error:", error);

@@ -9,6 +9,7 @@ import { findId } from "../api/findIdApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
+  width: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -22,11 +23,17 @@ const Container = styled.div`
 
 const PWBox = styled.div`
   position: relative;
-  width: 29vw;
+  min-width: 20rem;
+  max-width: 481px;
+  width: 100%;
   background-color: white;
   border-radius: 10px;
   color: black;
   padding: 40px;
+  @media (max-width: 576px) {
+    min-width: 0px;
+    padding: 5rem 0;
+  }
 `;
 
 const Title = styled.h1`
