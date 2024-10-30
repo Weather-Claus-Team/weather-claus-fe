@@ -111,12 +111,13 @@ function FindId() {
 
       if (result.code === 200) {
         alert("아이디를 전송했습니다");
+        navigate("/");
       } else {
         alert("알 수 없는 에러가 발생했습니다. 다시 시도해주세요");
       }
     } catch (error) {
-      console.error("이메일 전송 에러: ", error);
-      alert("이메일 전송 요청에 실패했습니다. 다시 시도해주세요");
+      console.error("아이디찾기 전송 에러: ", error);
+      alert("아이디찾기 전송 요청에 실패했습니다. 다시 시도해주세요");
     }
   };
 
