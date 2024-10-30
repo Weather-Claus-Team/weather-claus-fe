@@ -10,7 +10,6 @@ import {
   emailCheckState,
   emailCodeCheckState,
   emailDuplicateState,
-  recaptchaTokenState,
   usernameCheckState,
   usernameDuplicateState,
 } from "../atom";

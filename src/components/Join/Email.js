@@ -97,7 +97,7 @@ function Email() {
 
   useEffect(() => {
     setIsEmailDuplicate(null);
-  }, [email]);
+  }, [email, setIsEmailDuplicate]);
 
   // 인증번호 확인
   const [emailCode, setEmailCode] = useRecoilState(emailCodeState);
@@ -133,7 +133,7 @@ function Email() {
 
   useEffect(() => {
     setIsEmailCodeSame(null);
-  }, [emailCode]);
+  }, [emailCode, setIsEmailCodeSame]);
 
   return (
     <Container>

@@ -11,7 +11,6 @@ export const findId = async (email) => {
       },
       body: JSON.stringify({ email }),
     });
-    console.log(response);
     const result = await response.json();
     console.log(result);
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { emailState } from "../atom";
 import { useRecoilState } from "recoil";
 import { findId } from "../api/findIdApi";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   position: absolute;
@@ -91,9 +92,10 @@ function FindId() {
     trigger,
   } = useForm();
   const [email, setEmail] = useRecoilState(emailState);
+  const [emailExists, setEmailExists] = useState(null);
 
-  const handleBlur = async (value) => {
-    await trigger(value);
+  const handleBlur = async () => {
+    await trigger("email");
   };
 
   const handleClick = () => {
@@ -101,6 +103,12 @@ function FindId() {
   };
 
   const handleFindId = async () => {
+    const isValid = await trigger("email");
+
+    if (!isValid) {
+      return;
+    }
+
     try {
       const result = await findId(email);
 
@@ -111,7 +119,12 @@ function FindId() {
 
       if (result.code === 200) {
         alert("아이디를 전송했습니다");
-        navigate("/");
+        navigate("/login");
+      } else if (
+        result.code === 400 &&
+        result.errorDetails?.details === "Email not found."
+      ) {
+        setEmailExists(false);
       } else {
         alert("알 수 없는 에러가 발생했습니다. 다시 시도해주세요");
       }
@@ -120,6 +133,10 @@ function FindId() {
       alert("아이디찾기 전송 요청에 실패했습니다. 다시 시도해주세요");
     }
   };
+
+  useEffect(() => {
+    setEmailExists(null);
+  }, [email, setEmailExists]);
 
   return (
     <Container>
@@ -140,12 +157,15 @@ function FindId() {
                 message: "이메일을 올바르게 입력해주세요",
               },
             })}
-            onBlur={() => handleBlur("email")}
+            onBlur={handleBlur}
           />
           <span>{email && errors?.email?.message}</span>
           <SubmitBtn type="button" onClick={handleFindId}>
             아이디 찾기
           </SubmitBtn>
+          {email && emailExists === false && (
+            <span>존재하지 않는 이메일입니다</span>
+          )}
         </Form>
       </PWBox>
     </Container>
