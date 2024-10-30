@@ -12,6 +12,8 @@ import { checkEmailCode, sendEmail } from "../../api/signupApi";
 import { useEffect } from "react";
 
 const Container = styled.div`
+  max-width: 430px;
+  width: 100%;
   input:first-child {
     margin-bottom: 8px;
   }
@@ -19,13 +21,12 @@ const Container = styled.div`
 
 const EmailBox = styled.div`
   display: flex;
-  width: 430px;
-  gap: 20px;
+  gap: 3%;
   input {
     width: 70%;
   }
   button {
-    width: 30%;
+    width: 27%;
   }
 `;
 
@@ -43,6 +44,8 @@ const Btn = styled.button`
   color: white;
   border: none;
   border-radius: 3px;
+  overflow: wrap;
+  word-break: keep-all;
   cursor: pointer;
   padding: 5px 10px;
   transition: all 0.3s;

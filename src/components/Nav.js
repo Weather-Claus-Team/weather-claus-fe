@@ -32,7 +32,7 @@ const MenuButton = styled.button`
     margin-right: 10px;
   }
   &:hover {
-    color: #fec002;
+    color: #b9e5e8;
   }
 `;
 
