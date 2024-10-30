@@ -1,5 +1,3 @@
-const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
-
 const weatherApi = async (city, lat, lon) => {
   try {
     const url = city
