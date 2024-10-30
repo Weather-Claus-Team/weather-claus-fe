@@ -88,6 +88,7 @@ export const signupResult = async (data) => {
       body: JSON.stringify(data),
     });
     const result = await response.json();
+    console.log(result);
 
     // 백엔드 유효성검사 오류 발생 시
     if (!response.ok) {
@@ -111,12 +112,12 @@ export const signupResult = async (data) => {
         return [null, "이메일 유효성 검사 오류"];
       } else {
         console.log("Signup error: ", result?.errorDetails?.details);
-        return null;
+        return [null, "예기치 않은 오류 발생"];
       }
     }
-    return result;
+    return [result, null];
   } catch (error) {
     console.error("Signup error: ", error);
-    return null;
+    return [null, "회원가입 실패(서버 오류)"];
   }
 };
