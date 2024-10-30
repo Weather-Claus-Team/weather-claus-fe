@@ -7,6 +7,7 @@ import SetPw from "./pages/SetPw";
 import NewPw from "./pages/NewPw";
 import Remove from "./pages/Remove";
 import SetProfile from "./pages/SetProfile";
+import FindId from "./pages/FindId";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/setPw" element={<SetPw />} />
       <Route path="/newPw" element={<NewPw />} />
       <Route path="/remove" element={<Remove />} />
+      <Route path="/findId" element={<FindId />} />
     </Routes>
   );
 }

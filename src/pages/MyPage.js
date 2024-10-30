@@ -23,13 +23,13 @@ const Title = styled.div`
   font-family: "Cinzel Decorative", serif;
 `;
 
-const Line = styled.div`
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(to right, #ffffff, #2f3842);
-  border: none;
-  margin: 0 20px;
-`;
+// const Line = styled.div`
+//   width: 100px;
+//   height: 4px;
+//   background: linear-gradient(to right, #ffffff, #2f3842);
+//   border: none;
+//   margin: 0 20px;
+// `;
 
 const ProfileSection = styled.div`
   display: flex;
