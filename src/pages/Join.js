@@ -156,18 +156,18 @@ function Join() {
     // };
 
     try {
-      const [result, errorMessage] = await signupResult(restData);
+      const [result, errorMessage] = (await signupResult(restData)) || [];
 
       if (!result) {
-        if (errorMessage === "비밀번호 유효성 검사 오류") {
+        if (errorMessage.includes("비밀번호")) {
           setSignupError("비밀번호를 다시 확인해주세요");
           return;
         }
-        if (errorMessage === "아이디 유효성 검사 오류") {
+        if (errorMessage.includes("아이디")) {
           setSignupError("아이디를 다시 확인해주세요");
           return;
         }
-        if (errorMessage === "이메일 유효성 검사 오류") {
+        if (errorMessage.includes("이메일")) {
           setSignupError("이메일을 다시 확인해주세요");
           return;
         }
