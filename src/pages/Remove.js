@@ -7,7 +7,6 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  margin: 70px 150px;
   width: 100%;
   position: absolute;
   display: flex;

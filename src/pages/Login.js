@@ -199,7 +199,9 @@ function Login() {
         </LoginForm>
         <LoginNav>
           <ul>
-            <li>아이디 찾기</li>
+            <li>
+              <Link to="/findId">아이디 찾기</Link>
+            </li>
             <span>|</span>
             <li>
               <Link to="/join">회원가입</Link>
