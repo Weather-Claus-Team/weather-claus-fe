@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import authorityApi from "../api/authorityApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   width: 100%;
@@ -57,6 +57,28 @@ const Form = styled.form`
   align-items: center;
   gap: 20px;
   margin-top: 30px;
+`;
+
+const InputBox = styled.div`
+  position: relative;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    all: unset;
+  }
+  svg {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    color: #c0c0c0;
+    cursor: pointer;
+    transition: all 0.4s;
+  }
+  svg:hover {
+    color: gray;
+  }
 `;
 
 const Input = styled.input`
@@ -127,6 +149,17 @@ function NewPw() {
     }
   };
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+
+  const handleShowPW = () => {
+    setIsVisible((prev) => !prev);
+  };
+
+  const handleShowPW2 = () => {
+    setIsVisible2((prev) => !prev);
+  };
+
   return (
     <Container>
       <PWBox>
@@ -134,26 +167,35 @@ function NewPw() {
         <XBtn type="button" onClick={handleClick}>
           <FontAwesomeIcon icon={faXmark} />
         </XBtn>
-
         <Form onSubmit={handleSubmit}>
-          <Input
-            placeholder="새 비밀번호를 입력해주세요"
-            id="password"
-            type="password"
-            value={password}
-            autoComplete="off"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <Input
-            placeholder="새 비밀번호를 다시 입력해주세요"
-            id="password2"
-            type="password"
-            value={password2}
-            autoComplete="off"
-            onChange={(e) => setPassword2(e.target.value)}
-            required
-          />
+          <InputBox>
+            <Input
+              placeholder="새 비밀번호를 입력해주세요"
+              id="password"
+              type={isVisible ? "text" : "password"}
+              value={password}
+              autoComplete="off"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="button" onClick={handleShowPW}>
+              <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
+            </button>
+          </InputBox>
+          <InputBox>
+            <Input
+              placeholder="새 비밀번호를 다시 입력해주세요"
+              id="password2"
+              type={isVisible2 ? "text" : "password"}
+              value={password2}
+              autoComplete="off"
+              onChange={(e) => setPassword2(e.target.value)}
+              required
+            />
+            <button type="button" onClick={handleShowPW2}>
+              <FontAwesomeIcon icon={isVisible2 ? faEyeSlash : faEye} />
+            </button>
+          </InputBox>
           {error && <div style={{ color: "red" }}>{error}</div>}
           {isLoading ? (
             <div>확인중...</div>
