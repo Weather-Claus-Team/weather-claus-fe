@@ -3,7 +3,7 @@ import styled from "styled-components";
 import authorityApi from "../api/authorityApi";
 import logoutApi from "../api/logoutApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -60,8 +60,30 @@ const Form = styled.form`
   margin-top: 30px;
 `;
 
+const InputBox = styled.div`
+  position: relative;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    all: unset;
+  }
+  svg {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    color: #c0c0c0;
+    cursor: pointer;
+    transition: all 0.4s;
+  }
+  svg:hover {
+    color: gray;
+  }
+`;
+
 const Input = styled.input`
-  padding: 15px 15px;
+  padding: 15px;
   width: 85%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -115,6 +137,12 @@ function Remove() {
     navigate(-1);
   };
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleShowPW = () => {
+    setIsVisible((prev) => !prev);
+  };
+
   return (
     <Container>
       <PWBox>
@@ -123,15 +151,20 @@ function Remove() {
           <FontAwesomeIcon icon={faXmark} />
         </XBtn>
         <Form onSubmit={handleSubmit}>
-          <Input
-            placeholder="비밀번호를 입력해주세요"
-            id="password"
-            type="password"
-            value={password}
-            autoComplete="off"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <InputBox>
+            <Input
+              placeholder="비밀번호를 입력해주세요"
+              id="password"
+              type={isVisible ? "text" : "password"}
+              value={password}
+              autoComplete="off"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="button" onClick={handleShowPW}>
+              <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
+            </button>
+          </InputBox>
           {isLoading ? (
             <div>확인중...</div>
           ) : (
