@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import SearchCP from "../components/SearchCP";
 import WeatherCP from "../components/WeatherCP";
-import { Link } from "react-router-dom";
 import Nav from "../components/Nav";
+import weatherApi from "../api/weatherApi";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
-import weatherApi from "../api/weatherApi";
-import Footer from "../components/Footer";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   width: 100%;
@@ -33,6 +34,7 @@ const Main = styled.main`
 `;
 
 const Mainbox = styled.div`
+  position: relative;
   width: 100%;
   margin-top: 60px;
   padding: 60px 0;
@@ -46,7 +48,8 @@ const Btns = styled.div`
   right: 30px;
 `;
 
-const WeatherBox = styled.div`
+const WeatherBox = styled(motion.div)`
+  min-height: 311.5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -77,6 +80,26 @@ function Home() {
     }
   }, [locationValue, cityValue]);
 
+  const weatherVars = {
+    start: { opacity: 1 },
+    end: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const childVars = {
+    start: { opacity: 0, y: 15 },
+    end: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", bounce: 0.4 },
+    },
+  };
+
   return (
     <Container>
       <Title>
@@ -90,10 +113,12 @@ function Home() {
       <Main>
         <Mainbox>
           <SearchCP />
-          <WeatherBox>
-            <WeatherCP />
-            <WeatherCP />
-            <WeatherCP />
+          <WeatherBox variants={weatherVars} initial="start" animate="end">
+            {[...Array(3)].map((_, index) => (
+              <motion.div key={index} variants={childVars}>
+                <WeatherCP />
+              </motion.div>
+            ))}
           </WeatherBox>
         </Mainbox>
       </Main>

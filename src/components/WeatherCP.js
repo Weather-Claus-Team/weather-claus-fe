@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import ClothesCP from "./ClothesCP";
 import { useRecoilValue } from "recoil";
 import { cityState } from "../atom";
 import { useWeather } from "../hooks/useWeather";
-import ClothesCP from "./ClothesCP";
 
 const Container = styled.div`
   display: flex;
