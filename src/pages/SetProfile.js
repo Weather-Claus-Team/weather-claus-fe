@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import Profile from "../components/Profile";
-import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useMyPage } from "../hooks/useMypage";
 import { useSetProfile } from "../hooks/useSetProfile";
@@ -164,8 +164,8 @@ const Submit = styled.div`
 `;
 
 function SetProfile() {
-  const { mutate } = useSetProfile();
   const navigate = useNavigate();
+  const { mutate } = useSetProfile();
   const { data, isLoading, isError, isFetching } = useMyPage();
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);

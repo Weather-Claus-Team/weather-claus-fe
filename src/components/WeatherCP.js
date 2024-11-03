@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Loader from "../components/Loader";
 import ClothesCP from "./ClothesCP";
 import { useRecoilValue } from "recoil";
 import { cityState } from "../atom";
@@ -77,7 +78,7 @@ function WeatherCP() {
   console.log(data);
 
   if (isFetching || isLoading) {
-    return <div>로딩 중</div>;
+    return <Loader />;
   }
 
   if (isError) {
