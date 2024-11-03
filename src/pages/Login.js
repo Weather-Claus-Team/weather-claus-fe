@@ -8,33 +8,28 @@ import { useSetRecoilState } from "recoil";
 import { loginSuccessState } from "../atom";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  width: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   @media (max-width: 481px) {
     margin: 70px 0;
   }
 `;
 
-const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  h1 {
-    font-family: "Cinzel Decorative", serif;
-    font-size: 40px;
-  }
-`;
-
 const LoginBox = styled.section`
   min-width: 20rem;
-  max-width: 481px;
+  max-width: 400px;
   width: 100%;
   background-color: white;
   border-radius: 10px;
   color: black;
-  margin-top: 100px;
   padding: 40px 50px;
   @media (max-width: 481px) {
     min-width: 0px;
@@ -161,11 +156,6 @@ function Login() {
 
   return (
     <Container>
-      <Title>
-        <Link to="/">
-          <h1>Weather Claus</h1>
-        </Link>
-      </Title>
       <LoginBox>
         <LoginTitle>Login</LoginTitle>
         <LoginForm onSubmit={handleSubmit}>

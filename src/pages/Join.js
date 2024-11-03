@@ -17,22 +17,18 @@ import { signupResult } from "../api/signupApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  width: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   @media (max-width: 481px) {
     margin: 70px 0;
-  }
-`;
-
-const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  h1 {
-    font-family: "Cinzel Decorative", serif;
-    font-size: 40px;
   }
 `;
 
@@ -49,7 +45,6 @@ const SignupBox = styled.div`
   background-color: white;
   border-radius: 10px;
   color: black;
-  margin-top: 50px;
   padding: 40px 50px;
   h2 {
     font-size: 40px;
@@ -91,7 +86,7 @@ const SignupForm = styled.form`
 const SubmitBtn = styled.button`
   background-color: #39434f;
   color: white;
-  width: 100%;
+  width: 85%;
   border: none;
   border-radius: 25px;
   padding: 15px 20px;
@@ -191,11 +186,6 @@ function Join() {
 
   return (
     <Container>
-      <Title>
-        <Link to="/">
-          <h1>Weather Claus</h1>
-        </Link>
-      </Title>
       <SignupBox>
         <SignupTitle>
           <h2>Sign up</h2>

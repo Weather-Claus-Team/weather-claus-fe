@@ -37,11 +37,12 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
 body {
 	line-height: 1;
 	background-image: linear-gradient(60deg, #000000 0%, #485563 100%);
 	color: white;
-	font-family: "Inter", sans-serif;
+	font-family: "Outfit", sans-serif;
 }
 ol, ul {
 	list-style: none;
