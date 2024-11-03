@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import SearchCP from "../components/SearchCP";
 import WeatherCP from "../components/WeatherCP";
-import { Link } from "react-router-dom";
 import Nav from "../components/Nav";
+import weatherApi from "../api/weatherApi";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
-import weatherApi from "../api/weatherApi";
-import Footer from "../components/Footer";
 
 const Container = styled.div`
   width: 100%;
@@ -47,6 +47,7 @@ const Btns = styled.div`
 `;
 
 const WeatherBox = styled.div`
+  min-height: 311.5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

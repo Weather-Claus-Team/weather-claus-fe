@@ -14,7 +14,7 @@ function Profile({ onClick, sizes }) {
   const { data, isLoading, isError, isFetching } = useMyPage();
 
   if (isFetching || isLoading) {
-    return <div>로딩 중...</div>;
+    return <></>;
   }
 
   if (isError) {

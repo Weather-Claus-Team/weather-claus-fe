@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import logoutApi from "../api/logoutApi";
-import { useLayoutEffect, useState } from "react";
 import Profile from "./Profile";
+import { Link } from "react-router-dom";
+import { useLayoutEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRightFromBracket,

@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import Profile from "../components/Profile";
+import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
 import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -151,7 +152,7 @@ function MyPage() {
   const { data, isLoading, isError, isFetching } = useMyPage();
 
   if (isFetching || isLoading) {
-    return <div>로딩 중...</div>;
+    return <Loader />;
   }
 
   if (isError) {

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import { FormProvider, useForm } from "react-hook-form";
 import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
+import { Link, useNavigate } from "react-router-dom";
+import { FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   emailCheckState,

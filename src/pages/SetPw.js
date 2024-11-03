@@ -1,7 +1,8 @@
+import styled from "styled-components";
+import Loader from "../components/Loader";
+import authorityApi from "../api/authorityApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import authorityApi from "../api/authorityApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -159,7 +160,7 @@ function SetPw() {
             </button>
           </InputBox>
           {isLoading ? (
-            <div>확인중...</div>
+            <Loader />
           ) : (
             <SubmitBtn type="submit">확인하기</SubmitBtn>
           )}
