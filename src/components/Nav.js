@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logoutApi from "../api/logoutApi";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import Profile from "./Profile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -52,6 +52,7 @@ const Btn = styled.button`
 function Nav() {
   const [hasAct, setHasAct] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const navBox = useRef(null);
 
   useLayoutEffect(() => {
     const actValue = localStorage.getItem("ACT");
@@ -62,13 +63,30 @@ function Nav() {
     setIsMenuVisible((prev) => !prev);
   };
 
+  const handleClickOutside = (event) => {
+    if (navBox.current && !navBox.current.contains(event.target)) {
+      setIsMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isMenuVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuVisible]);
+
   return (
     <>
       {hasAct ? (
         <>
           <Profile onClick={toggleMenu} sizes={"50px"} />
           {isMenuVisible && (
-            <MenuContainer>
+            <MenuContainer ref={navBox}>
               <span>-- 님</span>
               <hr />
               <MenuButton>
