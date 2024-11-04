@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import SEO from "../components/SEO";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
@@ -147,6 +148,7 @@ function FindId() {
 
   return (
     <Container>
+      <SEO title="아이디 찾기" />
       <PWBox>
         <Title>아이디 찾기</Title>
         <XBtn type="button" onClick={handleClick}>

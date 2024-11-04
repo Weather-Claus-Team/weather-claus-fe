@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Loader from "../components/Loader";
+import SEO from "../components/SEO";
 import authorityApi from "../api/authorityApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -139,6 +140,7 @@ function SetPw() {
 
   return (
     <Container>
+      <SEO title="비밀번호 변경" />
       <PWBox>
         <Title>비밀번호 변경</Title>
         <XBtn type="button" onClick={handleClick}>

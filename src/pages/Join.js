@@ -3,6 +3,7 @@ import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
+import SEO from "../components/SEO";
 import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -186,6 +187,7 @@ function Join() {
 
   return (
     <Container>
+      <SEO title="회원가입" />
       <SignupBox>
         <SignupTitle>
           <h2>Sign up</h2>

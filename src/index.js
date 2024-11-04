@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -72,8 +73,10 @@ root.render(
   <BrowserRouter>
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <App />
+        <HelmetProvider>
+          <GlobalStyle />
+          <App />
+        </HelmetProvider>
       </QueryClientProvider>
     </RecoilRoot>
   </BrowserRouter>

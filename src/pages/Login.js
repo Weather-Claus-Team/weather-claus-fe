@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import loginApi from "../api/loginApi";
+import SEO from "../components/SEO";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -156,6 +157,7 @@ function Login() {
 
   return (
     <Container>
+      <SEO title="로그인" />
       <LoginBox>
         <LoginTitle>Login</LoginTitle>
         <LoginForm onSubmit={handleSubmit}>

@@ -21,11 +21,17 @@ const Container = styled.div`
 
 const Title = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   margin-top: 2rem;
   h1 {
     font-family: "Cinzel Decorative", serif;
     font-size: 40px;
+  }
+  span {
+    margin: 0 15px;
+    font-size: 15px;
   }
 `;
 
@@ -36,7 +42,7 @@ const Main = styled.main`
 const Mainbox = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 60px;
+  margin-top: 40px;
   padding: 60px 0;
 `;
 
@@ -55,6 +61,17 @@ const WeatherBox = styled(motion.div)`
   flex-wrap: wrap;
   justify-content: center;
   gap: 25px;
+`;
+
+const Line = styled.div`
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to left, #ffffff, #1e2329);
+  border: none;
+`;
+
+const Line2 = styled(Line)`
+  background: linear-gradient(to right, #ffffff, #36404b);
 `;
 
 function Home() {
@@ -103,9 +120,13 @@ function Home() {
   return (
     <Container>
       <Title>
+        <Line />
+        <span>✦</span>
         <Link to="/">
           <h1>Weather Claus</h1>
         </Link>
+        <span>✦</span>
+        <Line2 />
       </Title>
       <Btns>
         <Nav />

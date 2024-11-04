@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Profile from "../components/Profile";
+import SEO from "../components/SEO";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useMyPage } from "../hooks/useMypage";
@@ -230,45 +231,44 @@ function SetProfile() {
   }
 
   return (
-    <>
-      <Container>
-        <ProfileSection>
-          <ProfileSet>
-            <ProfileImage>
-              {imagePreview ? (
-                <ImagePreview src={imagePreview} alt="미리보기 이미지" />
-              ) : (
-                <Profile sizes={"120px"} />
-              )}
+    <Container>
+      <SEO title="프로필 수정" />
+      <ProfileSection>
+        <ProfileSet>
+          <ProfileImage>
+            {imagePreview ? (
+              <ImagePreview src={imagePreview} alt="미리보기 이미지" />
+            ) : (
+              <Profile sizes={"120px"} />
+            )}
 
-              <UploadBtn>
-                <label htmlFor="profileImg">이미지 업로드</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  id="profileImg"
-                  ref={fileInputRef}
-                  onChange={handleFileChange}
-                />
-                <button onClick={handleDelete}>이미지 삭제</button>
-              </UploadBtn>
-            </ProfileImage>
-            <Info>
-              <Label>닉네임</Label>
-              <Value
-                value={nickname}
-                placeholder="닉네임을 입력하세요"
-                onChange={handleNicknameChange}
+            <UploadBtn>
+              <label htmlFor="profileImg">이미지 업로드</label>
+              <input
+                type="file"
+                accept="image/*"
+                id="profileImg"
+                ref={fileInputRef}
+                onChange={handleFileChange}
               />
-            </Info>
-            <Submit>
-              <Button onClick={() => navigate(-1)}>취소</Button>
-              <Button onClick={handleSubmit}>저장</Button>
-            </Submit>
-          </ProfileSet>
-        </ProfileSection>
-      </Container>
-    </>
+              <button onClick={handleDelete}>이미지 삭제</button>
+            </UploadBtn>
+          </ProfileImage>
+          <Info>
+            <Label>닉네임</Label>
+            <Value
+              value={nickname}
+              placeholder="닉네임을 입력하세요"
+              onChange={handleNicknameChange}
+            />
+          </Info>
+          <Submit>
+            <Button onClick={() => navigate(-1)}>취소</Button>
+            <Button onClick={handleSubmit}>저장</Button>
+          </Submit>
+        </ProfileSet>
+      </ProfileSection>
+    </Container>
   );
 }
 

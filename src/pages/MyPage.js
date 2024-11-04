@@ -1,5 +1,6 @@
 import Profile from "../components/Profile";
 import Loader from "../components/Loader";
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
@@ -23,14 +24,6 @@ const Title = styled.div`
   font-size: 40px;
   font-family: "Cinzel Decorative", serif;
 `;
-
-// const Line = styled.div`
-//   width: 100px;
-//   height: 4px;
-//   background: linear-gradient(to right, #ffffff, #2f3842);
-//   border: none;
-//   margin: 0 20px;
-// `;
 
 const ProfileSection = styled.div`
   display: flex;
@@ -164,53 +157,52 @@ function MyPage() {
   }
 
   return (
-    <>
-      <Container>
-        <Title>
-          <span>
-            <Link to="/">My Page</Link>
-          </span>
-        </Title>
-        <ProfileSection>
-          <ProfileSet>
-            <ProfileImage>
-              <Profile sizes={"150px"} />
-              <button>
-                <Link to="/setProfile" color="#12b886">
-                  <FontAwesomeIcon icon={faPencil} />
-                </Link>
-              </button>
-            </ProfileImage>
-            <Info>
-              <Label>닉네임</Label>
-              <Value>{data.nickname}</Value>
-            </Info>
-          </ProfileSet>
-          <InfoBox>
-            <Info>
-              <Label>아이디</Label>
-              <Value>{data.username}</Value>
-            </Info>
-            <Info>
-              <Label>이메일</Label>
-              <Value>{data.email}</Value>
-            </Info>
-            <Info>
-              <Label>비밀번호</Label>
-              <StyledLink to="/setPw" color="white" className="first-link">
-                비밀번호 변경
-              </StyledLink>
-            </Info>
-            <Info>
-              <Label>계정 탈퇴</Label>
-              <StyledLink to="/remove" color="#ff6b6b">
-                계정 탈퇴
-              </StyledLink>
-            </Info>
-          </InfoBox>
-        </ProfileSection>
-      </Container>
-    </>
+    <Container>
+      <SEO title="마이페이지" />
+      <Title>
+        <span>
+          <Link to="/">My Page</Link>
+        </span>
+      </Title>
+      <ProfileSection>
+        <ProfileSet>
+          <ProfileImage>
+            <Profile sizes={"150px"} />
+            <button>
+              <Link to="/setProfile" color="#12b886">
+                <FontAwesomeIcon icon={faPencil} />
+              </Link>
+            </button>
+          </ProfileImage>
+          <Info>
+            <Label>닉네임</Label>
+            <Value>{data.nickname}</Value>
+          </Info>
+        </ProfileSet>
+        <InfoBox>
+          <Info>
+            <Label>아이디</Label>
+            <Value>{data.username}</Value>
+          </Info>
+          <Info>
+            <Label>이메일</Label>
+            <Value>{data.email}</Value>
+          </Info>
+          <Info>
+            <Label>비밀번호</Label>
+            <StyledLink to="/setPw" color="white" className="first-link">
+              비밀번호 변경
+            </StyledLink>
+          </Info>
+          <Info>
+            <Label>계정 탈퇴</Label>
+            <StyledLink to="/remove" color="#ff6b6b">
+              계정 탈퇴
+            </StyledLink>
+          </Info>
+        </InfoBox>
+      </ProfileSection>
+    </Container>
   );
 }
 

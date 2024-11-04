@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Loader from "../components/Loader";
 import logoutApi from "../api/logoutApi";
+import SEO from "../components/SEO";
 import authorityApi from "../api/authorityApi";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -146,6 +147,7 @@ function Remove() {
 
   return (
     <Container>
+      <SEO title="회원 탈퇴" />
       <PWBox>
         <Title>회원 탈퇴</Title>
         <XBtn type="button" onClick={handleClick}>
