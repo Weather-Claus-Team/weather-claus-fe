@@ -147,9 +147,9 @@ function Remove() {
 
   return (
     <Container>
-      <SEO title="회원 탈퇴" />
+      <SEO title="계정 탈퇴" />
       <PWBox>
-        <Title>회원 탈퇴</Title>
+        <Title>계정 탈퇴</Title>
         <XBtn type="button" onClick={handleClick}>
           <FontAwesomeIcon icon={faXmark} />
         </XBtn>

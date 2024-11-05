@@ -117,6 +117,9 @@ function Home() {
     },
   };
 
+  // 오늘, 내일, 모레 3일 간의 날씨 (시간은 정오)
+  const listNumber = [1, 9, 17];
+
   return (
     <Container>
       <Title>
@@ -135,9 +138,9 @@ function Home() {
         <Mainbox>
           <SearchCP />
           <WeatherBox variants={weatherVars} initial="start" animate="end">
-            {[...Array(3)].map((_, index) => (
+            {listNumber.map((number, index) => (
               <motion.div key={index} variants={childVars}>
-                <WeatherCP />
+                <WeatherCP listNumber={number} />
               </motion.div>
             ))}
           </WeatherBox>
