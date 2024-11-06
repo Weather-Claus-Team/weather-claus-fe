@@ -150,6 +150,8 @@ function Login() {
     }
   };
 
+  console.log(isLoading);
+
   const [isVisible, setIsVisible] = useState(false);
   const handleShowPW = () => {
     setIsVisible((prev) => !prev);
@@ -183,11 +185,7 @@ function Login() {
               <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
             </button>
           </PasswordBox>
-          {isLoading ? (
-            <div>로그인 중...</div>
-          ) : (
-            <SubmitBtn type="submit">로그인</SubmitBtn>
-          )}
+          <SubmitBtn type="submit">로그인</SubmitBtn>
         </LoginForm>
         <LoginNav>
           <ul>

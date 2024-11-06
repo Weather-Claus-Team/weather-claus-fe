@@ -56,6 +56,14 @@ const Searchbox = styled.form`
   svg:active {
     color: #8898a8;
   }
+  @media (max-width: 481px) {
+    input {
+      width: 70%;
+    }
+    button {
+      display: none;
+    }
+  }
 `;
 
 function SearchCP() {

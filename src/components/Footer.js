@@ -32,6 +32,10 @@ const TextBox = styled.div`
   display: flex;
   gap: 100px;
   line-height: 1.4em;
+  @media (max-width: 481px) {
+    flex-direction: column;
+    margin-top: 50px;
+  }
 `;
 
 const Bar = styled.span`

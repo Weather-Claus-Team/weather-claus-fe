@@ -50,19 +50,12 @@ const TempText = styled.span`
   }
 `;
 
-const ClothesBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #9b8676;
-  border-radius: 5px;
-  padding: 15px 20px;
-`;
-
 const RecText = styled.span`
+  background-color: #9b8676;
+  border-radius: 20px;
+  padding: 10px 20px;
   margin-bottom: 20px;
-  color: #1a1f24;
+  color: #453529;
   font-size: 15px;
 `;
 
@@ -77,8 +70,6 @@ function WeatherCP({ listNumber }) {
     selectedCity,
     locationValue
   );
-  // 날씨 데이터
-  console.log(data);
 
   if (isFetching || isLoading) {
     return <Loader />;
@@ -116,10 +107,8 @@ function WeatherCP({ listNumber }) {
             </TempText>
           </WMiniBox>
         </WBox1>
-        <ClothesBox>
-          <RecText>다음과 같은 옷을 추천해요</RecText>
-          <ClothesCP data={data.data.list[listNumber].main.temp} />
-        </ClothesBox>
+        <RecText>다음과 같은 옷을 추천해요</RecText>
+        <ClothesCP data={data.data.list[listNumber].main.temp} />
       </WeatherBox>
     </Container>
   );

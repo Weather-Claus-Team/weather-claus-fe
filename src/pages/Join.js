@@ -34,6 +34,7 @@ const Container = styled.div`
 `;
 
 const SignupTitle = styled.div`
+  margin-left: 20px;
   @media (max-width: 481px) {
     margin: 0 1rem 1rem;
   }
@@ -46,7 +47,7 @@ const SignupBox = styled.div`
   background-color: white;
   border-radius: 10px;
   color: black;
-  padding: 40px 50px;
+  padding: 40px 35px;
   h2 {
     font-size: 40px;
     margin-bottom: 10px;

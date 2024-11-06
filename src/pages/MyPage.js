@@ -6,6 +6,8 @@ import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { useSetRecoilState } from "recoil";
+import { nicknameState } from "../atom";
 
 const Container = styled.div`
   margin: 70px 150px;
@@ -143,6 +145,11 @@ const StyledLink = styled(Link)`
 
 function MyPage() {
   const { data, isLoading, isError, isFetching } = useMyPage();
+  // const setNickname = useSetRecoilState(nicknameState);
+  // IIFE 즉시 실행 함수
+  // (() => {
+  //   setNickname(data.nickname);
+  // })();
 
   if (isFetching || isLoading) {
     return <Loader />;

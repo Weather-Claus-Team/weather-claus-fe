@@ -33,6 +33,15 @@ const Title = styled.div`
     margin: 0 15px;
     font-size: 15px;
   }
+  @media (max-width: 481px) {
+    flex-direction: column;
+    h1 {
+      font-size: 30px;
+    }
+    span {
+      display: none;
+    }
+  }
 `;
 
 const Main = styled.main`
@@ -68,6 +77,9 @@ const Line = styled.div`
   height: 1px;
   background: linear-gradient(to left, #ffffff, #1e2329);
   border: none;
+  @media (max-width: 481px) {
+    display: none;
+  }
 `;
 
 const Line2 = styled(Line)`
