@@ -20,6 +20,10 @@ const Container = styled.div`
   }
 `;
 
+const PWBox = styled.div`
+  display: flex;
+`;
+
 const Password1 = styled.div`
   position: relative;
   input {
@@ -39,10 +43,6 @@ const Password2 = styled.div`
     top: 13px;
     right: 13px;
   }
-`;
-
-const PWBox = styled.div`
-  display: flex;
 `;
 
 function Password() {

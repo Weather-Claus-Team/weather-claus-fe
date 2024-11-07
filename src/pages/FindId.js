@@ -10,7 +10,7 @@ import { findId } from "../api/findIdApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
-  width: 100%;
+  height: 70%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const PWBox = styled.div`
+const IdBox = styled.div`
   position: relative;
   min-width: 20rem;
   max-width: 481px;
@@ -67,28 +67,32 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  padding: 15px 15px;
+  padding: 15px;
   width: 85%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   &:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   &:focus::placeholder {
     color: transparent;
   }
 `;
 
+const SubmitBox = styled.div`
+  width: 95%;
+  display: flex;
+  justify-content: end;
+`;
+
 const SubmitBtn = styled.button`
   background-color: #39434f;
   color: white;
-  width: 75%;
   border: none;
-  border-radius: 25px;
   padding: 15px 20px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-top: 5px;
+  font-size: 16px;
   cursor: pointer;
 `;
 
@@ -149,7 +153,7 @@ function FindId() {
   return (
     <Container>
       <SEO title="아이디 찾기" />
-      <PWBox>
+      <IdBox>
         <Title>아이디 찾기</Title>
         <XBtn type="button" onClick={handleClick}>
           <FontAwesomeIcon icon={faXmark} />
@@ -169,14 +173,16 @@ function FindId() {
             onBlur={handleBlur}
           />
           <span>{email && errors?.email?.message}</span>
-          <SubmitBtn type="button" onClick={handleFindId}>
-            아이디 찾기
-          </SubmitBtn>
-          {email && emailExists === false && (
-            <span>존재하지 않는 이메일입니다</span>
-          )}
+          <SubmitBox>
+            <SubmitBtn type="button" onClick={handleFindId}>
+              아이디 찾기
+            </SubmitBtn>
+            {email && emailExists === false && (
+              <span>존재하지 않는 이메일입니다</span>
+            )}
+          </SubmitBox>
         </Form>
-      </PWBox>
+      </IdBox>
     </Container>
   );
 }

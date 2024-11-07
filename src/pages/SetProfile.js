@@ -5,10 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useMyPage } from "../hooks/useMypage";
 import { useSetProfile } from "../hooks/useSetProfile";
+import Loader from "../components/Loader";
 
 const Container = styled.div`
+  position: absolute;
   display: flex;
-  margin: 70px 150px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   @media (max-width: 769px) {
     margin: 70px 0;
   }
@@ -19,7 +27,6 @@ const ProfileSection = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 600px;
-  margin: auto;
   height: auto;
   align-items: center;
   padding: 2rem 3rem;
@@ -219,7 +226,7 @@ function SetProfile() {
   };
 
   if (isFetching || isLoading) {
-    return <div>로딩 중...</div>;
+    return <Loader />;
   }
 
   if (isError) {

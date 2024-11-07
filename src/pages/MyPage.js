@@ -78,8 +78,6 @@ const InfoBox = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 20rem;
-  width: 50%;
-  margin: 0 1rem;
   @media (max-width: 769px) {
     width: 90%;
     height: 50%;

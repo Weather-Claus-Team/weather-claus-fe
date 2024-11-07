@@ -9,7 +9,7 @@ import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  width: 100%;
+  height: 70%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -87,10 +87,11 @@ const InputBox = styled.div`
 const Input = styled.input`
   padding: 15px;
   width: 85%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   &:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   &:focus::placeholder {
     color: transparent;
@@ -104,8 +105,7 @@ const SubmitBtn = styled.button`
   border: none;
   border-radius: 25px;
   padding: 15px 20px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 10px 0;
   font-size: 18px;
   cursor: pointer;
 `;

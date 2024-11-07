@@ -20,7 +20,7 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   @media (max-width: 481px) {
-    margin: 70px 0;
+    width: 50%;
   }
 `;
 
@@ -34,7 +34,6 @@ const LoginBox = styled.section`
   padding: 40px 50px;
   @media (max-width: 481px) {
     min-width: 0px;
-    padding: 5rem 0;
   }
 `;
 
@@ -57,10 +56,11 @@ const LoginForm = styled.form`
 const Input = styled.input`
   padding: 15px 15px;
   width: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   &:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   &:focus::placeholder {
     color: transparent;

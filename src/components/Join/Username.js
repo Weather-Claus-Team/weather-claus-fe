@@ -24,10 +24,8 @@ const UsernameBox = styled.div`
 
 const Btn = styled.button`
   height: 43px;
-  background-color: #b7b7b7;
-  color: white;
+  color: #5f6d7a;
   border: none;
-  border-radius: 3px;
   overflow: wrap;
   word-break: keep-all;
   cursor: pointer;
@@ -66,7 +64,6 @@ function Username() {
 
     try {
       const result = await checkDuplicateUsername(username);
-      console.log(result);
 
       if (!result) {
         alert("서버 응답이 없습니다. 다시 시도해주세요");
@@ -118,13 +115,13 @@ function Username() {
         </Btn>
       </UsernameBox>
       {username && isDuplicate !== null && (
-        <div>
+        <>
           {isDuplicate ? (
             <span style={{ color: "red" }}>이미 사용 중인 아이디입니다</span>
           ) : (
             <span style={{ color: "blue" }}>사용 가능한 아이디입니다</span>
           )}
-        </div>
+        </>
       )}
       <span>{username && errors?.username?.message}</span>
     </>

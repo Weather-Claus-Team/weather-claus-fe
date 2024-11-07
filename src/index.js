@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import Snowfall from "react-snowfall";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -74,6 +75,7 @@ root.render(
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
+          {/* <Snowfall /> */}
           <GlobalStyle />
           <App />
         </HelmetProvider>

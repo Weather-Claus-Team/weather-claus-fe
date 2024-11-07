@@ -29,12 +29,13 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   @media (max-width: 481px) {
-    margin: 70px 0;
+    width: 50%;
   }
 `;
 
 const SignupTitle = styled.div`
-  margin-left: 20px;
+  color: #2a323b;
+  margin-left: 25px;
   @media (max-width: 481px) {
     margin: 0 1rem 1rem;
   }
@@ -50,14 +51,16 @@ const SignupBox = styled.div`
   padding: 40px 35px;
   h2 {
     font-size: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
   }
   span {
     color: red;
   }
   @media (max-width: 481px) {
     min-width: 0px;
-    padding: 5rem 0;
+    h2 {
+      font-size: 25px;
+    }
   }
 `;
 
@@ -66,22 +69,26 @@ const SignupForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   margin-top: 20px;
   input {
     padding: 13px 15px;
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
   }
   input:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   input:focus::placeholder {
     color: transparent;
   }
   @media (max-width: 481px) {
     margin: 0 1rem;
+    input {
+      height: 10px;
+    }
   }
 `;
 
@@ -103,7 +110,7 @@ const LoginText = styled.span`
   a {
     margin-left: 4px;
     text-decoration: underline;
-    color: #45505e;
+    color: #5f6d7a;
     cursor: pointer;
   }
 `;

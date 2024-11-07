@@ -40,10 +40,8 @@ const EmailCodeCheckBox = styled(EmailBox)`
 
 const Btn = styled.button`
   height: 43px;
-  background-color: #b7b7b7;
-  color: white;
+  color: #5f6d7a;
   border: none;
-  border-radius: 3px;
   overflow: wrap;
   word-break: keep-all;
   cursor: pointer;
