@@ -20,23 +20,27 @@
 <br>
 <br>
   
-## 개발 기간과 팀 웨더클로스 FE
-개발 기간 : 2024.10.04 - 11.13 <br>
-
-- 팀 웨더클로스 FE 소개
+## 팀 웨더클로스 FE와 역할 분담
 
 | `FE`  | `FE`  |
 | :---: | :---: |
 | <img src="https://github.com/eunsuknoh.png" width="150"> | <img src="https://github.com/0Huns.png" width="150"> |
 | [Eunsuk](https://github.com/eunsuknoh) | [Younghun](https://github.com/0Huns) |
+<br>
+은숙 Eunsuk : 기획 / UI 전반 / 회원가입 ・ 아이디 찾기 ・ 위치 동의 ・ 검색 기능 <br>
+영훈 Younghun : 로그인 ・ 로그아웃 ・ 날씨카드 ・ 유저 프로필 변경 ・ 비밀번호 변경 ・ 계정 탈퇴 ・ 방명록(채팅창) 기능 
 
 ## 기술 스택
 ### 🪄&ensp;프론트엔드 
 <div> 
   <img src="https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB" />
   <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">
   <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=Recoil&logoColor=white">
-  <img src="https://img.shields.io/badge/react--query-FF4154?style=for-the-badge&logo=react-query&logoColor=white">
+  <img src="https://img.shields.io/badge/react--query-FF4154?style=for-the-badge&logo=react-query&logoColor=white"> <br>
+  <img src="https://img.shields.io/badge/google--fonts-4285F4?style=for-the-badge&logo=google-fonts&logoColor=white">
+  <img src="https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue">
+  <img src="https://img.shields.io/badge/fontawesome-538DD7?style=for-the-badge&logo=fontawesome&logoColor=white">
 </div>
 
 ### 🪄&ensp;배포
@@ -64,4 +68,9 @@
 <br>
 
 ## 회고 및 소감
+은숙 Eunsuk : <br>
+
+
+영훈 Younghun : <br>
+
 
