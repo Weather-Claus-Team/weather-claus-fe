@@ -114,7 +114,7 @@ function NewPw() {
     }
 
     try {
-      await authorityApi("PUT", "/password", {
+      await authorityApi("PUT", "/profile/password", {
         body: { password, password2 },
       });
       navigate("/myPage", { replace: true });

@@ -8,6 +8,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
 import weatherApi from "../api/weatherApi";
 import Footer from "../components/Footer";
+import Chat from "../components/Chat";
+import WebSocketComponent from "../components/WebSocketComponent";
 
 const Container = styled.div`
   width: 100%;
@@ -97,6 +99,7 @@ function Home() {
           </WeatherBox>
         </Mainbox>
       </Main>
+      <WebSocketComponent />
       <Footer />
     </Container>
   );

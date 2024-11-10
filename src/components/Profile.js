@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import defaultProfile from "../images/user.png";
 import { useMyPage } from "../hooks/useMypage";
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ProfileImage = styled.img`
   width: ${(props) => props.sizes};
@@ -11,7 +13,12 @@ const ProfileImage = styled.img`
 `;
 
 function Profile({ onClick, sizes }) {
+  const queryClient = useQueryClient();
   const { data, isLoading, isError, isFetching } = useMyPage();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ["chatToken"] });
+  }, [data, queryClient]);
 
   if (isFetching || isLoading) {
     return <div>로딩 중...</div>;
