@@ -6,16 +6,21 @@ import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { useSetRecoilState } from "recoil";
-import { nicknameState } from "../atom";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
   @media (max-width: 769px) {
-    margin: 70px 0.5rem;
+    width: 60%;
+    height: 60%;
   }
 `;
 
@@ -25,6 +30,9 @@ const Title = styled.div`
   align-items: center;
   font-size: 40px;
   font-family: "Cinzel Decorative", serif;
+  @media (max-width: 769px) {
+    font-size: 30px;
+  }
 `;
 
 const ProfileSection = styled.div`
@@ -32,16 +40,18 @@ const ProfileSection = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  height: 100%;
   width: 100%;
   max-width: 760px;
   border-radius: 20px;
-  padding: 60px 40px;
+  padding: 60px 0;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
   margin-top: 60px;
   @media (max-width: 769px) {
-    padding: 5rem 0;
     flex-direction: column;
+    margin-top: 40px;
+    padding: 20px 30px;
   }
 `;
 
@@ -49,6 +59,7 @@ const ProfileSet = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 50%;
   button {
@@ -68,8 +79,40 @@ const ProfileSet = styled.div`
 
   @media (max-width: 769px) {
     width: 90%;
-    flex-direction: column;
     justify-content: center;
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(999, 999, 999, 0.5);
+  }
+`;
+
+const ProfileImage = styled.div`
+  position: relative;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+  @media (max-width: 481px) {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 20px;
+    height: 50%;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    button {
+      top: 70px;
+      padding: 8px;
+      font-size: 13px;
+    }
+  }
+`;
+
+const Value = styled.div`
+  color: rgba(999, 999, 999, 0.5);
+  @media (max-width: 481px) {
+    overflow: scroll;
   }
 `;
 
@@ -81,19 +124,8 @@ const InfoBox = styled.div`
   @media (max-width: 769px) {
     width: 90%;
     height: 50%;
+    margin-top: 10px;
   }
-`;
-
-const ProfileImage = styled.div`
-  position: relative;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin-bottom: 70px;
-`;
-
-const Value = styled.div`
-  color: rgba(999, 999, 999, 0.5);
 `;
 
 const Info = styled.div`
@@ -105,11 +137,12 @@ const Info = styled.div`
   .first-link:hover {
     color: #171b1f;
   }
-
   @media (max-width: 481px) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    margin: 10px 0;
+    font-size: 14px;
   }
 `;
 
@@ -117,10 +150,6 @@ const Label = styled.div`
   width: 7rem;
   font-weight: 500;
   flex-shrink: 0;
-  @media (max-width: 481px) {
-    width: auto;
-    margin-bottom: 10px;
-  }
 `;
 
 const StyledLink = styled(Link)`
@@ -139,15 +168,15 @@ const StyledLink = styled(Link)`
     background-color: ${(props) => props.color};
     color: white;
   }
+  @media (max-width: 481px) {
+    font-size: 13px;
+    padding: 8px 10px;
+    white-space: pre;
+  }
 `;
 
 function MyPage() {
   const { data, isLoading, isError, isFetching } = useMyPage();
-  // const setNickname = useSetRecoilState(nicknameState);
-  // IIFE 즉시 실행 함수
-  // (() => {
-  //   setNickname(data.nickname);
-  // })();
 
   if (isFetching || isLoading) {
     return <Loader />;

@@ -8,10 +8,6 @@ import {
   faRightFromBracket,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRecoilValue } from "recoil";
-import { nicknameState } from "../atom";
-import { useMyPage } from "../hooks/useMypage";
-import Loader from "./Loader";
 
 const MenuContainer = styled.div`
   width: 140px;
@@ -60,7 +56,6 @@ const Btn = styled.button`
 function Nav() {
   const [hasAct, setHasAct] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  // const nickname = useRecoilValue(nicknameState);
 
   useLayoutEffect(() => {
     const actValue = localStorage.getItem("ACT");
@@ -79,7 +74,7 @@ function Nav() {
           {isMenuVisible && (
             <MenuContainer>
               <span>
-                {/* <span style={{ fontWeight: 600 }}>{nickname}</span> 님 */}님
+                {/* <span style={{ fontWeight: 600 }}>{nickname} 님</span> */}
               </span>
               <hr />
               <MenuButton>

@@ -22,6 +22,7 @@ const Container = styled.div`
 
 const PWBox = styled.div`
   display: flex;
+  flex-direction: row;
 `;
 
 const Password1 = styled.div`

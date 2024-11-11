@@ -19,6 +19,9 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media (max-width: 481px) {
+    width: 40%;
+  }
 `;
 
 const PWBox = styled.div`
@@ -31,8 +34,22 @@ const PWBox = styled.div`
   color: black;
   padding: 40px;
   @media (max-width: 576px) {
-    min-width: 0px;
-    padding: 5rem 0;
+    padding: 20px;
+    h1 {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    input {
+      width: 75%;
+    }
+    button {
+      width: 70%;
+      font-size: 14px;
+      margin: 0;
+    }
+    form {
+      margin-top: 20px;
+    }
   }
 `;
 

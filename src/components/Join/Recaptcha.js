@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { recaptchaTokenState } from "../../atom";
 
 const RecaptchaBox = styled.div`
-  margin: 13px 0;
+  margin: 20px 0;
 `;
 
 function Recaptcha() {

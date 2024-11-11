@@ -75,7 +75,7 @@ root.render(
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
-          {/* <Snowfall /> */}
+          <Snowfall />
           <GlobalStyle />
           <App />
         </HelmetProvider>

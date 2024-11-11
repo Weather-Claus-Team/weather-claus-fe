@@ -20,6 +20,9 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media (max-width: 481px) {
+    width: 40%;
+  }
 `;
 
 const IdBox = styled.div`
@@ -32,8 +35,20 @@ const IdBox = styled.div`
   color: black;
   padding: 40px;
   @media (max-width: 576px) {
-    min-width: 0px;
-    padding: 5rem 0;
+    padding: 20px;
+    h1 {
+      font-size: 20px;
+    }
+    input {
+      width: 75%;
+    }
+    button {
+      font-size: 14px;
+      margin: 0;
+    }
+    form {
+      gap: 15px;
+    }
   }
 `;
 

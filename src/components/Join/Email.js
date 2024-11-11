@@ -44,11 +44,15 @@ const Btn = styled.button`
   border: none;
   overflow: wrap;
   word-break: keep-all;
-  cursor: pointer;
   padding: 5px 10px;
+  cursor: pointer;
   transition: all 0.3s;
   &:active {
-    background-color: gray;
+    background-color: #dad9d9;
+  }
+  @media (max-width: 481px) {
+    height: 35px;
+    font-size: 10px;
   }
 `;
 

@@ -8,6 +8,10 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  @media (max-width: 769px) {
+    /* width: 50%;
+    height: 50%; */
+  }
 `;
 
 function Profile({ onClick, sizes }) {

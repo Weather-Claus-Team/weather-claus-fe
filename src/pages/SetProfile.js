@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Profile from "../components/Profile";
 import SEO from "../components/SEO";
+import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useMyPage } from "../hooks/useMypage";
 import { useSetProfile } from "../hooks/useSetProfile";
-import Loader from "../components/Loader";
 
 const Container = styled.div`
   position: absolute;
@@ -17,9 +17,6 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  @media (max-width: 769px) {
-    margin: 70px 0;
-  }
 `;
 
 const ProfileSection = styled.div`
@@ -33,9 +30,6 @@ const ProfileSection = styled.div`
   border-radius: 20px;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
-  @media (max-width: 481px) {
-    padding: 1rem;
-  }
 `;
 
 const ProfileSet = styled.div`
@@ -45,10 +39,6 @@ const ProfileSet = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-  @media (max-width: 481px) {
-    flex-direction: column;
-    justify-content: center;
-  }
 `;
 
 const ImagePreview = styled.img`
@@ -65,6 +55,38 @@ const ProfileImage = styled.div`
   align-items: center;
   height: 40%;
   width: 100%;
+  @media (max-width: 481px) {
+    img {
+      width: 45%;
+      height: 45%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+  }
+`;
+
+const Info = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 18%;
+  border-top: 1px solid #787878;
+  border-bottom: 1px solid #787878;
+  padding: 1rem 0;
+  @media (max-width: 481px) {
+    border-bottom: 0;
+    font-size: 15px;
+    input {
+      padding: 5px;
+      width: 80%;
+      font-size: 14px;
+      text-indent: 5px;
+    }
+    input::placeholder {
+      font-size: 12px;
+      text-indent: 5px;
+    }
+  }
 `;
 
 const Value = styled.input`
@@ -82,29 +104,14 @@ const Value = styled.input`
   }
 `;
 
-const Info = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  height: 18%;
-  border-top: 1px solid #787878;
-  border-bottom: 1px solid #787878;
-  padding: 1rem 0;
-  @media (max-width: 481px) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  }
-`;
-
 const Label = styled.div`
   font-weight: bold;
-  width: 9.5rem;
   flex-shrink: 0;
   text-indent: 20px;
+  margin-right: 60px;
   @media (max-width: 481px) {
-    width: auto;
-    margin-bottom: 10px;
+    text-indent: 0;
+    margin-right: 10px;
   }
 `;
 
@@ -153,12 +160,13 @@ const UploadBtn = styled.div`
     display: none;
   }
   @media (max-width: 481px) {
-    flex-direction: column;
     width: 100%;
+    justify-content: center;
     label,
     button {
-      width: 90%;
-      text-align: center;
+      font-size: 13px;
+      border-radius: 0;
+      padding: 8px 12px;
     }
   }
 `;
@@ -169,6 +177,15 @@ const Submit = styled.div`
   padding-top: 9.5rem;
   display: flex;
   justify-content: flex-end;
+  @media (max-width: 481px) {
+    padding-top: 0;
+    margin-top: 20px;
+    button {
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 0;
+    }
+  }
 `;
 
 function SetProfile() {

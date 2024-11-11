@@ -198,7 +198,9 @@ function Join() {
       <SEO title="회원가입" />
       <SignupBox>
         <SignupTitle>
-          <h2>Sign up</h2>
+          <Link to="/">
+            <h2>Sign up</h2>
+          </Link>
           <h5>
             Create an account for
             <LoginText>

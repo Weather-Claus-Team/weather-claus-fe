@@ -4,6 +4,8 @@ import WeatherCP from "../components/WeatherCP";
 import Nav from "../components/Nav";
 import weatherApi from "../api/weatherApi";
 import Footer from "../components/Footer";
+import bird from "../images/bird.png";
+import bird2 from "../images/bird2.png";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -86,6 +88,21 @@ const Line2 = styled(Line)`
   background: linear-gradient(to right, #ffffff, #36404b);
 `;
 
+const BirdImg = styled.img`
+  position: absolute;
+  top: 70px;
+  right: 380px;
+  width: 130px;
+  @media (max-width: 481px) {
+    display: none;
+  }
+`;
+
+const BirdImg2 = styled(BirdImg)`
+  top: 745px;
+  left: 70px;
+`;
+
 function Home() {
   const loginSuccess = useRecoilValue(loginSuccessState);
   const [locationValue, setLocationValue] = useRecoilState(locationState);
@@ -156,8 +173,10 @@ function Home() {
               </motion.div>
             ))}
           </WeatherBox>
+          <BirdImg src={bird} alt="bird" />
         </Mainbox>
       </Main>
+      <BirdImg2 src={bird2} alt="bird2" />
       <Footer />
     </Container>
   );

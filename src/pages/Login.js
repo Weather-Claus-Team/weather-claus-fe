@@ -20,7 +20,7 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   @media (max-width: 481px) {
-    width: 50%;
+    width: 60%;
   }
 `;
 
@@ -34,6 +34,11 @@ const LoginBox = styled.section`
   padding: 40px 50px;
   @media (max-width: 481px) {
     min-width: 0px;
+    padding: 30px 20px;
+    h1 {
+      font-size: 25px;
+      margin-bottom: 0px;
+    }
   }
 `;
 
@@ -81,7 +86,7 @@ const SubmitBtn = styled.button`
   font-size: 18px;
   cursor: pointer;
   @media (max-width: 481px) {
-    width: 95%;
+    width: 80%;
     border-radius: 0;
   }
 `;
@@ -161,7 +166,9 @@ function Login() {
     <Container>
       <SEO title="로그인" />
       <LoginBox>
-        <LoginTitle>Login</LoginTitle>
+        <LoginTitle>
+          <Link to="/">Login</Link>
+        </LoginTitle>
         <LoginForm onSubmit={handleSubmit}>
           <Input
             placeholder="아이디"
