@@ -74,3 +74,9 @@ export const locationState = atom({
     lon: null,
   },
 });
+
+// 닉네임
+export const nicknameState = atom({
+  key: "nicknameState",
+  default: "",
+});

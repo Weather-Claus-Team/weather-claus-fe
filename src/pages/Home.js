@@ -98,8 +98,8 @@ function Home() {
             <WeatherCP />
           </WeatherBox>
         </Mainbox>
+        <WebSocketComponent />
       </Main>
-      <WebSocketComponent />
       <Footer />
     </Container>
   );
