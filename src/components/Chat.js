@@ -17,6 +17,7 @@ const Container = styled.div`
   overflow-y: auto;
   width: 90%;
   box-sizing: border-box;
+  scroll-behavior: auto;
   @media (max-width: 481px) {
     flex-direction: column;
   }
@@ -40,9 +41,10 @@ function Chat({ messages }) {
     hasNextPage,
   } = useChatHistory();
 
+  const [initial, setInitial] = useState(true);
+
   const moreChatRef = useRef();
   const chatListRef = useRef();
-  const previousScrollRef = useRef();
 
   useEffect(() => {
     if (chatListRef.current) {
@@ -53,21 +55,23 @@ function Chat({ messages }) {
   useEffect(() => {
     const currentRef = moreChatRef.current;
 
+    if (initial && chatListRef.current) {
+      chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
+      setInitial(false);
+    }
+
     const observer = new IntersectionObserver((entries) => {
       const first = entries[0];
       if (first.isIntersecting && hasNextPage && !isFetchingNextPage) {
-        const previousScrollTop = chatListRef.current.scrollTop;
-        const previousScrollHeight = chatListRef.current.scrollHeight;
-
+        const previousScroll = chatListRef.current.scrollHeight;
+        console.log(previousScroll);
         fetchNextPage().then(() => {
-          setTimeout(() => {
-            if (chatListRef.current) {
-              const newScrollHeight = chatListRef.current.scrollHeight;
-
-              chatListRef.current.scrollTop =
-                previousScrollTop + (newScrollHeight - previousScrollHeight);
-            }
-          }, 0);
+          requestAnimationFrame(() => {
+            const newScrollHeight = chatListRef.current.scrollHeight;
+            chatListRef.current.scrollTop = newScrollHeight - previousScroll;
+            console.log(newScrollHeight);
+            console.log(chatListRef.current.scrollTop);
+          });
         });
       }
     });
@@ -81,7 +85,7 @@ function Chat({ messages }) {
         observer.unobserve(currentRef);
       }
     };
-  }, [data, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [data, hasNextPage, isFetchingNextPage, fetchNextPage, initial]);
 
   if (isLoading) {
     return <div>로딩 중...</div>;
@@ -97,18 +101,34 @@ function Chat({ messages }) {
 
   return (
     <Container ref={chatListRef}>
-      <h1 ref={moreChatRef}>더보기...</h1>
+      {hasNextPage ? (
+        <h1 ref={moreChatRef}>불러오는중...</h1>
+      ) : (
+        <h1>이전 채팅 없음</h1>
+      )}
+
       {data && data.pages.length === 0 ? (
         <div>채팅 이력 없음</div>
       ) : (
-        <ChatHistory ref={previousScrollRef}>
+        <ChatHistory>
           {data.pages.map((page, index) =>
-            page.content.map((item, index) => (
-              <li key={index}>
-                <p>{item.message}</p>
-                <p>{item.sentDate}</p>
-              </li>
-            ))
+            page.content.map((item, index) =>
+              item.nickname === 0 ? (
+                <MyChat>
+                  <li key={index}>
+                    <p>{item.message}</p>
+                    <p>{item.sentDate}</p>
+                  </li>
+                </MyChat>
+              ) : (
+                <OpponentChat>
+                  <li key={index}>
+                    <p>{item.message}</p>
+                    <p>{item.sentDate}</p>
+                  </li>
+                </OpponentChat>
+              )
+            )
           )}
         </ChatHistory>
       )}
