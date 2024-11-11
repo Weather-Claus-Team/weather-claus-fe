@@ -35,8 +35,8 @@ const Btn = styled.button`
     background-color: #dad9d9;
   }
   @media (max-width: 481px) {
-    height: 35px;
-    font-size: 11px;
+    height: 27px;
+    font-size: 10px;
   }
 `;
 

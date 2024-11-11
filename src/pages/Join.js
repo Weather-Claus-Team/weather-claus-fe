@@ -37,7 +37,7 @@ const SignupTitle = styled.div`
   color: #2a323b;
   margin-left: 25px;
   @media (max-width: 481px) {
-    margin: 0 1rem 1rem;
+    margin-left: 35px;
   }
 `;
 
@@ -57,9 +57,12 @@ const SignupBox = styled.div`
     color: red;
   }
   @media (max-width: 481px) {
-    min-width: 0px;
+    padding: 20px 0;
     h2 {
-      font-size: 25px;
+      font-size: 20px;
+    }
+    h5 {
+      font-size: 13px;
     }
   }
 `;
@@ -85,9 +88,11 @@ const SignupForm = styled.form`
     color: transparent;
   }
   @media (max-width: 481px) {
-    margin: 0 1rem;
+    width: 80%;
+    margin: 20px 30px 0 30px;
     input {
-      height: 10px;
+      font-size: 10px;
+      padding: 8px;
     }
   }
 `;
@@ -103,6 +108,9 @@ const SubmitBtn = styled.button`
   cursor: pointer;
   @media (max-width: 481px) {
     border-radius: 0;
+    width: 40%;
+    font-size: 13px;
+    padding: 10px 0;
   }
 `;
 
