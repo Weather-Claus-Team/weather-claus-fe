@@ -35,6 +35,12 @@ const Password1 = styled.div`
     top: 13px;
     right: 13px;
   }
+  @media (max-width: 481px) {
+    svg {
+      top: 7px;
+      font-size: 14px;
+    }
+  }
 `;
 
 const Password2 = styled.div`
@@ -43,6 +49,12 @@ const Password2 = styled.div`
     position: absolute;
     top: 13px;
     right: 13px;
+  }
+  @media (max-width: 481px) {
+    svg {
+      top: 7px;
+      font-size: 14px;
+    }
   }
 `;
 

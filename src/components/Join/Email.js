@@ -51,8 +51,9 @@ const Btn = styled.button`
     background-color: #dad9d9;
   }
   @media (max-width: 481px) {
-    height: 35px;
-    font-size: 10px;
+    height: 27px;
+    font-size: 9px;
+    white-space: pre;
   }
 `;
 
