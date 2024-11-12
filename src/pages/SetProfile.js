@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useMyPage } from "../hooks/useMypage";
 import { useSetProfile } from "../hooks/useSetProfile";
+import { useSetRecoilState } from "recoil";
+import { nicknameState } from "../atom";
 
 const Container = styled.div`
   position: absolute;
@@ -196,6 +198,7 @@ function SetProfile() {
   const [imagePreview, setImagePreview] = useState(null);
   const [nickname, setNickname] = useState(data?.nickname || "");
   const fileInputRef = useRef(null);
+  const saveNickname = useSetRecoilState(nicknameState);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -223,6 +226,7 @@ function SetProfile() {
       { body: formData },
       {
         onSuccess: () => {
+          saveNickname(nickname);
           console.log("good!");
           navigate(-1);
         },

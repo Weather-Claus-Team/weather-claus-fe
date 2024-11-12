@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
 import { motion } from "framer-motion";
+import weatherApi from "../api/weatherApi";
+import Footer from "../components/Footer";
+import WebSocketComponent from "../components/WebSocketComponent";
 
 const Container = styled.div`
   width: 100%;
@@ -175,6 +178,7 @@ function Home() {
           </WeatherBox>
           <BirdImg src={bird} alt="bird" />
         </Mainbox>
+        <WebSocketComponent />
       </Main>
       <BirdImg2 src={bird2} alt="bird2" />
       <Footer />

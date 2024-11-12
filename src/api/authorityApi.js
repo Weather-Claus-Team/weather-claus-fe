@@ -17,7 +17,7 @@ const authorityApi = async (method, endpoint, { body }) => {
   }
 
   try {
-    const url = `/api/profile${endpoint}`;
+    const url = `/api${endpoint}`;
 
     const response = await fetch(url, {
       ...baseOption,
