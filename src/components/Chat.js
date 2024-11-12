@@ -5,6 +5,7 @@ import MyChat from "./MyChat";
 import OpponentChat from "./OpponentChat";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../atom";
+import SystemChat from "./SystemChat";
 
 const Container = styled.div`
   height: 500px;
@@ -20,6 +21,9 @@ const Container = styled.div`
   scroll-behavior: auto;
   @media (max-width: 481px) {
     flex-direction: column;
+  }
+  h1 {
+    color: black;
   }
 `;
 
@@ -45,6 +49,27 @@ const NowChat = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+  }
+`;
+
+const Skeleton = styled.div`
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 100%;
+  height: 700px;
+  margin-bottom: 10px;
+  animation: pulse 1.5s infinite ease-in-out;
+
+  @keyframes pulse {
+    0% {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
 `;
 
@@ -111,7 +136,7 @@ function Chat({ messages }) {
   }, [data, hasNextPage, isFetchingNextPage, fetchNextPage, initial]);
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <div>로딩중....</div>;
   }
 
   if (isError) {
@@ -128,6 +153,8 @@ function Chat({ messages }) {
 
     return date.toLocaleString();
   };
+
+  console.log(messages);
 
   return (
     <Container ref={chatListRef}>
@@ -166,7 +193,7 @@ function Chat({ messages }) {
                 )
               ) : (
                 // nickname만 없고 token이 있을 때 로딩중
-                token && <div key={index}>로딩중</div>
+                token && <Skeleton key={index}>로딩중</Skeleton>
               )
             )
           )}
@@ -178,8 +205,21 @@ function Chat({ messages }) {
           {messages.map((msg, index) =>
             msg.isOwn ? ( //현재 채팅 내역 컴포넌트
               <MyChat key={index}>{msg.message}</MyChat>
+            ) : msg.nickname ? (
+              <OpponentChat key={index}>
+                <img src={msg.imageUrl} alt="chatProfile" />
+                <div>
+                  <h3>{msg.nickname}</h3>
+                  <p>{msg.message}</p>
+                  <span>{transformDate(msg.sentDate)}</span>
+                </div>
+              </OpponentChat>
             ) : (
-              <OpponentChat key={index}>{msg.message}</OpponentChat>
+              <SystemChat key={index}>
+                <div>
+                  <p>{msg.message}</p>
+                </div>
+              </SystemChat>
             )
           )}
         </ul>
