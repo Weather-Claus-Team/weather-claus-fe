@@ -6,14 +6,12 @@ import weatherApi from "../api/weatherApi";
 import Footer from "../components/Footer";
 import bird from "../images/bird.png";
 import bird2 from "../images/bird2.png";
+import WebSocketComponent from "../components/WebSocketComponent";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cityState, locationState, loginSuccessState } from "../atom";
 import { motion } from "framer-motion";
-import weatherApi from "../api/weatherApi";
-import Footer from "../components/Footer";
-import WebSocketComponent from "../components/WebSocketComponent";
 
 const Container = styled.div`
   width: 100%;
@@ -102,7 +100,7 @@ const BirdImg = styled.img`
 `;
 
 const BirdImg2 = styled(BirdImg)`
-  top: 745px;
+  top: 1345px;
   left: 70px;
 `;
 

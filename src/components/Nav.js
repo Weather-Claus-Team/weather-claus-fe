@@ -1,9 +1,8 @@
 import styled from "styled-components";
+import Profile from "./Profile";
 import logoutApi from "../api/logoutApi";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
-import Profile from "./Profile";
 import { Link } from "react-router-dom";
-import { useLayoutEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRightFromBracket,
@@ -94,7 +93,7 @@ function Nav() {
         <>
           <Profile onClick={toggleMenu} sizes={"50px"} />
           {isMenuVisible && (
-             <MenuContainer ref={navBox}>
+            <MenuContainer ref={navBox}>
               <span>{nickname} 님</span>
               <hr />
               <MenuButton>
