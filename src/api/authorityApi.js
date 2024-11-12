@@ -46,7 +46,7 @@ const authorityApi = async (method, endpoint, { body }) => {
         //엑세스 토큰 재발급 실패
         const refreshErrData = refreshResponse;
         window.alert("토큰 재발급 실패");
-        logoutApi();
+        // logoutApi();
         throw new Error(refreshErrData.message);
       }
     } else if (response.status === 200) {
