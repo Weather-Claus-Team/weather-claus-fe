@@ -50,6 +50,7 @@
     ]
   },
   "proxy": "http://43.200.138.242",
+  "homepage": "https://weather-claus.netlify.app/",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
