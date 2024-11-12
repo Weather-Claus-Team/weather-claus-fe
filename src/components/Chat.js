@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useChatHistory } from "../hooks/useChatHistory";
-import WebSocketComponent from "./WebSocketComponent";
 import { useEffect, useRef, useState } from "react";
 import MyChat from "./MyChat";
 import OpponentChat from "./OpponentChat";
