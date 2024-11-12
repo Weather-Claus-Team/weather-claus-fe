@@ -9,18 +9,6 @@
   force = true
 
 [[redirects]]
-  from = "/login"
-  to = "https://api.mungwithme.com/login"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/reissue"
-  to = "https://api.mungwithme.com/reissue"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
