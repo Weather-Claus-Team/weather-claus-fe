@@ -25,7 +25,7 @@ const authorityApi = async (method, endpoint, { body }) => {
 
     //엑세스 토큰 만료 시 재발급
     if (response.status === 401) {
-      const refreshUrl = `/reissue`;
+      const refreshUrl = "/reissue";
       console.log("토큰 만료!");
       const refreshResponse = await fetch(refreshUrl, {
         method: "POST",
@@ -45,7 +45,7 @@ const authorityApi = async (method, endpoint, { body }) => {
         //엑세스 토큰 재발급 실패
         const refreshErrData = refreshResponse;
         window.alert("토큰 재발급 실패");
-        // logoutApi();
+        logoutApi();
         throw new Error(refreshErrData.message);
       }
     } else if (response.status === 200) {

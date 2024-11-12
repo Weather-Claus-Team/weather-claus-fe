@@ -1,6 +1,6 @@
 const loginApi = async ({ username, password }) => {
   try {
-    const url = `/login`;
+    const url = "/login";
 
     const response = await fetch(url, {
       method: "POST",
