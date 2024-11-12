@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import SEO from "../components/SEO";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
@@ -9,7 +10,7 @@ import { findId } from "../api/findIdApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
-  width: 100%;
+  height: 70%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -19,9 +20,12 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media (max-width: 481px) {
+    width: 40%;
+  }
 `;
 
-const PWBox = styled.div`
+const IdBox = styled.div`
   position: relative;
   min-width: 20rem;
   max-width: 481px;
@@ -31,8 +35,20 @@ const PWBox = styled.div`
   color: black;
   padding: 40px;
   @media (max-width: 576px) {
-    min-width: 0px;
-    padding: 5rem 0;
+    padding: 20px;
+    h1 {
+      font-size: 20px;
+    }
+    input {
+      width: 75%;
+    }
+    button {
+      font-size: 14px;
+      margin: 0;
+    }
+    form {
+      gap: 15px;
+    }
   }
 `;
 
@@ -66,28 +82,32 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  padding: 15px 15px;
+  padding: 15px;
   width: 85%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   &:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   &:focus::placeholder {
     color: transparent;
   }
 `;
 
+const SubmitBox = styled.div`
+  width: 95%;
+  display: flex;
+  justify-content: end;
+`;
+
 const SubmitBtn = styled.button`
   background-color: #39434f;
   color: white;
-  width: 75%;
   border: none;
-  border-radius: 25px;
   padding: 15px 20px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-top: 5px;
+  font-size: 16px;
   cursor: pointer;
 `;
 
@@ -147,7 +167,8 @@ function FindId() {
 
   return (
     <Container>
-      <PWBox>
+      <SEO title="아이디 찾기" />
+      <IdBox>
         <Title>아이디 찾기</Title>
         <XBtn type="button" onClick={handleClick}>
           <FontAwesomeIcon icon={faXmark} />
@@ -167,14 +188,16 @@ function FindId() {
             onBlur={handleBlur}
           />
           <span>{email && errors?.email?.message}</span>
-          <SubmitBtn type="button" onClick={handleFindId}>
-            아이디 찾기
-          </SubmitBtn>
-          {email && emailExists === false && (
-            <span>존재하지 않는 이메일입니다</span>
-          )}
+          <SubmitBox>
+            <SubmitBtn type="button" onClick={handleFindId}>
+              아이디 찾기
+            </SubmitBtn>
+            {email && emailExists === false && (
+              <span>존재하지 않는 이메일입니다</span>
+            )}
+          </SubmitBox>
         </Form>
-      </PWBox>
+      </IdBox>
     </Container>
   );
 }

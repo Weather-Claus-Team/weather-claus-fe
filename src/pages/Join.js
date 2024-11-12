@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import { FormProvider, useForm } from "react-hook-form";
 import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
+import SEO from "../components/SEO";
+import { Link, useNavigate } from "react-router-dom";
+import { FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   emailCheckState,
@@ -17,28 +18,26 @@ import { signupResult } from "../api/signupApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  width: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   @media (max-width: 481px) {
-    margin: 70px 0;
-  }
-`;
-
-const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  h1 {
-    font-family: "Cinzel Decorative", serif;
-    font-size: 40px;
+    width: 50%;
   }
 `;
 
 const SignupTitle = styled.div`
+  color: #2a323b;
+  margin-left: 25px;
   @media (max-width: 481px) {
-    margin: 0 1rem 1rem;
+    margin-left: 35px;
   }
 `;
 
@@ -49,18 +48,22 @@ const SignupBox = styled.div`
   background-color: white;
   border-radius: 10px;
   color: black;
-  margin-top: 50px;
-  padding: 40px 50px;
+  padding: 40px 35px;
   h2 {
     font-size: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
   }
   span {
     color: red;
   }
   @media (max-width: 481px) {
-    min-width: 0px;
-    padding: 5rem 0;
+    padding: 20px 0;
+    h2 {
+      font-size: 20px;
+    }
+    h5 {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -69,29 +72,35 @@ const SignupForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   margin-top: 20px;
   input {
     padding: 13px 15px;
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
   }
   input:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   input:focus::placeholder {
     color: transparent;
   }
   @media (max-width: 481px) {
-    margin: 0 1rem;
+    width: 80%;
+    margin: 20px 30px 0 30px;
+    input {
+      font-size: 10px;
+      padding: 8px;
+    }
   }
 `;
 
 const SubmitBtn = styled.button`
   background-color: #39434f;
   color: white;
-  width: 100%;
+  width: 85%;
   border: none;
   border-radius: 25px;
   padding: 15px 20px;
@@ -99,6 +108,9 @@ const SubmitBtn = styled.button`
   cursor: pointer;
   @media (max-width: 481px) {
     border-radius: 0;
+    width: 40%;
+    font-size: 13px;
+    padding: 10px 0;
   }
 `;
 
@@ -106,7 +118,7 @@ const LoginText = styled.span`
   a {
     margin-left: 4px;
     text-decoration: underline;
-    color: #45505e;
+    color: #5f6d7a;
     cursor: pointer;
   }
 `;
@@ -191,14 +203,12 @@ function Join() {
 
   return (
     <Container>
-      <Title>
-        <Link to="/">
-          <h1>Weather Claus</h1>
-        </Link>
-      </Title>
+      <SEO title="회원가입" />
       <SignupBox>
         <SignupTitle>
-          <h2>Sign up</h2>
+          <Link to="/">
+            <h2>Sign up</h2>
+          </Link>
           <h5>
             Create an account for
             <LoginText>

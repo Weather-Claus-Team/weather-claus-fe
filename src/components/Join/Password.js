@@ -20,6 +20,11 @@ const Container = styled.div`
   }
 `;
 
+const PWBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Password1 = styled.div`
   position: relative;
   input {
@@ -30,6 +35,12 @@ const Password1 = styled.div`
     top: 13px;
     right: 13px;
   }
+  @media (max-width: 481px) {
+    svg {
+      top: 7px;
+      font-size: 14px;
+    }
+  }
 `;
 
 const Password2 = styled.div`
@@ -39,10 +50,12 @@ const Password2 = styled.div`
     top: 13px;
     right: 13px;
   }
-`;
-
-const PWBox = styled.div`
-  display: flex;
+  @media (max-width: 481px) {
+    svg {
+      top: 7px;
+      font-size: 14px;
+    }
+  }
 `;
 
 function Password() {

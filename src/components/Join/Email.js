@@ -40,17 +40,20 @@ const EmailCodeCheckBox = styled(EmailBox)`
 
 const Btn = styled.button`
   height: 43px;
-  background-color: #b7b7b7;
-  color: white;
+  color: #5f6d7a;
   border: none;
-  border-radius: 3px;
   overflow: wrap;
   word-break: keep-all;
-  cursor: pointer;
   padding: 5px 10px;
+  cursor: pointer;
   transition: all 0.3s;
   &:active {
-    background-color: gray;
+    background-color: #dad9d9;
+  }
+  @media (max-width: 481px) {
+    height: 27px;
+    font-size: 9px;
+    white-space: pre;
   }
 `;
 

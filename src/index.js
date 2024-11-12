@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import Snowfall from "react-snowfall";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -37,11 +39,12 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
 body {
 	line-height: 1;
 	background-image: linear-gradient(60deg, #000000 0%, #485563 100%);
 	color: white;
-	font-family: "Inter", sans-serif;
+	font-family: "Outfit", sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -71,8 +74,17 @@ root.render(
   <BrowserRouter>
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <App />
+        <HelmetProvider>
+          <Snowfall
+            style={{
+              position: "fixed",
+              width: "100vw",
+              height: "100vh",
+            }}
+          />
+          <GlobalStyle />
+          <App />
+        </HelmetProvider>
       </QueryClientProvider>
     </RecoilRoot>
   </BrowserRouter>

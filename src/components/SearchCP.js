@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloud } from "@fortawesome/free-solid-svg-icons";
 import { useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { cityState } from "../atom";
@@ -8,12 +6,9 @@ import { cityState } from "../atom";
 const Searchbox = styled.form`
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-
   input {
     padding: 20px;
     width: 100%;
@@ -40,21 +35,12 @@ const Searchbox = styled.form`
     color: transparent;
   }
 
-  button {
-    all: unset;
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 18px;
-  }
-
-  svg {
-    color: #485563;
-    font-size: 25px;
-  }
-
-  svg:active {
-    color: #8898a8;
+  @media (max-width: 481px) {
+    display: flex;
+    justify-content: center;
+    input {
+      width: 70%;
+    }
   }
 `;
 
@@ -84,9 +70,6 @@ function SearchCP() {
         value={inputValue}
         onChange={handleChange}
       />
-      <button type="submit">
-        <FontAwesomeIcon icon={faCloud} />
-      </button>
     </Searchbox>
   );
 }

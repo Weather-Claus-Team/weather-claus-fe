@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import Profile from "./Profile";
 import logoutApi from "../api/logoutApi";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
-import Profile from "./Profile";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRightFromBracket,
@@ -34,7 +34,7 @@ const MenuButton = styled.button`
     margin-right: 10px;
   }
   &:hover {
-    color: #b9e5e8;
+    color: #8f9dbf;
   }
 `;
 
@@ -48,6 +48,10 @@ const Btn = styled.button`
   transition: all 0.3s;
   &:hover {
     background-color: rgba(0, 0, 0, 0.3);
+  }
+  @media (max-width: 481px) {
+    font-size: 15px;
+    padding: 5px 7px;
   }
 `;
 

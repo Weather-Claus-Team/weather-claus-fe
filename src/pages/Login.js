@@ -1,6 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 import loginApi from "../api/loginApi";
+import SEO from "../components/SEO";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -8,37 +9,36 @@ import { useSetRecoilState } from "recoil";
 import { loginSuccessState } from "../atom";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  width: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   @media (max-width: 481px) {
-    margin: 70px 0;
-  }
-`;
-
-const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  h1 {
-    font-family: "Cinzel Decorative", serif;
-    font-size: 40px;
+    width: 60%;
   }
 `;
 
 const LoginBox = styled.section`
   min-width: 20rem;
-  max-width: 481px;
+  max-width: 400px;
   width: 100%;
   background-color: white;
   border-radius: 10px;
   color: black;
-  margin-top: 100px;
   padding: 40px 50px;
   @media (max-width: 481px) {
     min-width: 0px;
-    padding: 5rem 0;
+    padding: 30px 20px;
+    h1 {
+      font-size: 25px;
+      margin-bottom: 0px;
+    }
   }
 `;
 
@@ -61,10 +61,11 @@ const LoginForm = styled.form`
 const Input = styled.input`
   padding: 15px 15px;
   width: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   &:focus {
-    outline-color: #7e8c9e;
+    outline: none;
+    border-color: #7e8c9e;
   }
   &:focus::placeholder {
     color: transparent;
@@ -85,7 +86,7 @@ const SubmitBtn = styled.button`
   font-size: 18px;
   cursor: pointer;
   @media (max-width: 481px) {
-    width: 95%;
+    width: 80%;
     border-radius: 0;
   }
 `;
@@ -154,6 +155,8 @@ function Login() {
     }
   };
 
+  console.log(isLoading);
+
   const [isVisible, setIsVisible] = useState(false);
   const handleShowPW = () => {
     setIsVisible((prev) => !prev);
@@ -161,13 +164,11 @@ function Login() {
 
   return (
     <Container>
-      <Title>
-        <Link to="/">
-          <h1>Weather Claus</h1>
-        </Link>
-      </Title>
+      <SEO title="로그인" />
       <LoginBox>
-        <LoginTitle>Login</LoginTitle>
+        <LoginTitle>
+          <Link to="/">Login</Link>
+        </LoginTitle>
         <LoginForm onSubmit={handleSubmit}>
           <Input
             placeholder="아이디"
@@ -191,11 +192,7 @@ function Login() {
               <FontAwesomeIcon icon={isVisible ? faEyeSlash : faEye} />
             </button>
           </PasswordBox>
-          {isLoading ? (
-            <div>로그인 중...</div>
-          ) : (
-            <SubmitBtn type="submit">로그인</SubmitBtn>
-          )}
+          <SubmitBtn type="submit">로그인</SubmitBtn>
         </LoginForm>
         <LoginNav>
           <ul>

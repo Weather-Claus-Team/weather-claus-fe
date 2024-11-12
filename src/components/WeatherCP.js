@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import Loader from "../components/Loader";
+import ClothesCP from "./ClothesCP";
 import { useRecoilValue } from "recoil";
 import { cityState } from "../atom";
 import { useWeather } from "../hooks/useWeather";
-import ClothesCP from "./ClothesCP";
 
 const Container = styled.div`
   display: flex;
@@ -11,15 +12,10 @@ const Container = styled.div`
   margin-top: 20px;
   background-color: rgba(999, 999, 999, 0.2);
   border-radius: 5px;
-  padding: 35px 25px;
-  padding-bottom: 10px;
+  padding: 30px 25px;
+  padding-bottom: 20px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-`;
-
-const WeatherCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+  font-family: "Open Sans", sans-serif;
 `;
 
 const WeatherBox = styled.div`
@@ -31,12 +27,13 @@ const WeatherBox = styled.div`
 
 const WBox1 = styled.div`
   display: flex;
+  min-width: 203.07px;
 `;
 
 const WMiniBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 15px;
+  align-items: center;
 `;
 
 const DateText = styled.span`
@@ -47,22 +44,22 @@ const TempText = styled.span`
   font-size: 40px;
   font-weight: 600;
   margin-top: 20px;
-  color: #b9e5e8;
+  color: #8f9dbf;
   span {
     font-weight: 400;
   }
 `;
 
 const RecText = styled.span`
-  margin-top: 10px;
-  margin-bottom: 20px;
-  background-color: #dff2eb;
-  color: #1a1f24;
-  padding: 9px 17px;
+  background-color: #9b8676;
   border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  color: #453529;
+  font-size: 15px;
 `;
 
-function WeatherCP() {
+function WeatherCP({ listNumber }) {
   const loginSuccess = localStorage.getItem("loginSuccess") === "true";
   const cityValue = useRecoilValue(cityState);
   const searchedCity = localStorage.getItem("searchedCity");
@@ -73,11 +70,9 @@ function WeatherCP() {
     selectedCity,
     locationValue
   );
-  // 날씨 데이터
-  console.log(data);
 
   if (isFetching || isLoading) {
-    return <div>로딩 중</div>;
+    return <Loader />;
   }
 
   if (isError) {
@@ -89,34 +84,32 @@ function WeatherCP() {
   }
 
   // 날짜 모양
-  const fullDate = new Date(data.data.list[0].dt_txt); // 2024-10-18 06:00:00
+  const fullDate = new Date(data.data.list[listNumber].dt_txt); // 2024-10-18 06:00:00
   const month = fullDate.getMonth() + 1;
   const date = fullDate.getDate();
 
   return (
     <Container>
-      <WeatherCard>
-        <WeatherBox>
-          <WBox1>
-            <img
-              src={`https://openweathermap.org/img/wn/${data.data.list[0].weather[0].icon}@2x.png`}
-              alt="weatherImg"
-            />
-            <WMiniBox>
-              <div>
-                <DateText>{`${month}/${date}`}</DateText>
-                <span>{data.data.city.name}</span>
-              </div>
-              <TempText>
-                {Math.floor(data.data.list[0].main.temp)}
-                <span>°C</span>
-              </TempText>
-            </WMiniBox>
-          </WBox1>
-          <RecText>다음과 같은 옷을 추천해요</RecText>
-          <ClothesCP data={data.data.list[0].main.temp} />
-        </WeatherBox>
-      </WeatherCard>
+      <WeatherBox>
+        <WBox1>
+          <img
+            src={`https://openweathermap.org/img/wn/${data.data.list[listNumber].weather[0].icon}@2x.png`}
+            alt="weatherImg"
+          />
+          <WMiniBox>
+            <div>
+              <DateText>{`${month}/${date}`}</DateText>
+              <span>{data.data.city.name}</span>
+            </div>
+            <TempText>
+              {Math.floor(data.data.list[listNumber].main.temp)}
+              <span>°C</span>
+            </TempText>
+          </WMiniBox>
+        </WBox1>
+        <RecText>다음과 같은 옷을 추천해요</RecText>
+        <ClothesCP data={data.data.list[listNumber].main.temp} />
+      </WeatherBox>
     </Container>
   );
 }

@@ -1,17 +1,26 @@
-import { Link } from "react-router-dom";
 import Profile from "../components/Profile";
+import Loader from "../components/Loader";
+import SEO from "../components/SEO";
+import { Link } from "react-router-dom";
 import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
-  margin: 70px 150px;
+  position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
   @media (max-width: 769px) {
-    margin: 70px 0.5rem;
+    width: 60%;
+    height: 60%;
   }
 `;
 
@@ -21,31 +30,28 @@ const Title = styled.div`
   align-items: center;
   font-size: 40px;
   font-family: "Cinzel Decorative", serif;
+  @media (max-width: 769px) {
+    font-size: 30px;
+  }
 `;
-
-// const Line = styled.div`
-//   width: 100px;
-//   height: 4px;
-//   background: linear-gradient(to right, #ffffff, #2f3842);
-//   border: none;
-//   margin: 0 20px;
-// `;
 
 const ProfileSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  height: 100%;
   width: 100%;
   max-width: 760px;
   border-radius: 20px;
-  padding: 60px 40px;
+  padding: 60px 0;
   background-color: rgb(255 255 255 / 5%);
   backdrop-filter: blur(10px);
   margin-top: 60px;
   @media (max-width: 769px) {
-    padding: 5rem 0;
     flex-direction: column;
+    margin-top: 40px;
+    padding: 20px 30px;
   }
 `;
 
@@ -53,6 +59,7 @@ const ProfileSet = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 50%;
   button {
@@ -72,21 +79,9 @@ const ProfileSet = styled.div`
 
   @media (max-width: 769px) {
     width: 90%;
-    flex-direction: column;
     justify-content: center;
-  }
-`;
-
-const InfoBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 20rem;
-  width: 50%;
-  margin: 0 1rem;
-  @media (max-width: 769px) {
-    width: 90%;
-    height: 50%;
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(999, 999, 999, 0.5);
   }
 `;
 
@@ -95,11 +90,42 @@ const ProfileImage = styled.div`
   display: flex;
   height: 100%;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 10px;
+  @media (max-width: 481px) {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 20px;
+    height: 50%;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    button {
+      top: 70px;
+      padding: 8px;
+      font-size: 13px;
+    }
+  }
 `;
 
 const Value = styled.div`
   color: rgba(999, 999, 999, 0.5);
+  @media (max-width: 481px) {
+    overflow: scroll;
+  }
+`;
+
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 20rem;
+  @media (max-width: 769px) {
+    width: 90%;
+    height: 50%;
+    margin-top: 10px;
+  }
 `;
 
 const Info = styled.div`
@@ -111,11 +137,12 @@ const Info = styled.div`
   .first-link:hover {
     color: #171b1f;
   }
-
   @media (max-width: 481px) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    margin: 10px 0;
+    font-size: 14px;
   }
 `;
 
@@ -123,10 +150,6 @@ const Label = styled.div`
   width: 7rem;
   font-weight: 500;
   flex-shrink: 0;
-  @media (max-width: 481px) {
-    width: auto;
-    margin-bottom: 10px;
-  }
 `;
 
 const StyledLink = styled(Link)`
@@ -145,13 +168,18 @@ const StyledLink = styled(Link)`
     background-color: ${(props) => props.color};
     color: white;
   }
+  @media (max-width: 481px) {
+    font-size: 13px;
+    padding: 8px 10px;
+    white-space: pre;
+  }
 `;
 
 function MyPage() {
   const { data, isLoading, isError, isFetching } = useMyPage();
 
   if (isFetching || isLoading) {
-    return <div>로딩 중...</div>;
+    return <Loader />;
   }
 
   if (isError) {
@@ -163,53 +191,52 @@ function MyPage() {
   }
 
   return (
-    <>
-      <Container>
-        <Title>
-          <span>
-            <Link to="/">My Page</Link>
-          </span>
-        </Title>
-        <ProfileSection>
-          <ProfileSet>
-            <ProfileImage>
-              <Profile sizes={"150px"} />
-              <button>
-                <Link to="/setProfile" color="#12b886">
-                  <FontAwesomeIcon icon={faPencil} />
-                </Link>
-              </button>
-            </ProfileImage>
-            <Info>
-              <Label>닉네임</Label>
-              <Value>{data.nickname}</Value>
-            </Info>
-          </ProfileSet>
-          <InfoBox>
-            <Info>
-              <Label>아이디</Label>
-              <Value>{data.username}</Value>
-            </Info>
-            <Info>
-              <Label>이메일</Label>
-              <Value>{data.email}</Value>
-            </Info>
-            <Info>
-              <Label>비밀번호</Label>
-              <StyledLink to="/setPw" color="white" className="first-link">
-                비밀번호 변경
-              </StyledLink>
-            </Info>
-            <Info>
-              <Label>계정 탈퇴</Label>
-              <StyledLink to="/remove" color="#ff6b6b">
-                계정 탈퇴
-              </StyledLink>
-            </Info>
-          </InfoBox>
-        </ProfileSection>
-      </Container>
-    </>
+    <Container>
+      <SEO title="마이페이지" />
+      <Title>
+        <span>
+          <Link to="/">My Page</Link>
+        </span>
+      </Title>
+      <ProfileSection>
+        <ProfileSet>
+          <ProfileImage>
+            <Profile sizes={"150px"} />
+            <button>
+              <Link to="/setProfile" color="#12b886">
+                <FontAwesomeIcon icon={faPencil} />
+              </Link>
+            </button>
+          </ProfileImage>
+          <Info>
+            <Label>닉네임</Label>
+            <Value>{data.nickname}</Value>
+          </Info>
+        </ProfileSet>
+        <InfoBox>
+          <Info>
+            <Label>아이디</Label>
+            <Value>{data.username}</Value>
+          </Info>
+          <Info>
+            <Label>이메일</Label>
+            <Value>{data.email}</Value>
+          </Info>
+          <Info>
+            <Label>비밀번호</Label>
+            <StyledLink to="/setPw" color="white" className="first-link">
+              비밀번호 변경
+            </StyledLink>
+          </Info>
+          <Info>
+            <Label>계정 탈퇴</Label>
+            <StyledLink to="/remove" color="#ff6b6b">
+              계정 탈퇴
+            </StyledLink>
+          </Info>
+        </InfoBox>
+      </ProfileSection>
+    </Container>
   );
 }
 

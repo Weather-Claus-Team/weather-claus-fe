@@ -4,7 +4,13 @@ import { useSetRecoilState } from "recoil";
 import { recaptchaTokenState } from "../../atom";
 
 const RecaptchaBox = styled.div`
-  margin: 13px 0;
+  margin: 20px 0;
+  @media (max-width: 481px) {
+    margin: 5px 0;
+    div {
+      transform: scale(0.94);
+    }
+  }
 `;
 
 function Recaptcha() {

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 const UsernameBox = styled.div`
   display: flex;
+  flex-direction: row;
   max-width: 430px;
   width: 100%;
   gap: 3%;
@@ -24,16 +25,18 @@ const UsernameBox = styled.div`
 
 const Btn = styled.button`
   height: 43px;
-  background-color: #b7b7b7;
-  color: white;
+  color: #5f6d7a;
   border: none;
-  border-radius: 3px;
   overflow: wrap;
   word-break: keep-all;
   cursor: pointer;
   transition: all 0.3s;
   &:active {
-    background-color: gray;
+    background-color: #dad9d9;
+  }
+  @media (max-width: 481px) {
+    height: 27px;
+    font-size: 10px;
   }
 `;
 
@@ -66,7 +69,6 @@ function Username() {
 
     try {
       const result = await checkDuplicateUsername(username);
-      console.log(result);
 
       if (!result) {
         alert("서버 응답이 없습니다. 다시 시도해주세요");
@@ -97,6 +99,7 @@ function Username() {
     <>
       <UsernameBox>
         <input
+          id="id"
           type="text"
           placeholder="아이디"
           {...register("username", {
@@ -118,13 +121,13 @@ function Username() {
         </Btn>
       </UsernameBox>
       {username && isDuplicate !== null && (
-        <div>
+        <>
           {isDuplicate ? (
             <span style={{ color: "red" }}>이미 사용 중인 아이디입니다</span>
           ) : (
             <span style={{ color: "blue" }}>사용 가능한 아이디입니다</span>
           )}
-        </div>
+        </>
       )}
       <span>{username && errors?.username?.message}</span>
     </>
