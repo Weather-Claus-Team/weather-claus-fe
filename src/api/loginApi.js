@@ -1,8 +1,6 @@
-const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
-
 const loginApi = async ({ username, password }) => {
   try {
-    const url = `${SERVER_URL}/login`;
+    const url = `/login`;
 
     const response = await fetch(url, {
       method: "POST",
@@ -23,6 +21,8 @@ const loginApi = async ({ username, password }) => {
     }
     const accessToken = response.headers.get("Authorization");
     window.localStorage.setItem("ACT", accessToken);
+    console.log("Set-Cookie Header:", response.headers.get("Set-Cookie")); // 서버가 쿠키를 보내는지 확인
+    console.log("Document Cookies:", document.cookie); // 브라우저가 쿠키를 저장했는지 확인
     // window.location.replace("/");
   } catch (error) {
     console.error("Failed to Login:", error);
