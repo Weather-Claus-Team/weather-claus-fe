@@ -51,10 +51,10 @@ const WebSocketComponent = () => {
 
   const wsUrl =
     actToken && chatToken
-      ? `wss://43.200.138.242/ws?Second=${chatToken}`
+      ? `wss://api.mungwithme.com/ws?Second=${chatToken}`
       : actToken && !chatToken
       ? null
-      : `wss://43.200.138.242/ws`;
+      : `wss://api.mungwithme.com/ws`;
 
   const { messages, sendMessage } = useWebSocket(wsUrl);
 
