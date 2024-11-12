@@ -3,7 +3,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
 // 이메일로 아이디 찾기
 export const findId = async (email) => {
   try {
-    const url = `${SERVER_URL}/api/users/email-find`;
+    const url = `${SERVER_URL}/users/email-find`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
