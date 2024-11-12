@@ -4,7 +4,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "http://api.mungwithme.com/:splat"
+  to = "https://api.mungwithme.com/:splat"
   status = 200
   force = true
 
