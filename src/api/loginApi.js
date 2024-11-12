@@ -1,6 +1,8 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_GET_WEATHER_URL;
+
 const loginApi = async ({ username, password }) => {
   try {
-    const url = "/login";
+    const url = `${SERVER_URL}/login`;
 
     const response = await fetch(url, {
       method: "POST",
