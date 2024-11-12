@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import authorityApi from "./../api/authorityApi";
+import chatListApi from "../api/chatListApi";
 
 const fetchChatList = async (page) => {
-  const response = await authorityApi("GET", `/chatList?page=${page}`, {});
+  const response = await chatListApi("GET", `/chatList?page=${page}`, {});
   return response;
 };
 
