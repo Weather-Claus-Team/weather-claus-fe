@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useChatHistory } from "../hooks/useChatHistory";
 import { useEffect, useRef, useState } from "react";
 import MyChat from "./MyChat";
@@ -52,6 +52,46 @@ const NowChat = styled.div`
   }
 `;
 
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const Loading = styled.div`
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: transparent;
+  padding: 10px 20px;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: 3px solid black;
+    border-radius: 50%;
+    border-top: 3px solid white;
+    animation: ${spin} 1s linear infinite;
+  }
+`;
+
+const NoMoreChats = styled.div`
+  display: flex;
+  align-items: center;
+  width: 90%;
+  justify-content: center;
+  font-size: 18px;
+  color: #333;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 20px;
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+`;
 const ChatSkeleton = styled.div`
   background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -107,22 +147,25 @@ function Chat({ messages }) {
     }
 
     //이전 채팅 내역 업데이트 트리거
-    const observer = new IntersectionObserver((entries) => {
-      const first = entries[0];
-      if (first.isIntersecting && hasNextPage && !isFetchingNextPage) {
-        const previousScroll = chatListRef.current.scrollHeight;
-        console.log(previousScroll);
-        fetchNextPage().then(() => {
-          //이전 채팅 내역 업데이트 시 이전 스크롤 위치로 고정
-          requestAnimationFrame(() => {
-            const newScrollHeight = chatListRef.current.scrollHeight;
-            chatListRef.current.scrollTop = newScrollHeight - previousScroll;
-            console.log(newScrollHeight);
-            console.log(chatListRef.current.scrollTop);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries[0];
+        if (first.isIntersecting && hasNextPage && !isFetchingNextPage) {
+          const previousScroll = chatListRef.current.scrollHeight;
+          console.log(previousScroll);
+          fetchNextPage().then(() => {
+            //이전 채팅 내역 업데이트 시 이전 스크롤 위치로 고정
+            requestAnimationFrame(() => {
+              const newScrollHeight = chatListRef.current.scrollHeight;
+              chatListRef.current.scrollTop = newScrollHeight - previousScroll;
+              console.log(newScrollHeight);
+              console.log(chatListRef.current.scrollTop);
+            });
           });
-        });
-      }
-    });
+        }
+      },
+      { threshold: 0.7 }
+    );
 
     if (currentRef) {
       observer.observe(currentRef);
@@ -157,9 +200,9 @@ function Chat({ messages }) {
   return (
     <Container ref={chatListRef}>
       {hasNextPage ? ( //이전 채팅 내역 트리거 컴포넌트
-        <h1 ref={moreChatRef}>불러오는중...</h1>
+        <Loading ref={moreChatRef} />
       ) : (
-        <h1>이전 채팅 없음</h1>
+        <NoMoreChats>이전 채팅 없음</NoMoreChats>
       )}
 
       {data && data.pages.length === 0 ? ( //이전 채팅 내역 컴포넌트
