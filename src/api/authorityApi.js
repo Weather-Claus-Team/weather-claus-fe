@@ -44,7 +44,7 @@ const authorityApi = async (method, endpoint, { body }) => {
       } else {
         //엑세스 토큰 재발급 실패
         const refreshErrData = refreshResponse;
-        window.alert("토큰 재발급 실패");
+        console.log("토큰 재발급 실패");
         logoutApi();
         throw new Error(refreshErrData.message);
       }
@@ -58,7 +58,7 @@ const authorityApi = async (method, endpoint, { body }) => {
       throw new Error(response.message);
     } else {
       //엑세스 토큰 검증 오류
-      window.alert("토큰 검증 실패");
+      console.log("토큰 검증 실패");
       logoutApi();
     }
   } catch (error) {
