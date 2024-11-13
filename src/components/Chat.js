@@ -52,11 +52,11 @@ const NowChat = styled.div`
   }
 `;
 
-const Skeleton = styled.div`
+const ChatSkeleton = styled.div`
   background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   width: 100%;
-  height: 700px;
+  height: 500px;
   margin-bottom: 10px;
   animation: pulse 1.5s infinite ease-in-out;
 
@@ -136,7 +136,7 @@ function Chat({ messages }) {
   }, [data, hasNextPage, isFetchingNextPage, fetchNextPage, initial]);
 
   if (isLoading) {
-    return <div>로딩중....</div>;
+    return <ChatSkeleton />;
   }
 
   if (isError) {
@@ -153,8 +153,6 @@ function Chat({ messages }) {
 
     return date.toLocaleString();
   };
-
-  console.log(messages);
 
   return (
     <Container ref={chatListRef}>
@@ -193,7 +191,7 @@ function Chat({ messages }) {
                 )
               ) : (
                 // nickname만 없고 token이 있을 때 로딩중
-                token && <Skeleton key={index}>로딩중</Skeleton>
+                token && <ChatSkeleton key={index} />
               )
             )
           )}
