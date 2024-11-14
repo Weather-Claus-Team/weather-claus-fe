@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import bird2 from "../images/bird2.png";
 import { FaGithub } from "react-icons/fa";
 import { RiNotionFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
+  position: relative;
   min-height: 100px;
   width: 85%;
   margin: 130px 20px 0 20px;
@@ -84,9 +86,20 @@ const Icons = styled.div`
   }
 `;
 
+const BirdImg = styled.img`
+  position: absolute;
+  top: -100px;
+  left: 50px;
+  width: 130px;
+  @media (max-width: 481px) {
+    display: none;
+  }
+`;
+
 function Footer() {
   return (
     <Container>
+      <BirdImg src={bird2} alt="bird2" />
       <Logo>
         <h1>Weather</h1>
         <h1>Claus</h1>

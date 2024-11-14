@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import styled from "styled-components";
 
 const OpponentChatContainer = styled.li`
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: lightgray;
+  color: black;
   padding: 1rem;
   border-radius: 10px;
   max-width: 60%;
@@ -24,7 +24,7 @@ const OpponentChatContainer = styled.li`
     flex-direction: column;
     gap: 0.5rem;
     h3 {
-      font-weight: 600;
+      font-weight: 700;
       color: black;
     }
     span {

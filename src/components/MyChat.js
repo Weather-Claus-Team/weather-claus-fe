@@ -2,8 +2,7 @@ import React, { memo } from "react";
 import styled from "styled-components";
 
 const MyChatContainer = styled.li`
-  background-color: #d1e7dd;
-  color: #155724;
+  background-color: #6e7e9c;
   padding: 1rem;
   border-radius: 10px;
   max-width: 60%;
@@ -12,7 +11,6 @@ const MyChatContainer = styled.li`
   display: flex;
   gap: 1rem;
   align-items: center;
-
   img {
     width: 50px;
     height: 50px;
@@ -27,9 +25,12 @@ const MyChatContainer = styled.li`
       font-weight: 600;
       color: black;
     }
+    p {
+      line-height: 1.4em;
+    }
     span {
       font-size: smaller;
-      color: gray;
+      color: #414142;
     }
   }
 `;
