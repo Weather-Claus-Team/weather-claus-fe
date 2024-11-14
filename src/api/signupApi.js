@@ -78,7 +78,8 @@ export const checkEmailCode = async (email, emailCode) => {
 // // 회원가입 완료
 export const signupResult = async (data) => {
   try {
-    const response = await fetch("/api/users", {
+    const url = "/api/users";
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
