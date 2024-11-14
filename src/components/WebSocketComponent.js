@@ -1,46 +1,81 @@
 import React, { useState } from "react";
 import useWebSocket from "../hooks/useWebSocket";
-import { useChatToken } from "../hooks/useChatToken";
 import Chat from "./Chat";
 import styled from "styled-components";
+import frame from "../images/frame.png";
+import { useChatToken } from "../hooks/useChatToken";
+import { IoPaperPlaneOutline } from "react-icons/io5";
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin-top: 100px;
+`;
+
+const Title = styled.h1`
+  color: white;
+  font-size: 30px;
+  margin-bottom: 60px;
+  font-family: "Cinzel Decorative", serif;
+  margin-left: 330px;
+  @media (max-width: 481px) {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+`;
+
+const ChatBox = styled.div`
   width: 90%;
   max-width: 700px;
   margin: 0 auto;
   padding: 20px;
-  border-radius: 8px;
-  background-color: #fafafa;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 50;
 `;
 
 const Form = styled.form`
+  position: relative;
   display: flex;
   gap: 10px;
   margin-top: 20px;
 `;
 
 const TextInput = styled.input`
+  all: unset;
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  background-color: #545454;
+  padding: 13px 10px;
   font-size: 16px;
+  text-indent: 10px;
   box-sizing: border-box;
+  margin-left: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const SendButton = styled.button`
-  padding: 10px 25px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
+  all: unset;
+  svg {
+    font-size: 25px;
+    position: absolute;
+    top: 11px;
+    right: 25px;
+    cursor: pointer;
+  }
+`;
 
-  &:hover {
-    background-color: #0056b3;
+const FrameImg = styled.img`
+  position: absolute;
+  top: 60px;
+  left: 295px;
+  width: 850px;
+  height: 690px;
+  @media (max-width: 481px) {
+    display: none;
   }
 `;
 
@@ -70,15 +105,21 @@ const WebSocketComponent = () => {
 
   return (
     <Container>
-      <Chat messages={messages} />
-      <Form>
-        <TextInput
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <SendButton onClick={onClickSend}>입력</SendButton>
-      </Form>
+      <Title>Weather Talk</Title>
+      <FrameImg src={frame} alt="frame" />
+      <ChatBox>
+        <Chat messages={messages} />
+        <Form>
+          <TextInput
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <SendButton onClick={onClickSend}>
+            <IoPaperPlaneOutline />
+          </SendButton>
+        </Form>
+      </ChatBox>
     </Container>
   );
 };

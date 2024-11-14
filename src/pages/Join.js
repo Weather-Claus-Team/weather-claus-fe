@@ -11,6 +11,7 @@ import {
   emailCheckState,
   emailCodeCheckState,
   emailDuplicateState,
+  recaptchaTokenState,
   usernameCheckState,
   usernameDuplicateState,
 } from "../atom";
@@ -132,7 +133,7 @@ function Join() {
   const methods = useForm();
   const { reset } = methods;
   const navigate = useNavigate();
-  // const recaptchaToken = useRecoilValue(recaptchaTokenState);
+  const recaptchaToken = useRecoilValue(recaptchaTokenState);
   const usernameChecked = useRecoilValue(usernameCheckState);
   const emailChecked = useRecoilValue(emailCheckState);
   const setUsernameDuplicate = useSetRecoilState(usernameDuplicateState);
@@ -147,10 +148,10 @@ function Join() {
   }, [setUsernameDuplicate, setEmailCodeCheck, setEmailDuplicate]);
 
   const onValid = async (data) => {
-    // if (!recaptchaToken) {
-    //   alert("리캡챠가 완료되지 않았습니다");
-    //   return;
-    // }
+    if (!recaptchaToken) {
+      alert("리캡챠가 완료되지 않았습니다");
+      return;
+    }
     if (!usernameChecked) {
       alert("아이디 중복 확인이 완료되지 않았습니다");
       return;
@@ -162,13 +163,15 @@ function Join() {
     // 데이터에서 이메일 인증번호 제외
     const { emailCode, ...restData } = data;
     // 리캡챠 토큰 추가
-    // const addTokenData = {
-    //   ...restData,
-    //   token: recaptchaToken,
-    // };
+    const addTokenData = {
+      ...restData,
+      token: recaptchaToken,
+    };
+    console.log(recaptchaToken);
+    console.log(addTokenData);
 
     try {
-      const [result, errorMessage] = (await signupResult(restData)) || [];
+      const [result, errorMessage] = (await signupResult(addTokenData)) || [];
 
       if (!result) {
         if (errorMessage.includes("비밀번호")) {

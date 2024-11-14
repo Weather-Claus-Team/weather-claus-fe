@@ -5,7 +5,6 @@ import Nav from "../components/Nav";
 import weatherApi from "../api/weatherApi";
 import Footer from "../components/Footer";
 import bird from "../images/bird.png";
-import bird2 from "../images/bird2.png";
 import WebSocketComponent from "../components/WebSocketComponent";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -99,11 +98,6 @@ const BirdImg = styled.img`
   }
 `;
 
-const BirdImg2 = styled(BirdImg)`
-  top: 1345px;
-  left: 70px;
-`;
-
 function Home() {
   const loginSuccess = useRecoilValue(loginSuccessState);
   const [locationValue, setLocationValue] = useRecoilState(locationState);
@@ -178,7 +172,6 @@ function Home() {
         </Mainbox>
         <WebSocketComponent />
       </Main>
-      <BirdImg2 src={bird2} alt="bird2" />
       <Footer />
     </Container>
   );

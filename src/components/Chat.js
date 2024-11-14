@@ -13,7 +13,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
-  border: 1px solid rgba(999, 999, 999, 0.5);
   padding: 20px;
   overflow-y: auto;
   width: 100%;
@@ -37,13 +36,13 @@ const ChatHistory = styled.ul`
 const NowChat = styled.div`
   width: 100%;
   gap: 20px;
+  margin-top: 20px;
   h2 {
-    color: black;
     display: flex;
     justify-content: center;
-    width: 100%;
+    /* width: 100%;
     padding: 1rem 0;
-    border-top: 1px dashed black;
+    border-top: 1px dashed white; */
   }
   ul {
     display: flex;
@@ -241,7 +240,7 @@ function Chat({ messages }) {
         </ChatHistory>
       )}
       <NowChat>
-        <h2>현재 채팅 내역</h2>
+        {/* <h2>현재 채팅 내역</h2> */}
         <ul>
           {messages.map((msg, index) =>
             msg.isOwn ? ( //현재 채팅 내역 컴포넌트
