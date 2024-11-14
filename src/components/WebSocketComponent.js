@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import useWebSocket from "../hooks/useWebSocket";
 import Chat from "./Chat";
 import styled from "styled-components";
-import frame from "../images/frame.png";
 import { useChatToken } from "../hooks/useChatToken";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 
 const Container = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 100px;
+  margin: 100px 0 50px 0;
 `;
 
 const Title = styled.h1`
@@ -32,8 +30,9 @@ const ChatBox = styled.div`
   width: 90%;
   max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
-  z-index: 50;
+  border: 4px solid rgba(999, 999, 999, 0.2);
+  border-radius: 8px;
+  padding: 30px 40px;
 `;
 
 const Form = styled.form`
@@ -68,17 +67,6 @@ const SendButton = styled.button`
   }
 `;
 
-const FrameImg = styled.img`
-  position: absolute;
-  top: 60px;
-  left: 295px;
-  width: 850px;
-  height: 690px;
-  @media (max-width: 481px) {
-    display: none;
-  }
-`;
-
 const WebSocketComponent = () => {
   const actToken = localStorage.getItem("ACT");
   const [text, setText] = useState("");
@@ -106,7 +94,6 @@ const WebSocketComponent = () => {
   return (
     <Container>
       <Title>Weather Talk</Title>
-      <FrameImg src={frame} alt="frame" />
       <ChatBox>
         <Chat messages={messages} />
         <Form>

@@ -43,6 +43,9 @@ html, body {
 body {
 	line-height: 1;
 	background-image: linear-gradient(60deg, #000000 0%, #485563 100%);
+  /* background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%); */
+  /* background: linear-gradient(110.6deg, rgb(156, 116, 129) -18.3%, rgb(67, 54, 74) 16.4%, rgb(47, 48, 67) 68.2%, rgb(27, 23, 36) 99.1%); */
+  
 	color: white;
 	font-family: "Outfit", sans-serif;
 }
