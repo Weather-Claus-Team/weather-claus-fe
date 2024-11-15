@@ -10,6 +10,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 100px 0 50px 0;
+  @media (max-width: 481px) {
+    width: 75%;
+    margin-left: 60px;
+  }
 `;
 
 const Title = styled.h1`
@@ -22,48 +26,90 @@ const Title = styled.h1`
     margin-left: 0;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
 `;
 
 const ChatBox = styled.div`
+  position: relative;
   width: 90%;
   max-width: 700px;
   margin: 0 auto;
-  border: 4px solid rgba(999, 999, 999, 0.2);
-  border-radius: 8px;
+  background-color: rgba(999, 999, 999, 0.15);
+  border-radius: 10px;
   padding: 30px 40px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  @media (max-width: 481px) {
+    padding: 20px;
+    li {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+    div {
+      gap: 4px;
+    }
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 
 const Form = styled.form`
-  position: relative;
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  @media (max-width: 481px) {
+  }
 `;
 
 const TextInput = styled.input`
   all: unset;
   flex: 1;
-  background-color: #545454;
+  color: black;
   padding: 13px 10px;
   font-size: 16px;
-  text-indent: 10px;
+  text-indent: 15px;
   box-sizing: border-box;
   margin-left: 20px;
   &:focus {
     outline: none;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+  @media (max-width: 481px) {
+    font-size: 14px;
   }
 `;
 
 const SendButton = styled.button`
   all: unset;
   svg {
+    color: #37414c;
     font-size: 25px;
     position: absolute;
-    top: 11px;
+    top: 17px;
     right: 25px;
     cursor: pointer;
+  }
+  @media (max-width: 481px) {
+    svg {
+      font-size: 20px;
+      top: 20px;
+      right: 22px;
+    }
   }
 `;
 
@@ -98,6 +144,7 @@ const WebSocketComponent = () => {
         <Chat messages={messages} />
         <Form>
           <TextInput
+            placeholder="메세지를 작성하세요"
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}

@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { useChatHistory } from "../hooks/useChatHistory";
-import { useEffect, useRef, useState } from "react";
 import MyChat from "./MyChat";
 import OpponentChat from "./OpponentChat";
+import SystemChat from "./SystemChat";
+import { useChatHistory } from "../hooks/useChatHistory";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../atom";
-import SystemChat from "./SystemChat";
 
 const Container = styled.div`
   height: 500px;
@@ -20,9 +20,7 @@ const Container = styled.div`
   scroll-behavior: auto;
   @media (max-width: 481px) {
     flex-direction: column;
-  }
-  h1 {
-    color: black;
+    height: 400px;
   }
 `;
 
@@ -31,23 +29,40 @@ const ChatHistory = styled.ul`
   flex-direction: column-reverse;
   width: 100%;
   gap: 20px;
+  @media (max-width: 481px) {
+    gap: 15px;
+  }
 `;
 
 const NowChat = styled.div`
   width: 100%;
   gap: 20px;
   margin-top: 20px;
-  h2 {
-    display: flex;
-    justify-content: center;
-    /* width: 100%;
-    padding: 1rem 0;
-    border-top: 1px dashed white; */
-  }
   ul {
     display: flex;
     flex-direction: column;
     gap: 15px;
+  }
+`;
+
+const TodayLine = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  div {
+    width: 100%;
+    border: 0.5px solid #bdbdbd;
+  }
+  h2 {
+    color: #bdbdbd;
+    font-size: 18px;
+    margin: 0 10px;
+  }
+  @media (max-width: 481px) {
+    h2 {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -81,6 +96,7 @@ function Chat({ messages }) {
     fetchNextPage,
     hasNextPage,
   } = useChatHistory();
+  const loginSuccess = localStorage.getItem("loginSuccess");
 
   const [initial, setInitial] = useState(true);
   const nickname = useRecoilValue(nicknameState);
@@ -148,9 +164,16 @@ function Chat({ messages }) {
 
   //채팅 날짜 데이터 변환
   const transformDate = (dateString) => {
-    const date = new Date(dateString.replace("T", " "));
+    const fullDate = new Date(dateString.replace("T", " "));
+    const localFullDate = fullDate.toLocaleString();
+    const date = localFullDate.slice(0, 12);
+    const time =
+      localFullDate.length <= 24
+        ? localFullDate.slice(14, 21)
+        : localFullDate.slice(14, 22);
+    const result = `${date} ${time}`;
 
-    return date.toLocaleString();
+    return result;
   };
 
   console.log(messages);
@@ -199,7 +222,13 @@ function Chat({ messages }) {
         </ChatHistory>
       )}
       <NowChat>
-        {/* <h2>현재 채팅 내역</h2> */}
+        {loginSuccess === "true" && (
+          <TodayLine>
+            <div />
+            <h2>NOW</h2>
+            <div />
+          </TodayLine>
+        )}
         <ul>
           {messages.map((msg, index) =>
             msg.isOwn ? ( //현재 채팅 내역 컴포넌트

@@ -33,6 +33,25 @@ const MyChatContainer = styled.li`
       color: #414142;
     }
   }
+  @media (max-width: 481px) {
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+    div {
+      gap: 4px;
+      h3 {
+        font-size: 13px;
+      }
+      p {
+        font-size: 12px;
+      }
+      span {
+        font-size: 10px;
+      }
+    }
+  }
 `;
 
 const MyChat = memo(({ children }) => {
