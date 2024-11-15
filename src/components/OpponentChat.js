@@ -2,16 +2,16 @@ import React, { memo } from "react";
 import styled from "styled-components";
 
 const OpponentChatContainer = styled.li`
+  max-width: 60%;
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
   background-color: lightgray;
   color: black;
-  padding: 1rem;
   border-radius: 10px;
-  max-width: 60%;
-  align-self: flex-start;
   margin: 5px 0;
-  display: flex;
+  padding: 1rem;
   gap: 1rem;
-  align-items: center;
 
   img {
     width: 50px;
@@ -30,6 +30,17 @@ const OpponentChatContainer = styled.li`
     span {
       font-size: smaller;
       color: gray;
+    }
+    @media (max-width: 481px) {
+      h3 {
+        font-size: 13px;
+      }
+      p {
+        font-size: 12px;
+      }
+      span {
+        font-size: 10px;
+      }
     }
   }
 `;
