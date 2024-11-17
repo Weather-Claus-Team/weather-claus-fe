@@ -24,25 +24,30 @@
 
 ## 팀 웨더클로스 FE와 역할 분담
 
-<table style="width: 100%;">
-  <tr>
-    <td style="width: 50%; text-align: center;">
-      <strong>FE</strong><br>
-      <img src="https://github.com/eunsuknoh.png" width="150"><br>
-      <a href="https://github.com/eunsuknoh">Eunsuk</a><br>
-      기획 / UI 전반 / 회원가입 ・ 아이디 찾기 ・ 위치 동의 ・ 검색 기능
-    </td>
-    <td style="width: 50%; text-align: center;">
-      <strong>FE</strong><br>
-      <img src="https://github.com/0Huns.png" width="150"><br>
-      <a href="https://github.com/0Huns">Younghun</a><br>
-      로그인 ・ 로그아웃 ・ 날씨카드 ・ 유저 프로필 변경 ・ 비밀번호 변경 ・ 계정 탈퇴 ・ 방명록(채팅창) 기능
-    </td>
-  </tr>
-</table>
+|                           `FE`                           |                         `FE`                         |
+| :------------------------------------------------------: | :--------------------------------------------------: |
+| <img src="https://github.com/eunsuknoh.png" width="150"> | <img src="https://github.com/0Huns.png" width="150"> |
+|          [Eunsuk](https://github.com/eunsuknoh)          |         [Younghun](https://github.com/0Huns)         |
 
 <br>
-<br>
+
+### Eunsuk
+
+- 프로젝트 기획
+- 전반적인 UI 작업
+- 회원가입
+- 아이디 찾기
+- 날씨 검색 기능
+- 사용자 위치 동의 및 위치 기반 날씨 검색
+
+### Younghun
+
+- 로그인 & 로그아웃
+- 비밀번호 변경
+- 날씨카드
+- 유저 페이지 및 프로필 변경
+- 계정 탈퇴
+- 방명록(채팅창) 기능
 
 ## 기술 스택
 
@@ -75,13 +80,17 @@
 
 ## 아키텍쳐
 
-### 🗂️&ensp;파일 구조 트리
+### 📢&ensp;파일 구조 트리
 
 📦src<br>
 ┣ 📂api<br>
+┃ ┣ ... //데이터 통신 api 로직<br>
 ┣ 📂components<br>
+┃ ┣ ... //페이지 내 기능 컴포넌트<br>
 ┣ 📂hooks<br>
+┃ ┣ ... //리액트 쿼리 & api 로직 관리<br>
 ┣ 📂images<br>
+┃ ┣ ... //프로젝트 내 이미지 파일 관리<br>
 ┣ 📂pages<br>
 ┃ ┣ 📜FindId.js<br>
 ┃ ┣ 📜Home.js<br>
@@ -97,7 +106,7 @@
 ┣ 📜image.js<br>
 ┗ 📜index.js<br>
 
-### 🗂️&ensp;프론트엔드 아키텍쳐
+### 📢&ensp;프론트엔드 아키텍쳐
 
 <img src="public/architecture.png">
 
