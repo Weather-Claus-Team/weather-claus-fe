@@ -66,8 +66,15 @@ const Nav = styled.div`
 `;
 
 const IconBox = styled.div`
+  position: relative;
+  min-width: 301.72px;
   span {
+    position: absolute;
+    right: -35px;
     color: gray;
+  }
+  @media (max-width: 481px) {
+    right: 20px;
   }
 `;
 
@@ -123,7 +130,11 @@ function Footer() {
           <ul>
             <li>Home</li>
             <li>Weather Talk</li>
-            <li>About us</li>
+            <li>
+              <Link to="https://github.com/Weather-Claus-Team" target="_blank">
+                About us
+              </Link>
+            </li>
           </ul>
         </Nav>
       </TextBox>

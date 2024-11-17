@@ -108,27 +108,6 @@ const TodayLine = styled.div`
   }
 `;
 
-// const Skeleton = styled.div`
-//   background: rgba(0, 0, 0, 0.1);
-//   border-radius: 4px;
-//   width: 100%;
-//   height: 500px;
-//   margin-bottom: 10px;
-//   animation: pulse 1.5s infinite ease-in-out;
-
-//   @keyframes pulse {
-//     0% {
-//       background-color: rgba(0, 0, 0, 0.1);
-//     }
-//     50% {
-//       background-color: rgba(0, 0, 0, 0.3);
-//     }
-//     100% {
-//       background-color: rgba(0, 0, 0, 0.1);
-//     }
-//   }
-// `;
-
 function Chat({ messages }) {
   const {
     data,

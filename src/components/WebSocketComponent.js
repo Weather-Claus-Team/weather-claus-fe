@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import useWebSocket from "../hooks/useWebSocket";
 import Chat from "./Chat";
 import styled from "styled-components";
+import useWebSocket from "../hooks/useWebSocket";
 import { useChatToken } from "../hooks/useChatToken";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 
@@ -20,7 +20,7 @@ const Title = styled.h1`
   color: white;
   font-size: 30px;
   margin-bottom: 60px;
-  font-family: "Cinzel Decorative", serif;
+  font-family: "Cinzel Decorative", serif !important;
   margin-left: 330px;
   @media (max-width: 481px) {
     margin-left: 0;

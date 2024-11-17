@@ -28,7 +28,7 @@ const Title = styled.div`
   align-items: center;
   margin-top: 2rem;
   h1 {
-    font-family: "Cinzel Decorative", serif;
+    font-family: "Cinzel Decorative", serif !important;
     font-size: 40px;
   }
   span {

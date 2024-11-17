@@ -42,9 +42,7 @@ html, body {
 
 body {
 	line-height: 1;
-  /* background-image: linear-gradient(to left bottom, #1a1f23, #242b31, #2e373f, #38434e, #43505d); */
-  background-image: linear-gradient(to left, #1a1f23, #242b31, #2e373f, #38434e, #43505d);
-  
+  background-image: linear-gradient(to left, #1a1f23, #242b31, #2e373f, #38434e, #43505d);  
   color: white;
 	font-family: "Outfit", sans-serif;
 }
