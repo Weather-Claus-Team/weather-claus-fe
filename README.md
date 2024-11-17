@@ -24,11 +24,25 @@
 
 ## 팀 웨더클로스 FE와 역할 분담
 
-|                                `FE`                                |                                                  `FE`                                                   |
-| :----------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
-|      <img src="https://github.com/eunsuknoh.png" width="150">      |                          <img src="https://github.com/0Huns.png" width="150">                           |
-|               [Eunsuk](https://github.com/eunsuknoh)               |                                  [Younghun](https://github.com/0Huns)                                   |
-| 기획 / UI 전반 / 회원가입 ・ 아이디 찾기 ・ 위치 동의 ・ 검색 기능 | 로그인 ・ 로그아웃 ・ 날씨카드 ・ 유저 프로필 변경 ・ 비밀번호 변경 ・ 계정 탈퇴 ・ 방명록(채팅창) 기능 |
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 50%; text-align: center;">
+      <strong>FE</strong><br>
+      <img src="https://github.com/eunsuknoh.png" width="150"><br>
+      <a href="https://github.com/eunsuknoh">Eunsuk</a><br>
+      기획 / UI 전반 / 회원가입 ・ 아이디 찾기 ・ 위치 동의 ・ 검색 기능
+    </td>
+    <td style="width: 50%; text-align: center;">
+      <strong>FE</strong><br>
+      <img src="https://github.com/0Huns.png" width="150"><br>
+      <a href="https://github.com/0Huns">Younghun</a><br>
+      로그인 ・ 로그아웃 ・ 날씨카드 ・ 유저 프로필 변경 ・ 비밀번호 변경 ・ 계정 탈퇴 ・ 방명록(채팅창) 기능
+    </td>
+  </tr>
+</table>
+
+<br>
+<br>
 
 ## 기술 스택
 
