@@ -66,25 +66,25 @@
 
 ### 🗂️&ensp;파일 구조 트리
 
-📦src
-┣ 📂api
-┣ 📂components
-┣ 📂hooks
-┣ 📂images
-┣ 📂pages
-┃ ┣ 📜FindId.js
-┃ ┣ 📜Home.js
-┃ ┣ 📜Join.js
-┃ ┣ 📜Login.js
-┃ ┣ 📜MyPage.js
-┃ ┣ 📜NewPw.js
-┃ ┣ 📜Remove.js
-┃ ┣ 📜SetProfile.js
-┃ ┗ 📜SetPw.js
-┣ 📜App.js
-┣ 📜atom.js
-┣ 📜image.js
-┗ 📜index.js
+📦src<br>
+┣ 📂api<br>
+┣ 📂components<br>
+┣ 📂hooks<br>
+┣ 📂images<br>
+┣ 📂pages<br>
+┃ ┣ 📜FindId.js<br>
+┃ ┣ 📜Home.js<br>
+┃ ┣ 📜Join.js<br>
+┃ ┣ 📜Login.js<br>
+┃ ┣ 📜MyPage.js<br>
+┃ ┣ 📜NewPw.js<br>
+┃ ┣ 📜Remove.js<br>
+┃ ┣ 📜SetProfile.js<br>
+┃ ┗ 📜SetPw.js<br>
+┣ 📜App.js<br>
+┣ 📜atom.js<br>
+┣ 📜image.js<br>
+┗ 📜index.js<br>
 
 ### 🗂️&ensp;프론트엔드 아키텍쳐
 
