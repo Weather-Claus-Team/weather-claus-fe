@@ -51,13 +51,12 @@ const spin = keyframes`
 `;
 
 const Loading = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
   background-color: transparent;
-  padding: 10px 20px;
 
   &::before {
     content: "";
@@ -75,9 +74,7 @@ const Loading = styled.div`
 const NoMoreChats = styled.div`
   display: flex;
   align-items: center;
-  width: 90%;
   justify-content: center;
-  font-size: 18px;
   color: #333;
   background-color: #e0e0e0;
   border-radius: 8px;
