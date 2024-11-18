@@ -113,13 +113,13 @@
 
 ### 📢&ensp;프론트엔드 아키텍쳐
 
-<img src="public/architecture.png">
+![architechture](https://github.com/user-attachments/assets/b9eb28e0-3aea-4657-b5b3-b791a9d792fd)
 
 <br>
 
 ## UI 구성
 
-<img src="public/ui.png">
+![ui](https://github.com/user-attachments/assets/85cb599b-f269-40f4-b1c5-8ddb3efe2805)
 
 <br>
 
