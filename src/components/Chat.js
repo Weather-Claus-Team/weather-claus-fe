@@ -85,7 +85,9 @@ const NoMoreChats = styled.div`
   border: 2px solid #ccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 `;
-const ChatSkeleton = styled.div``;
+const ChatSkeleton = styled.div`
+  height: 500px;
+`;
 
 const TodayLine = styled.div`
   display: flex;
