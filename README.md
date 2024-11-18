@@ -11,9 +11,10 @@
 
 <!-- 이미지 추가 예정 (gif 등) -->
 
-<br/>
+<br>
 
 ► 해당 readme는 웨더 클로스 프로젝트 ${\textsf{\color{LightSalmon}프론트엔드(FE)}}$ readme 입니다 (팀 readme는 아래 참고 부탁드립니다)
+
 <br>
 
 ## 프로젝트 소개
@@ -48,6 +49,8 @@
 - 유저 페이지 및 프로필 변경
 - 계정 탈퇴
 - 방명록(채팅창) 기능
+
+<br>
 
 ## 기술 스택
 
@@ -106,16 +109,26 @@
 ┣ 📜image.js<br>
 ┗ 📜index.js<br>
 
+<br>
+
 ### 📢&ensp;프론트엔드 아키텍쳐
 
 <img src="public/architecture.png">
 
+<br>
+
+## UI 구성
+
+<img src="public/ui.png">
+
+<br>
+
 ## 주요 기능
 
-- 회원가입 ・ 로그인 <br>
-- 검색 ・ 날씨 카드 <br>
-- 마이페이지 <br>
-- 방명록 겸 채팅창 <br>
+- 회원가입 ・ 로그인
+- 검색 ・ 날씨 카드
+- 마이페이지
+- 방명록 겸 채팅창
 
 <br>
 
