@@ -141,12 +141,19 @@ function Remove() {
     }
     setIsLoading(true);
     try {
-      await authorityApi("DELETE", "", { body: { password } });
-      logoutApi();
-      window.alert("계정이 삭제되었습니다.");
+      const response = await authorityApi("POST", "/profile/password", {
+        body: { password },
+      });
+      if (response.code === 200) {
+        await authorityApi("DELETE", "/profile", {});
+        logoutApi();
+        window.alert("계정이 삭제되었습니다.");
+      } else {
+        window.alert("비밀번호를 확인해주세요!");
+      }
     } catch (error) {
       console.error("error:", error);
-      alert("비밀번호를 확인해주세요!");
+      window.alert("비밀번호를 확인해주세요!");
     } finally {
       setIsLoading(false);
     }
