@@ -203,7 +203,11 @@ function Chat({ messages }) {
   return (
     <Container ref={chatListRef}>
       {hasNextPage ? ( //이전 채팅 내역 트리거 컴포넌트
-        <Loading ref={moreChatRef} />
+        data ? (
+          <Loading ref={moreChatRef} />
+        ) : (
+          <></>
+        )
       ) : (
         <NoMoreChats>이전 채팅 없음</NoMoreChats>
       )}
