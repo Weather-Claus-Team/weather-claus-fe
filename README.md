@@ -94,7 +94,7 @@
  ┃ ┃ ┣ ...  // 채팅 api
  ┃ ┣ 📂contentApis
  ┃ ┃ ┣ ...  // 콘텐츠 api
- ┃ ┗ 📂myPageApis
+ ┃ ┣ 📂myPageApis
  ┃ ┃ ┣ ...  // 마이페이지 api
  ┣ 📂components
  ┃ ┣ 📂chat
@@ -103,7 +103,7 @@
  ┃ ┃ ┣ ...  // 메인 콘텐츠 컴포넌트
  ┃ ┣ 📂Join
  ┃ ┃ ┣ ...  // 회원가입 컴포넌트
- ┃ ┗ 📂layout
+ ┃ ┣ 📂layout
  ┃ ┃ ┣ ...  // 레이아웃 컴포넌트
  ┣ 📂hooks
  ┃ ┣ ...  // 리액트 쿼리, api 로직 관리
