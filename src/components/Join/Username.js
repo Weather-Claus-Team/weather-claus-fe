@@ -6,7 +6,7 @@ import {
   usernameDuplicateState,
   usernameState,
 } from "../../atom";
-import { checkDuplicateUsername } from "../../api/signupApi";
+import { checkDuplicateUsername } from "../../api/authApis/signupApi";
 import { useEffect } from "react";
 
 const UsernameBox = styled.div`

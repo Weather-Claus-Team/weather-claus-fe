@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import SEO from "../components/SEO";
+import SEO from "../components/layout/SEO";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { emailState } from "../atom";
 import { useRecoilState } from "recoil";
-import { findId } from "../api/findIdApi";
+import { findId } from "../api/authApis/findIdApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`

@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import SearchCP from "../components/SearchCP";
-import WeatherCP from "../components/WeatherCP";
-import Nav from "../components/Nav";
-import weatherApi from "../api/weatherApi";
-import Footer from "../components/Footer";
+import SearchCP from "../components/content/SearchCP";
+import WeatherCP from "../components/content/WeatherCP";
+import Nav from "../components/layout/Nav";
+import weatherApi from "../api/contentApis/weatherApi";
+import Footer from "../components/layout/Footer";
 import bird from "../images/bird.png";
-import WebSocketComponent from "../components/WebSocketComponent";
+import WebSocketComponent from "../components/chat/WebSocketComponent";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";

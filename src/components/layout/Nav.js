@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Profile from "./Profile";
-import logoutApi from "../api/logoutApi";
+import Profile from "../content/Profile";
+import logoutApi from "../../api/authApis/logoutApi";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,7 @@ import {
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilValue } from "recoil";
-import { nicknameState } from "../atom";
+import { nicknameState } from "../../atom";
 
 const MenuContainer = styled.div`
   width: 140px;

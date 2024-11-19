@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Loader from "../components/Loader";
-import logoutApi from "../api/logoutApi";
-import SEO from "../components/SEO";
-import authorityApi from "../api/authorityApi";
+import Loader from "../components/layout/Loader";
+import logoutApi from "../api/authApis/logoutApi";
+import SEO from "../components/layout/SEO";
+import authorityApi from "../api/authApis/authorityApi";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";

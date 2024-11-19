@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { useState } from "react";
-import { cityState } from "../atom";
+import { cityState } from "../../atom";
 
 const Searchbox = styled.form`
   position: relative;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import loginApi from "../api/loginApi";
-import SEO from "../components/SEO";
+import loginApi from "../api/authApis/loginApi";
+import SEO from "../components/layout/SEO";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

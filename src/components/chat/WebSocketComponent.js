@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Chat from "./Chat";
 import styled from "styled-components";
-import useWebSocket from "../hooks/useWebSocket";
-import { useChatToken } from "../hooks/useChatToken";
+import useWebSocket from "../../hooks/useWebSocket";
+import { useChatToken } from "../../hooks/useChatToken";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 
 const Container = styled.div`

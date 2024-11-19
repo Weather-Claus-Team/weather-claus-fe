@@ -8,7 +8,7 @@ import {
   coat,
   hoodie,
   padding,
-} from "../image";
+} from "../../image";
 
 const ClothesCard = styled.div`
   display: flex;

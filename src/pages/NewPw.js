@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Loader from "../components/Loader";
-import SEO from "../components/SEO";
-import authorityApi from "../api/authorityApi";
+import Loader from "../components/layout/Loader";
+import SEO from "../components/layout/SEO";
+import authorityApi from "../api/authApis/authorityApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bird2 from "../images/bird2.png";
+import bird2 from "../../images/bird2.png";
 import { FaGithub } from "react-icons/fa";
 import { RiNotionFill } from "react-icons/ri";
 import { Link } from "react-router-dom";

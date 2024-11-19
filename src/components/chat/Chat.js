@@ -2,10 +2,10 @@ import styled, { keyframes } from "styled-components";
 import MyChat from "./MyChat";
 import OpponentChat from "./OpponentChat";
 import SystemChat from "./SystemChat";
-import { useChatHistory } from "../hooks/useChatHistory";
+import { useChatHistory } from "../../hooks/useChatHistory";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { nicknameState } from "../atom";
+import { nicknameState } from "../../atom";
 
 const Container = styled.div`
   height: 500px;

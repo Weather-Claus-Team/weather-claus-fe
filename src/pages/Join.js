@@ -3,7 +3,7 @@ import Recaptcha from "../components/Join/Recaptcha";
 import Username from "../components/Join/Username";
 import Password from "../components/Join/Password";
 import Email from "../components/Join/Email";
-import SEO from "../components/SEO";
+import SEO from "../components/layout/SEO";
 import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -15,7 +15,7 @@ import {
   usernameCheckState,
   usernameDuplicateState,
 } from "../atom";
-import { signupResult } from "../api/signupApi";
+import { signupResult } from "../api/authApis/signupApi";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`

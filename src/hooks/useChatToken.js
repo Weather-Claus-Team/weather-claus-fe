@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import chatTokenApi from "../api/chatTokenApi";
+import chatTokenApi from "../api/chatApis/chatTokenApi";
 
 const fetchChatToken = async () => {
   const response = await chatTokenApi();

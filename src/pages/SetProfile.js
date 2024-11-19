@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Profile from "../components/Profile";
-import SEO from "../components/SEO";
-import Loader from "../components/Loader";
+import Profile from "../components/content/Profile";
+import SEO from "../components/layout/SEO";
+import Loader from "../components/layout/Loader";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useMyPage } from "../hooks/useMypage";

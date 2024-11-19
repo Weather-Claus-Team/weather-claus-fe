@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import defaultProfile from "../images/user.png";
-import { useMyPage } from "../hooks/useMypage";
+import defaultProfile from "../../images/user.png";
+import { useMyPage } from "../../hooks/useMypage";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSetRecoilState } from "recoil";
-import { nicknameState } from "../atom";
+import { nicknameState } from "../../atom";
 
 const ProfileImage = styled.img`
   width: ${(props) => props.sizes};

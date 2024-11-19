@@ -8,7 +8,7 @@ import NewPw from "./pages/NewPw";
 import Remove from "./pages/Remove";
 import SetProfile from "./pages/SetProfile";
 import FindId from "./pages/FindId";
-import SEO from "./components/SEO";
+import SEO from "./components/layout/SEO";
 
 function App() {
   return (

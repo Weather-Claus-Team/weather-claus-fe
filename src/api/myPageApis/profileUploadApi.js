@@ -1,4 +1,4 @@
-import logoutApi from "./logoutApi";
+import logoutApi from "../authApis/logoutApi";
 
 const profileUploadApi = async ({ body }) => {
   const accessToken = window.localStorage.getItem("ACT");

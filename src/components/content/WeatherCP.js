@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Loader from "../components/Loader";
+import Loader from "../layout/Loader";
 import ClothesCP from "./ClothesCP";
 import { useRecoilValue } from "recoil";
-import { cityState } from "../atom";
-import { useWeather } from "../hooks/useWeather";
+import { cityState } from "../../atom";
+import { useWeather } from "../../hooks/useWeather";
 
 const Container = styled.div`
   display: flex;

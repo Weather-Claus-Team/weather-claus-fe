@@ -1,6 +1,6 @@
-import Profile from "../components/Profile";
-import Loader from "../components/Loader";
-import SEO from "../components/SEO";
+import Profile from "../components/content/Profile";
+import Loader from "../components/layout/Loader";
+import SEO from "../components/layout/SEO";
 import { Link } from "react-router-dom";
 import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";

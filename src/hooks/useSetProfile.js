@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import profileUploadApi from "../api/profileUploadApi";
+import profileUploadApi from "../api/myPageApis/profileUploadApi";
 
 const fetchSetProfile = async (body) => {
   const response = await profileUploadApi(body);

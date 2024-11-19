@@ -8,7 +8,7 @@ import {
   emailDuplicateState,
   emailState,
 } from "../../atom";
-import { checkEmailCode, sendEmail } from "../../api/signupApi";
+import { checkEmailCode, sendEmail } from "../../api/authApis/signupApi";
 import { useEffect } from "react";
 
 const Container = styled.div`
