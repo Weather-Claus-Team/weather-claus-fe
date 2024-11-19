@@ -144,7 +144,7 @@ function Footer() {
             <FaGithub />
           </Link>
           <Link
-            to="https://www.notion.so/Home-1235ab8d4e08808593c8e79f7f031f63"
+            to="https://www.notion.so/Weather-Claus-1415ab8d4e08802dae9adca77b873abf"
             target="_blank"
           >
             <RiNotionFill className="last-icon" />
