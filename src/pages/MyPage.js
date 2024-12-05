@@ -1,6 +1,7 @@
 import Profile from "../components/content/Profile";
 import Loader from "../components/layout/Loader";
 import SEO from "../components/layout/SEO";
+import santa from "../images/santa3.png";
 import { Link } from "react-router-dom";
 import { useMyPage } from "../hooks/useMypage";
 import { styled } from "styled-components";
@@ -175,6 +176,17 @@ const StyledLink = styled(Link)`
   }
 `;
 
+// christmas ver.
+const SantaImg = styled.img`
+  position: absolute;
+  bottom: 0px;
+  right: -150px;
+  width: 130px;
+  @media (max-width: 481px) {
+    display: none;
+  }
+`;
+
 function MyPage() {
   const { data, isLoading, isError, isFetching } = useMyPage();
 
@@ -235,6 +247,7 @@ function MyPage() {
             </StyledLink>
           </Info>
         </InfoBox>
+        <SantaImg src={santa} alt="santa" />
       </ProfileSection>
     </Container>
   );

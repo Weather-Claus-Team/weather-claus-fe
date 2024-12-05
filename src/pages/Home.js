@@ -4,7 +4,8 @@ import WeatherCP from "../components/content/WeatherCP";
 import Nav from "../components/layout/Nav";
 import weatherApi from "../api/contentApis/weatherApi";
 import Footer from "../components/layout/Footer";
-import bird from "../images/bird.png";
+import bird from "../images/santa2.png";
+import gold from "../images/gold.png";
 import WebSocketComponent from "../components/chat/WebSocketComponent";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -33,7 +34,9 @@ const Title = styled.div`
   }
   span {
     margin: 0 15px;
-    font-size: 15px;
+    /* font-size: 15px; */
+    // christmas ver.
+    font-size: 25px;
   }
   @media (max-width: 481px) {
     flex-direction: column;
@@ -77,7 +80,7 @@ const WeatherBox = styled(motion.div)`
 const Line = styled.div`
   width: 100px;
   height: 1px;
-  background: linear-gradient(to left, #ffffff, #1e2329);
+  background: linear-gradient(to left, #ffffff, #36414c);
   border: none;
   @media (max-width: 481px) {
     display: none;
@@ -85,14 +88,28 @@ const Line = styled.div`
 `;
 
 const Line2 = styled(Line)`
-  background: linear-gradient(to right, #ffffff, #36404b);
+  background: linear-gradient(to right, #ffffff, #242a30);
 `;
 
 const BirdImg = styled.img`
   position: absolute;
-  top: 70px;
-  right: 380px;
+  /* top: 70px;
+  right: 380px; */
+  // christmas ver.
+  top: 45px;
+  right: 370px;
   width: 130px;
+  @media (max-width: 481px) {
+    display: none;
+  }
+`;
+
+// christmas ver.
+const GoldImg = styled.img`
+  position: absolute;
+  width: 400px;
+  top: 0;
+  left: -70px;
   @media (max-width: 481px) {
     display: none;
   }
@@ -146,13 +163,16 @@ function Home() {
 
   return (
     <Container>
+      <GoldImg src={gold} alt="gold ribbon" />
       <Title>
         <Line />
-        <span>✦</span>
+        {/* <span>✦</span> */}
+        <span>❅</span>
         <Link to="/">
           <h1>Weather Claus</h1>
         </Link>
-        <span>✦</span>
+        <span>❅</span>
+        {/* <span>✦</span> */}
         <Line2 />
       </Title>
       <Btns>
