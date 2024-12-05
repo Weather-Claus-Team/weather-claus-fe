@@ -134,7 +134,7 @@ function Remove() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isConfirmed = window.confirm("정말로 계정을 삭제하시겠습니까?");
+    const isConfirmed = window.confirm("계정을 삭제하시겠습니까?");
 
     if (!isConfirmed) {
       return;

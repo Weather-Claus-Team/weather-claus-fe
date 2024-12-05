@@ -189,13 +189,11 @@ function Chat({ messages }) {
   const transformDate = (dateString) => {
     const fullDate = new Date(dateString.replace("T", " "));
     const localFullDate = fullDate.toLocaleString();
-    const date = localFullDate.slice(0, 12);
-    const time =
-      localFullDate.length <= 24
-        ? localFullDate.slice(14, 21)
-        : localFullDate.slice(14, 22);
+    const datePart = localFullDate.split(".");
+    const date = `${datePart[0]}.${datePart[1]}.${datePart[2]}`;
+    const timePart = datePart[3].split(":");
+    const time = `${timePart[0]}:${timePart[1]}`;
     const result = `${date} ${time}`;
-
     return result;
   };
 
