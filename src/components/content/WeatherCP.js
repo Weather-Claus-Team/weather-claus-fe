@@ -83,7 +83,7 @@ function WeatherCP({ listNumber }) {
     );
   }
 
-  // 날짜 모양
+  // 날짜 포맷
   const fullDate = new Date(data.data.list[listNumber].dt_txt); // 2024-10-18 06:00:00
   const month = fullDate.getMonth() + 1;
   const date = fullDate.getDate();

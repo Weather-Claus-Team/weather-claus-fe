@@ -9,10 +9,8 @@ export const checkDuplicateUsername = async (username) => {
       },
       body: JSON.stringify({ username }),
     });
-    console.log(response);
 
     const result = await response.json();
-    console.log(result);
 
     // 중복된 아이디일 때
     if (!response.ok) {
@@ -87,7 +85,6 @@ export const signupResult = async (data) => {
       body: JSON.stringify(data),
     });
     const result = await response.json();
-    console.log(result);
 
     // 백엔드 유효성검사 오류 발생 시
     if (!response.ok) {

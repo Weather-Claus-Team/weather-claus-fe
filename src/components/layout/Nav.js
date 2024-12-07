@@ -47,7 +47,7 @@ const Btn = styled.button`
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(999, 999, 999, 0.08);
   }
   @media (max-width: 481px) {
     font-size: 15px;

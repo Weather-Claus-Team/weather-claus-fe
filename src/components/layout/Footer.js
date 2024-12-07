@@ -3,6 +3,8 @@ import bird2 from "../../images/santa1.png";
 import { FaGithub } from "react-icons/fa";
 import { RiNotionFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { scrollTargetState } from "../../atom";
 
 const Container = styled.div`
   position: relative;
@@ -105,6 +107,12 @@ const BirdImg = styled.img`
 `;
 
 function Footer() {
+  const setScrollTarget = useSetRecoilState(scrollTargetState);
+
+  const handleClick = (target) => {
+    setScrollTarget(target);
+  };
+
   return (
     <Container>
       <BirdImg src={bird2} alt="bird2" />
@@ -129,8 +137,8 @@ function Footer() {
         </WSTeam>
         <Nav>
           <ul>
-            <li>Home</li>
-            <li>Weather Talk</li>
+            <li onClick={() => handleClick("home")}>Home</li>
+            <li onClick={() => handleClick("talk")}>Weather Talk</li>
             <li>
               <Link to="https://github.com/Weather-Claus-Team" target="_blank">
                 About us

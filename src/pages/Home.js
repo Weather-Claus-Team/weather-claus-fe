@@ -8,9 +8,14 @@ import bird from "../images/santa2.png";
 import gold from "../images/gold.png";
 import WebSocketComponent from "../components/chat/WebSocketComponent";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { cityState, locationState, loginSuccessState } from "../atom";
+import {
+  cityState,
+  locationState,
+  loginSuccessState,
+  scrollTargetState,
+} from "../atom";
 import { motion } from "framer-motion";
 
 const Container = styled.div`
@@ -115,10 +120,41 @@ const GoldImg = styled.img`
   }
 `;
 
+const RefBox = styled.div`
+  position: relative;
+  div {
+    position: absolute;
+    top: -70px;
+  }
+  @media (max-width: 481px) {
+    display: none;
+  }
+`;
+
+const RefBox2 = styled(RefBox)`
+  div {
+    top: 50px;
+  }
+`;
+
 function Home() {
   const loginSuccess = useRecoilValue(loginSuccessState);
   const [locationValue, setLocationValue] = useRecoilState(locationState);
   const cityValue = useRecoilValue(cityState);
+  const homeRef = useRef(null);
+  const talkRef = useRef(null);
+  const [scrollTarget, setScrollTarget] = useRecoilState(scrollTargetState);
+
+  // 목차 스크롤
+  useEffect(() => {
+    if (scrollTarget === "home" && homeRef.current) {
+      homeRef.current.scrollIntoView({ behavior: "smooth" });
+      setScrollTarget(null);
+    } else if (scrollTarget === "talk" && talkRef.current) {
+      talkRef.current.scrollIntoView({ behavior: "smooth" });
+      setScrollTarget(null);
+    }
+  }, [scrollTarget, setScrollTarget]);
 
   useEffect(() => {
     if (loginSuccess) {
@@ -163,6 +199,9 @@ function Home() {
 
   return (
     <Container>
+      <RefBox>
+        <div ref={homeRef} />
+      </RefBox>
       <GoldImg src={gold} alt="gold ribbon" />
       <Title>
         <Line />
@@ -190,6 +229,9 @@ function Home() {
           </WeatherBox>
           <BirdImg src={bird} alt="bird" />
         </Mainbox>
+        <RefBox2>
+          <div ref={talkRef} />
+        </RefBox2>
         <WebSocketComponent />
       </Main>
       <Footer />

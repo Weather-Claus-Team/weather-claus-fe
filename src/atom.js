@@ -80,3 +80,9 @@ export const nicknameState = atom({
   key: "nicknameState",
   default: "",
 });
+
+// 목차 스크롤
+export const scrollTargetState = atom({
+  key: "scrollTargetState",
+  default: null,
+});
