@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import bird2 from "../../images/santa1.png";
-import { FaGithub } from "react-icons/fa";
-import { RiNotionFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { scrollTargetState } from "../../atom";
 
@@ -43,6 +40,7 @@ const TextBox = styled.div`
 `;
 
 const Bar = styled.span`
+  color: gray;
   margin: 0 10px;
 `;
 
@@ -50,10 +48,6 @@ const WSTeam = styled.div`
   h4 {
     color: rgba(999, 999, 999, 0.85);
     margin-bottom: 20px;
-  }
-  span {
-    color: gray;
-    cursor: pointer;
   }
 `;
 
@@ -67,31 +61,12 @@ const Nav = styled.div`
   }
 `;
 
-const IconBox = styled.div`
-  position: relative;
-  min-width: 301.72px;
-  span {
-    position: absolute;
-    right: -35px;
-    color: gray;
-  }
-  @media (max-width: 481px) {
-    right: 20px;
-  }
-`;
+const Copyright = styled.span`
+  color: gray;
 
-const Icons = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-  svg {
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
-  .last-icon {
-    font-size: 35px;
+  @media (max-width: 481px) {
+    font-size: 13px;
+    margin-top: 40px;
   }
 `;
 
@@ -103,6 +78,47 @@ const BirdImg = styled.img`
   width: 130px;
   @media (max-width: 481px) {
     display: none;
+  }
+`;
+
+// For tooltip
+const Member = styled.div`
+  position: relative;
+  display: inline-block;
+  color: gray;
+  cursor: pointer;
+
+  &:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+const Tooltip = styled.span`
+  visibility: hidden;
+  background-color: #545c66;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  padding: 3px 9px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  top: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #545c66 transparent;
   }
 `;
 
@@ -123,44 +139,28 @@ function Footer() {
       <TextBox>
         <WSTeam>
           <h4>About Team Weather Claus</h4>
-          <Link to="https://github.com/eunsuknoh" target="_blank">
-            <span>Eunsuk</span>
-          </Link>
+          <Member>
+            Eunsuk
+            <Tooltip className="tooltip">eunsuk.nh@gmail.com</Tooltip>
+          </Member>
           <Bar>|</Bar>
-          <Link to="https://github.com/0Huns" target="_blank">
-            <span>Younghun</span>
-          </Link>
+          <Member>
+            Younghun<Tooltip className="tooltip">dudgns3864@gmail.com</Tooltip>
+          </Member>
           <Bar>|</Bar>
-          <Link to="https://github.com/HyungGeun94" target="_blank">
-            <span>Hyunggeun</span>
-          </Link>
+          <Member>
+            Hyunggeun<Tooltip className="tooltip">goorm94@naver.com</Tooltip>
+          </Member>
         </WSTeam>
         <Nav>
           <ul>
             <li onClick={() => handleClick("home")}>Home</li>
             <li onClick={() => handleClick("talk")}>Weather Talk</li>
-            <li>
-              <Link to="https://github.com/Weather-Claus-Team" target="_blank">
-                About us
-              </Link>
-            </li>
+            <li>About us</li>
           </ul>
         </Nav>
       </TextBox>
-      <IconBox>
-        <Icons>
-          <Link to="https://github.com/Weather-Claus-Team" target="_blank">
-            <FaGithub />
-          </Link>
-          <Link
-            to="https://www.notion.so/Weather-Claus-1415ab8d4e08802dae9adca77b873abf"
-            target="_blank"
-          >
-            <RiNotionFill className="last-icon" />
-          </Link>
-        </Icons>
-        <span>© 2024 Weather Claus. All rights reserved.</span>
-      </IconBox>
+      <Copyright>© 2024 Weather Claus. All rights reserved.</Copyright>
     </Container>
   );
 }
