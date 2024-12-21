@@ -3,8 +3,8 @@ import defaultProfile from "../../images/user.png";
 import { useMyPage } from "../../hooks/useMypage";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useSetRecoilState } from "recoil";
-import { nicknameState } from "../../atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { accessTokenState, nicknameState } from "../../atom";
 
 const ProfileImage = styled.img`
   width: ${(props) => props.sizes};
@@ -22,6 +22,12 @@ function Profile({ onClick, sizes }) {
   const queryClient = useQueryClient();
   const { data, isLoading, isError, isFetching } = useMyPage();
   const saveNickname = useSetRecoilState(nicknameState);
+  const [token, setToken] = useRecoilState(accessTokenState);
+  const hasToken = localStorage.getItem("ACT");
+
+  useEffect(() => {
+    setToken(localStorage.getItem("ACT"));
+  }, [hasToken, setToken]);
 
   useEffect(() => {
     if (data) {
@@ -31,7 +37,7 @@ function Profile({ onClick, sizes }) {
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ["chatToken"] });
-  }, [data, queryClient]);
+  }, [token, queryClient]);
 
   if (isFetching || isLoading) {
     return <></>;

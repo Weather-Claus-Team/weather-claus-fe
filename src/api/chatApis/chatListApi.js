@@ -25,7 +25,6 @@ const chatListApi = async (method, endpoint, { body }) => {
       console.log("400 에러!");
       throw new Error(response.message);
     } else if (response.status === 200) {
-      console.log("토큰 유효함. 권한 확인 완료");
       const data = await response.json();
       return data;
     }

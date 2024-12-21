@@ -86,3 +86,9 @@ export const scrollTargetState = atom({
   key: "scrollTargetState",
   default: null,
 });
+
+//엑세스 토큰 재발급 감지
+export const accessTokenState = atom({
+  key: "accessTokenState",
+  default: "",
+});

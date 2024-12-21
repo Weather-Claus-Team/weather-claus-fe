@@ -20,6 +20,7 @@ const chatTokenApi = async () => {
     //엑세스 토큰 만료 시 재발급
     if (response.status === 401) {
       const data = null;
+      console.log("st 토큰 발급 실패");
       return data;
     } else if (response.status === 200) {
       //기존 엑세스 토큰이 유효할 때
