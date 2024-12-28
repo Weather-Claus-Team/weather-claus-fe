@@ -4,8 +4,7 @@ import WeatherCP from "../components/content/WeatherCP";
 import Nav from "../components/layout/Nav";
 import weatherApi from "../api/contentApis/weatherApi";
 import Footer from "../components/layout/Footer";
-import bird from "../images/santa2.png";
-import gold from "../images/gold.png";
+import bird from "../images/bird.png";
 import WebSocketComponent from "../components/chat/WebSocketComponent";
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
@@ -39,9 +38,7 @@ const Title = styled.div`
   }
   span {
     margin: 0 15px;
-    /* font-size: 15px; */
-    // christmas ver.
-    font-size: 25px;
+    font-size: 15px;
   }
   @media (max-width: 481px) {
     flex-direction: column;
@@ -98,23 +95,9 @@ const Line2 = styled(Line)`
 
 const BirdImg = styled.img`
   position: absolute;
-  /* top: 70px;
-  right: 380px; */
-  // christmas ver.
-  top: 45px;
-  right: 370px;
+  top: 70px;
+  right: 380px;
   width: 130px;
-  @media (max-width: 481px) {
-    display: none;
-  }
-`;
-
-// christmas ver.
-const GoldImg = styled.img`
-  position: absolute;
-  width: 400px;
-  top: 0;
-  left: -70px;
   @media (max-width: 481px) {
     display: none;
   }
@@ -202,16 +185,13 @@ function Home() {
       <RefBox>
         <div ref={homeRef} />
       </RefBox>
-      <GoldImg src={gold} alt="gold ribbon" />
       <Title>
         <Line />
-        {/* <span>✦</span> */}
-        <span>❅</span>
+        <span>✦</span>
         <Link to="/">
           <h1>Weather Claus</h1>
         </Link>
-        <span>❅</span>
-        {/* <span>✦</span> */}
+        <span>✦</span>
         <Line2 />
       </Title>
       <Btns>
