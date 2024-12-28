@@ -3,7 +3,8 @@ import authorityApi from "./../api/authApis/authorityApi";
 
 const fetchMyPage = async () => {
   const response = await authorityApi("GET", "/profile/myPage", {});
-  return response.data;
+  const data = await response.json();
+  return data.data;
 };
 
 export const useMyPage = () => {
