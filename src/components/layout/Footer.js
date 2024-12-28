@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bird2 from "../../images/santa1.png";
+import bird2 from "../../images/bird2.png";
 import { useSetRecoilState } from "recoil";
 import { scrollTargetState } from "../../atom";
 
@@ -72,8 +72,7 @@ const Copyright = styled.span`
 
 const BirdImg = styled.img`
   position: absolute;
-  /* top: -100px; */
-  top: -138px; // christmas ver.
+  top: -100px;
   left: 50px;
   width: 130px;
   @media (max-width: 481px) {
