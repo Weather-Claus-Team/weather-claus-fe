@@ -1,6 +1,9 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 const logoutApi = async () => {
   try {
-    const url = "/logout";
+    const url = `${base}/logout`;
     const accessToken = localStorage.getItem("ACT");
 
     await fetch(url, {

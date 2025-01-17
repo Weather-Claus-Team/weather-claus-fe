@@ -1,3 +1,6 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 const chatListApi = async (method, endpoint, { body }) => {
   const baseOption = {
     method: method,
@@ -12,7 +15,7 @@ const chatListApi = async (method, endpoint, { body }) => {
   }
 
   try {
-    const url = `/api${endpoint}`;
+    const url = `${base}/api${endpoint}`;
 
     const response = await fetch(url, {
       ...baseOption,

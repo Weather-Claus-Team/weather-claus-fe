@@ -1,7 +1,10 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 // 아이디 중복 검사
 export const checkDuplicateUsername = async (username) => {
   try {
-    const url = "/api/users/username";
+    const url = `${base}/api/users/username`;
     const response = await fetch(url, {
       method: "POST",
       headers: {

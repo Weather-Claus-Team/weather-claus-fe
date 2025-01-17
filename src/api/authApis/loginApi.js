@@ -1,6 +1,9 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 const loginApi = async ({ username, password }) => {
   try {
-    const url = "/login";
+    const url = `${base}/login`;
 
     const response = await fetch(url, {
       method: "POST",

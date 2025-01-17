@@ -1,10 +1,13 @@
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 const weatherApi = async (city, lat, lon) => {
   try {
     const url = city
-      ? `/api/weather/forecast?city=${city}`
+      ? `${base}/api/weather/forecast?city=${city}`
       : lat && lon
-      ? `/api/weather/forecast?lat=${lat}&lon=${lon}`
-      : "/api/weather/forecast";
+      ? `${base}/api/weather/forecast?lat=${lat}&lon=${lon}`
+      : `${base}/api/weather/forecast`;
 
     const response = await fetch(url, {
       method: "GET",

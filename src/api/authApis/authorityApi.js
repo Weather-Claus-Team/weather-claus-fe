@@ -1,5 +1,8 @@
 import logoutApi from "./logoutApi";
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 let isRefreshing = false;
 let failedQueue = [];
 
@@ -23,7 +26,7 @@ const requestFetch = (method, { body }) => {
 };
 
 const handleRefreshToken = async () => {
-  const refreshUrl = "/reissue";
+  const refreshUrl = `${base}/reissue`;
   console.log("토큰 만료!");
   const refreshResponse = await fetch(refreshUrl, {
     method: "POST",
@@ -85,7 +88,7 @@ const responseFetch = async (response, method, endpoint, { body }) => {
 
 const authorityApi = async (method, endpoint, { body }) => {
   const baseOption = requestFetch(method, { body });
-  const url = `/api${endpoint}`;
+  const url = `${base}/api${endpoint}`;
 
   try {
     const response = await fetch(url, baseOption);

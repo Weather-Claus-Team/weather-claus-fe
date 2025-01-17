@@ -1,5 +1,8 @@
 import logoutApi from "../authApis/logoutApi";
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
+
 const profileUploadApi = async ({ body }) => {
   const accessToken = window.localStorage.getItem("ACT");
 
@@ -16,7 +19,7 @@ const profileUploadApi = async ({ body }) => {
   }
 
   try {
-    const url = `/api/profile/myPage`;
+    const url = `${base}/api/profile/myPage`;
 
     const response = await fetch(url, {
       ...baseOption,
@@ -26,7 +29,7 @@ const profileUploadApi = async ({ body }) => {
 
     //엑세스 토큰 만료 시 재발급
     if (response.status === 401) {
-      const refreshUrl = "/reissue";
+      const refreshUrl = `${base}/reissue`;
       console.log("토큰 만료!");
       const refreshResponse = await fetch(refreshUrl, {
         method: "POST",
