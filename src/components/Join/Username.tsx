@@ -101,7 +101,7 @@ function Username() {
   };
 
   useEffect(() => {
-    setIsDuplicate(false);
+    setIsDuplicate(null);
   }, [username, setIsDuplicate]);
 
   return (

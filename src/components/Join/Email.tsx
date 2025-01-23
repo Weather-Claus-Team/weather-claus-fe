@@ -104,7 +104,7 @@ function Email() {
   };
 
   useEffect(() => {
-    setIsEmailDuplicate(false);
+    setIsEmailDuplicate(null);
   }, [email, setIsEmailDuplicate]);
 
   // 인증번호 확인
@@ -140,7 +140,7 @@ function Email() {
   };
 
   useEffect(() => {
-    setIsEmailCodeSame(true);
+    setIsEmailCodeSame(null);
   }, [emailCode, setIsEmailCodeSame]);
 
   return (
