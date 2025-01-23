@@ -16,7 +16,7 @@ function App() {
       <SEO title="" />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/page/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/myPage" element={<MyPage />} />
         <Route path="/setProfile" element={<SetProfile />} />

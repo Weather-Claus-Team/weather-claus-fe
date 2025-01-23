@@ -212,8 +212,6 @@ function Chat({ messages }: ChatProps) {
     return result;
   };
 
-  console.log(data)
-
   return (
     <Container ref={chatListRef}>
       {hasNextPage ? ( //이전 채팅 내역 트리거 컴포넌트

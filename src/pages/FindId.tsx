@@ -158,7 +158,7 @@ function FindId() {
 
       if (result.code === 200) {
         alert("아이디를 전송했습니다");
-        navigate("/login");
+        navigate("/page/login");
       } else if (
         result.code === 400 &&
         result.errorDetails?.details === "Email not found."
