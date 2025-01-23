@@ -112,7 +112,7 @@ function Nav() {
       ) : (
         <>
           <Btn>
-            <Link to="/page/login">Login</Link>
+            <Link to="/signin">Login</Link>
           </Btn>
           <Btn>
             <Link to="/join">Join</Link>

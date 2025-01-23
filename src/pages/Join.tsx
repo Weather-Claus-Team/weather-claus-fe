@@ -223,7 +223,7 @@ function Join() {
           <h5>
             Create an account for
             <LoginText>
-              <Link to="/page/login">Login</Link>
+              <Link to="/signin">Login</Link>
             </LoginText>
           </h5>
         </SignupTitle>
