@@ -120,10 +120,10 @@ const WebSocketComponent = () => {
 
   const wsUrl: string|undefined =
     actToken && chatToken
-      ? `wss://api.mungwithme.com/ws?Second=${chatToken}`
+      ? `wss://weatherclaus.store/ws?Second=${chatToken}`
       : actToken && !chatToken
       ? undefined
-      : `wss://api.mungwithme.com/ws`;
+      : `wss://weatherclaus.store/ws`;
 
   const { messages, sendMessage } = useWebSocket(wsUrl);
 
