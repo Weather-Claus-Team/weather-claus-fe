@@ -3,9 +3,7 @@ import Loader from "../layout/Loader";
 import ClothesCP from "./ClothesCP";
 import { useRecoilValue } from "recoil";
 import { cityState } from "../../atom";
-// import { useWeather } from "../../hooks/useWeather";
-import weatherApi from "../../api/contentApis/weatherApi";
-import { useEffect, useState } from "react";
+import { useWeather } from "../../hooks/useWeather";
 
 // 스타일 컴포넌트
 const Container = styled.div`
@@ -67,55 +65,6 @@ interface WeatherCPProps {
   listNumber: number;
 }
 
-interface WeatherData {
-  status: string;
-  message: string;
-  data: {
-    cod: string;
-    message: number;
-    cnt: number;
-    list: {
-      dt: number;
-      main: {
-        temp: number;
-        feels_like: number;
-        temp_min: number;
-        temp_max: number;
-        pressure: number;
-        sea_level: number;
-        grnd_level: number;
-        humidity: number;
-        temp_kf: number;
-      };
-      weather: {
-        id: number;
-        main: string;
-        description: string;
-        icon: string;
-      }[];
-      visibility: number;
-      pop: number;
-      dt_txt: string;
-    }[];
-    city: {
-      id: number;
-      name: string;
-      coord: {
-        lat: number;
-        lon: number;
-      };
-      country: string;
-      population: number;
-      timezone: number;
-      sunrise: string;
-      sunset: string;
-    };
-  };
-  errorDetails: null | string;
-  code: number;
-}
-
-
 function WeatherCP({ listNumber }: WeatherCPProps) {
   const loginSuccess = localStorage.getItem("loginSuccess") === "true";
   const cityValue = useRecoilValue(cityState);
@@ -123,36 +72,25 @@ function WeatherCP({ listNumber }: WeatherCPProps) {
   const locationValue = JSON.parse(localStorage.getItem("geoLocation") || "{}");
   const selectedCity = loginSuccess && searchedCity ? searchedCity : cityValue;
 
- 
-  // 🔹 상태 관리
-  const [data, setData] = useState<WeatherData | null>(null);
+  const { data, isLoading, isError, isFetching } = useWeather(
+    selectedCity,
+    locationValue
+  );
 
+  if (isFetching || isLoading) {
+    return <Loader />;
+  }
 
-  console.log(data)
-  useEffect(() => {
-    const fetchWeather = async () => {
+  if (isError) {
+    return (
+      <div className="text-center text-red-500">
+        Error: 데이터를 불러오지 못했습니다.
+      </div>
+    );
+  }
 
-      try {
-        const response = await weatherApi(selectedCity, locationValue.lat, locationValue.lon);
-        setData(response);
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
-
-      }
-    };
-
-    fetchWeather();
-  }, []); // 의존성 배열: 도시 선택이 바뀔 때마다 호출
-
-
-
-  // 🔹 날짜 포맷 처리
-
-
-  const cityName = data?.data?.city?.name ?? "알 수 없음";
-  const temperature = data?.data?.list?.[listNumber]?.main?.temp ?? 0;
-  const weatherIcon = data?.data?.list?.[listNumber]?.weather?.[0]?.icon ?? "";
-  const fullDate = new Date(data?.data?.list?.[listNumber]?.dt_txt || "");
+  // 날짜 포맷
+  const fullDate = new Date(data.data.list[listNumber].dt_txt); // 2024-10-18 06:00:00
   const month = fullDate.getMonth() + 1;
   const date = fullDate.getDate();
 
@@ -161,22 +99,22 @@ function WeatherCP({ listNumber }: WeatherCPProps) {
       <WeatherBox>
         <WBox1>
           <img
-            src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+            src={`https://openweathermap.org/img/wn/${data.data.list[listNumber].weather[0].icon}@2x.png`}
             alt="weatherImg"
           />
           <WMiniBox>
             <div>
               <DateText>{`${month}/${date}`}</DateText>
-              <span>{cityName}</span>
+              <span>{data.data.city.name}</span>
             </div>
             <TempText>
-              {Math.round(temperature)}
+              {Math.round(data.data.list[listNumber].main.temp)}
               <span>°C</span>
             </TempText>
           </WMiniBox>
         </WBox1>
         <RecText>다음과 같은 옷을 추천해요</RecText>
-        <ClothesCP data={temperature} />
+        <ClothesCP data={data.data.list[listNumber].main.temp} />
       </WeatherBox>
     </Container>
   );
