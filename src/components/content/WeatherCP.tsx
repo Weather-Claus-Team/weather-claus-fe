@@ -77,8 +77,6 @@ function WeatherCP({ listNumber }: WeatherCPProps) {
     locationValue
   );
 
-  console.log(data);
-
   if (isFetching || isLoading) {
     return <Loader />;
   }

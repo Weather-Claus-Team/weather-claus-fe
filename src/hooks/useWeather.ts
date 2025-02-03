@@ -3,7 +3,6 @@ import weatherApi from "../api/contentApis/weatherApi";
 
 // 오늘 날짜
 const getTodayString = () => new Date().toISOString().split("T")[0];
-console.log(getTodayString())
 
 export const useWeather = (city: string, location: { lat: number; lon: number }) => {
   const storedData = localStorage.getItem("weatherData");
