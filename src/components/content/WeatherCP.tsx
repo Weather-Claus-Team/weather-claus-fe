@@ -77,6 +77,8 @@ function WeatherCP({ listNumber }: WeatherCPProps) {
     locationValue
   );
 
+  console.log(data);
+
   if (isFetching || isLoading) {
     return <Loader />;
   }
@@ -108,7 +110,7 @@ function WeatherCP({ listNumber }: WeatherCPProps) {
               <span>{data.data.city.name}</span>
             </div>
             <TempText>
-              {Math.floor(data.data.list[listNumber].main.temp)}
+              {Math.round(data.data.list[listNumber].main.temp)}
               <span>°C</span>
             </TempText>
           </WMiniBox>
