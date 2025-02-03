@@ -9,5 +9,6 @@ export const useWeather = (city:string, location:{lat:number; lon:number;}) => {
     refetchOnWindowFocus: false, // 윈도우 포커스 시 다시 요청
     refetchOnReconnect: true, // 네트워크 재연결 시 다시 요청
     staleTime: 100000,
+    gcTime: 100000,
   });
 };

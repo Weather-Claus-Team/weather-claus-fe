@@ -22,5 +22,6 @@ export const useChatHistory = () => {
       return undefined;
     },
     initialPageParam: 0,
+    gcTime: 100000,
   });
 };
