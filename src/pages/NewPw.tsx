@@ -155,9 +155,7 @@ function NewPw() {
     }
 
     try {
-      await authorityApi("PUT", "/profile/password", {
-        requestBody: { password, password2 },
-      });
+      await authorityApi("PUT", "/profile/password", {password, password2});
       navigate("/myPage", { replace: true });
       window.alert("비밀번호가 변경되었습니다!");
     } catch (error) {

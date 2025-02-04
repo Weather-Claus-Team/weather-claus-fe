@@ -141,11 +141,9 @@ function Remove() {
     }
     setIsLoading(true);
     try {
-      const response = await authorityApi("POST", "/profile/password", {
-        requestBody: { password },
-      });
+      const response = await authorityApi("POST", "/profile/password", { password });
       if (response.status === 200) {
-        await authorityApi("DELETE", "/profile", {});
+        await authorityApi("DELETE", "/profile");
         logoutApi();
         window.alert("계정이 삭제되었습니다.");
       } else {

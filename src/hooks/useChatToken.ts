@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import authorityApi from "../api/authApis/authorityApi";
 
 const fetchChatToken = async () => {
-  const response = await authorityApi("POST", "/st", {});
+  const response = await authorityApi("POST", "/st");
   if (response.status === 200) {
     console.log("st 토큰 발급 완료");
     const data = response.headers.get("second");

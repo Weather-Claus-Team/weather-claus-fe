@@ -135,7 +135,7 @@ function SetPw() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await authorityApi("POST", "/profile/password", { requestBody: { password } });
+      await authorityApi("POST", "/profile/password", { password });
       navigate("/NewPw", { replace: true });
     } catch (error) {
       console.error("error:", error);

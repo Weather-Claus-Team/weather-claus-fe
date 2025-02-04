@@ -3,7 +3,7 @@ import authorityApi from "../api/authApis/authorityApi";
 
 
 const fetchMyPage = async () => {
-  const response = await authorityApi("GET", "/profile/myPage", {});
+  const response = await authorityApi("GET", "/profile/myPage");
   const data = await response.json();
   return data.data;
 };
