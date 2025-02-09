@@ -1,7 +1,7 @@
 import logoutApi from "./logoutApi";
 
 let isRefreshing: boolean = false;
-let failedQueue: Array<{ resolve: (token: string) => void; reject: (error: any) => void }> = [];
+let failedQueue: Array<(token: string) => Promise<void>> = [];
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const base = window.location.hostname === "localhost" ? SERVER_URL : "";
@@ -20,7 +20,7 @@ export const handleRefreshToken = async (): Promise<string> => {
 
   if (isRefreshing) {
     return new Promise((resolve, reject) => {
-      failedQueue.push({ resolve, reject });
+      failedQueue.push(async (token) => resolve(token));
     });
   }
 
@@ -47,15 +47,13 @@ export const handleRefreshToken = async (): Promise<string> => {
     console.log("토큰 재발급 성공");
 
     // 실패한 요청들 다시 실행
-    failedQueue.forEach(({ resolve }) => resolve(newAccessToken));
+    failedQueue.forEach((callback) => callback(newAccessToken));
     failedQueue = [];
 
     return newAccessToken;
   } catch (error) {
     console.error("토큰 재발급 실패:", error);
     logoutApi();
-    failedQueue.forEach(({ reject }) => reject(error));
-    failedQueue = [];
     throw error;
   } finally {
     isRefreshing = false;

@@ -58,22 +58,19 @@ const retryRequest = async (
   endpoint: string,
   requestBody?: RequestBody
 ): Promise<Response> => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const newAccessToken = await handleRefreshToken();
-      const retryOptions = fetchWrapper(method, endpoint, requestBody);
-      retryOptions.headers = {
-        ...retryOptions.headers,
-        Authorization: newAccessToken,
-      };
+  try {
+    const newAccessToken = await handleRefreshToken();
+    const retryOptions = fetchWrapper(method, endpoint, requestBody);
+    retryOptions.headers = {
+      ...retryOptions.headers,
+      Authorization: newAccessToken,
+    };
 
-      const retryResponse = await fetch(`${base}/api${endpoint}`, retryOptions);
-      resolve(retryResponse);
-    } catch (error) {
-      console.error("토큰 재발급 후 요청 실패:", error);
-      reject(error);
-    }
-  });
+    return await fetch(`${base}/api${endpoint}`, retryOptions);
+  } catch (error) {
+    console.error("토큰 재발급 후 요청 실패:", error);
+    throw error;
+  }
 };
 
 export default authorityApi;
