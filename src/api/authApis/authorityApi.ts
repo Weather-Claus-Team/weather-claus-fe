@@ -1,12 +1,14 @@
 import logoutApi from "./logoutApi";
 
-interface RequestOptions {
-  method: "GET" | "POST" | "PUT" | "DELETE";
-  endpoint: string;
-  body?: Record<string, any>; // 요청 바디 (JSON 객체)
+
+interface RequestBody {
+  password: string;
+  password2?: string;
 }
 
-const authorityApi = async <T = any>({ method, endpoint, body }: RequestOptions): Promise<T> => {
+const authorityApi = async <T = any>( method: string,
+  endpoint: string,
+  requestBody?: RequestBody): Promise<T> => {
   const accessToken = window.localStorage.getItem("ACT");
 
   const baseOption: RequestInit = {
@@ -18,8 +20,8 @@ const authorityApi = async <T = any>({ method, endpoint, body }: RequestOptions)
     credentials: "include",
   };
 
-  if (body) {
-    baseOption.body = JSON.stringify(body);
+  if (requestBody) {
+    baseOption.body = JSON.stringify(requestBody);
   }
 
   try {
@@ -46,7 +48,7 @@ const authorityApi = async <T = any>({ method, endpoint, body }: RequestOptions)
         console.log("토큰 재발급 성공");
 
         // 기존 요청을 새 토큰으로 재시도
-        return authorityApi<T>({ method, endpoint, body });
+        return authorityApi<T>( method, endpoint, requestBody );
       } else {
         console.log("토큰 재발급 실패");
         logoutApi();
