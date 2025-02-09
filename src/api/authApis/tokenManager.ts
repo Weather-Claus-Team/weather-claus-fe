@@ -18,7 +18,13 @@ export const setAccessToken = (token: string) => {
 export const handleRefreshToken = async (): Promise<string> => {
   const refreshUrl = `${base}/reissue`;
 
+  if (isRefreshing) {
+    return new Promise((resolve, reject) => {
+      failedQueue.push(async (token) => resolve(token));
+    });
+  }
 
+  isRefreshing = true;
 
   try {
     console.log("토큰 재발급 요청...");
@@ -40,11 +46,16 @@ export const handleRefreshToken = async (): Promise<string> => {
     setAccessToken(newAccessToken);
     console.log("토큰 재발급 성공");
 
+    // 실패한 요청들 다시 실행
+    failedQueue.forEach((callback) => callback(newAccessToken));
+    failedQueue = [];
 
     return newAccessToken;
   } catch (error) {
     console.error("토큰 재발급 실패:", error);
     logoutApi();
     throw error;
+  } finally {
+    isRefreshing = false;
   }
 };
