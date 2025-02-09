@@ -56,7 +56,6 @@
 
 <div> 
   <img src="https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white"/>
   <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
   <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">
   <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=Recoil&logoColor=white">
@@ -109,19 +108,19 @@
  ┣ 📂images
  ┃ ┗ ...  // 프로젝트 내 이미지 파일 관리
  ┣ 📂pages
- ┃ ┣ 📜FindId.tsx
- ┃ ┣ 📜Home.tsx
- ┃ ┣ 📜Join.tsx
- ┃ ┣ 📜Login.tsx
- ┃ ┣ 📜MyPage.tsx
- ┃ ┣ 📜NewPw.tsx
- ┃ ┣ 📜Remove.tsx
- ┃ ┣ 📜SetProfile.tsx
- ┃ ┗ 📜SetPw.tsx
- ┣ 📜App.tsx
- ┣ 📜atom.ts
- ┣ 📜image.ts
- ┗ 📜index.tsx
+ ┃ ┣ 📜FindId.js
+ ┃ ┣ 📜Home.js
+ ┃ ┣ 📜Join.js
+ ┃ ┣ 📜Login.js
+ ┃ ┣ 📜MyPage.js
+ ┃ ┣ 📜NewPw.js
+ ┃ ┣ 📜Remove.js
+ ┃ ┣ 📜SetProfile.js
+ ┃ ┗ 📜SetPw.js
+ ┣ 📜App.js
+ ┣ 📜atom.js
+ ┣ 📜image.js
+ ┗ 📜index.js
 ```
 
 <br>
