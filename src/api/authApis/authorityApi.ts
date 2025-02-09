@@ -1,71 +1,74 @@
-import logoutApi from "./logoutApi";
+// authorityApi.ts
+import { fetchWrapper } from "./fetchWrapper";
+import { handleRefreshToken, getAccessToken } from "./tokenManager";
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const base = window.location.hostname === "localhost" ? SERVER_URL : "";
 
 interface RequestBody {
   password: string;
   password2?: string;
 }
 
-const authorityApi = async <T = any>( method: string,
+// API 요청 함수
+const authorityApi = async (
+  method: string,
   endpoint: string,
-  requestBody?: RequestBody): Promise<T> => {
-  const accessToken = window.localStorage.getItem("ACT");
-
-  const baseOption: RequestInit = {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: accessToken ? `${accessToken}` : "",
-    },
-    credentials: "include",
-  };
-
-  if (requestBody) {
-    baseOption.body = JSON.stringify(requestBody);
-  }
+  requestBody?: RequestBody
+): Promise<Response> => {
+  const url = `${base}/api${endpoint}`;
+  const options = fetchWrapper(method, endpoint, requestBody);
 
   try {
-    const url = `/api${endpoint}`;
-    const response = await fetch(url, baseOption);
-
-    if (response.status === 401) {
-      // 401 Unauthorized → 토큰 재발급 시도
-      console.log("토큰 만료!");
-      const refreshUrl = "/reissue";
-
-      const refreshResponse = await fetch(refreshUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-
-      if (refreshResponse.status === 200) {
-        // 새로운 액세스 토큰 저장
-        const newAccessToken = refreshResponse.headers.get("Authorization");
-        if (newAccessToken) {
-          window.localStorage.setItem("ACT", newAccessToken);
-        }
-        console.log("토큰 재발급 성공");
-
-        // 기존 요청을 새 토큰으로 재시도
-        return authorityApi<T>( method, endpoint, requestBody );
-      } else {
-        console.log("토큰 재발급 실패");
-        logoutApi();
-        throw new Error("토큰 재발급 실패");
-      }
-    } else if (response.ok) {
-      console.log("토큰 유효함. 권한 확인 완료");
-      return response.json();
-    } else if (response.status === 400) {
-      throw new Error("잘못된 요청입니다.");
-    } else {
-      console.log("토큰 검증 실패");
-      logoutApi();
-      throw new Error("인증 실패");
-    }
+    const response = await fetch(url, options);
+    return await handleResponse(response, method, endpoint, requestBody);
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error("Fetch 요청 실패:", error);
+    throw error;
+  }
+};
+
+// 응답 처리 함수
+const handleResponse = async (
+  response: Response,
+  method: string,
+  endpoint: string,
+  requestBody?: RequestBody
+): Promise<Response> => {
+  if (response.ok) {
+    return response;
+  }
+
+  switch (response.status) {
+    case 401:
+      return retryRequest(method, endpoint, requestBody);
+    case 400:
+      const errorMessage = await response.json();
+      throw new Error(errorMessage.message || "잘못된 요청입니다.");
+    case 500:
+      throw new Error("서버 오류가 발생했습니다.");
+    default:
+      throw new Error(`알 수 없는 오류 발생: ${response.status}`);
+  }
+};
+
+// 401 Unauthorized 시 재요청 처리
+const retryRequest = async (
+  method: string,
+  endpoint: string,
+  requestBody?: RequestBody
+): Promise<Response> => {
+  try {
+    const newAccessToken = await handleRefreshToken();
+    const retryOptions = fetchWrapper(method, endpoint, requestBody);
+    retryOptions.headers = {
+      ...retryOptions.headers,
+      Authorization: newAccessToken,
+    };
+
+    return await fetch(`${base}/api${endpoint}`, retryOptions);
+  } catch (error) {
+    console.error("토큰 재발급 후 요청 실패:", error);
     throw error;
   }
 };
